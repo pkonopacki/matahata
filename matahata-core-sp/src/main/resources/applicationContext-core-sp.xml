@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+						http://cxf.apache.org/jaxws
+						http://cxf.apache.org/schemas/jaxws.xsd
+						http://cxf.apache.org/core
+						http://cxf.apache.org/schemas/core.xsd
+						http://cxf.apache.org/transports/http/configuration
+						http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+						   
+	<import resource="classpath:applicationContext-jpa.xml" />
+	
+	<!-- Service Locator -->
+
+	<!--	<bean id="servoceLocator" class="com.zwort.matahata.core.sp.ServiceLocator" />-->
+
+	<!-- Service configuration -->
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+		<value>classpath:statistics.properties</value>
+		</property>
+	</bean>
+	
+	<bean id="statsConfig" class="com.zwort.matahata.core.sp.config.StatsConfigBeanImpl">
+		<property name="monthFirstDay"><value>${month.first.day}</value></property>
+		<property name="monthLastDay"><value>${month.last.day}</value></property>
+	</bean>
+
+	<bean id="abstractManagementService" class="com.zwort.matahata.core.sp.service.impl.AbstractManagementServiceImpl" abstract="true">
+		<property name="facade" ref="facade" />
+	</bean>
+
+	<bean id="substituteSellerService" class="com.zwort.matahata.core.sp.service.impl.SubstituteSellerServiceImpl" parent="abstractManagementService" />
+
+	<bean id="accountManagementService" class="com.zwort.matahata.core.sp.service.impl.AccountManagementServiceImpl">
+		<property name="accountService" ref="accountService" />
+		<property name="currencyService" ref="currencyService" />
+	</bean>
+	
+	<bean id="categoryManagementService" class="com.zwort.matahata.core.sp.service.impl.CategoryManagementServiceImpl" parent="abstractManagementService">
+		<property name="binder" ref="categoryManagementBinder" />
+	</bean>
+
+	<bean id="planManagementService" class="com.zwort.matahata.core.sp.service.impl.PlanManagementServiceImpl" parent="abstractManagementService">
+		<property name="binder" ref="planManagementBinder" />
+	</bean>
+
+	<bean id="transferManagementService" class="com.zwort.matahata.core.sp.service.impl.TransferManagementServiceImpl" parent="abstractManagementService">
+		<property name="binder" ref="transferManagementBinder" />
+		<property name="facade" ref="facade" />
+	</bean>
+
+	<bean id="incomeManagementService" class="com.zwort.matahata.core.sp.service.impl.IncomeManagementServiceImpl" parent="abstractManagementService">
+		<property name="binder" ref="incomeManagementBinder" />
+		<property name="facade" ref="facade" />
+	</bean>
+
+	<bean id="expenseManagementService" class="com.zwort.matahata.core.sp.service.impl.ExpenseManagementServiceImpl" parent="abstractManagementService">
+		<property name="binder" ref="expenseManagementBinder" />
+		<property name="facade" ref="facade" />
+	</bean>
+
+	<bean id="commonBinder" class="com.zwort.matahata.core.sp.binder.CommonBinder" abstract="true">
+		<property name="facade" ref="facade" />
+	</bean>
+	
+	<bean id="transferManagementBinder" class="com.zwort.matahata.core.sp.binder.TransferManagementBinder" parent="commonBinder" />
+	
+	<bean id="expenseManagementBinder" class="com.zwort.matahata.core.sp.binder.ExpenseManagementBinder" parent="commonBinder" />
+
+	<bean id="categoryManagementBinder" class="com.zwort.matahata.core.sp.binder.CategoryManagementBinder" parent="commonBinder" />
+
+	<bean id="incomeManagementBinder" class="com.zwort.matahata.core.sp.binder.IncomeManagementBinder" parent="commonBinder" />
+
+	<bean id="planManagementBinder" class="com.zwort.matahata.core.sp.binder.PlanManagementBinder" parent="commonBinder" />
+
+</beans>

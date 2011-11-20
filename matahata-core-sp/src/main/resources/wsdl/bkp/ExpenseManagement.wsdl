@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ExpenseManagementService"
+	targetNamespace="http://com.zwort/matahata/Services/1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://com.zwort/matahata/Services/1"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<!-- types -->
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://com.zwort/matahata/Services/1">
+			<xsd:include schemaLocation="Service.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- messages -->
+	<wsdl:message name="findAllExpenses">
+	</wsdl:message>
+	<wsdl:message name="addNewExpense">
+		<wsdl:part name="addNewExpense" element="addNewExpense">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="addNewExpenseResponse">
+		<wsdl:part name="addNewExpenseResponse" element="addNewExpenseResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findAllExpensesResponse">
+		<wsdl:part name="findAllExpensesResponse" element="findAllExpensesResponse">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<!-- port type -->
+	<wsdl:portType name="ExpenseManagementPortType">
+		<wsdl:operation name="addNewExpense">
+			<wsdl:input name="addNewExpense" message="addNewExpense">
+			</wsdl:input>
+			<wsdl:output name="addNewExpenseResponse" message="addNewExpenseResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAllExpenses">
+			<wsdl:input name="findAllExpenses" message="findAllExpenses">
+			</wsdl:input>
+			<wsdl:output name="findAllExpensesResponse" message="findAllExpensesResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<!-- binding -->
+	<wsdl:binding name="ExpenseManagementServiceSoapBinding"
+		type="ExpenseManagementPortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="addNewExpense">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="addNewExpense">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="addNewExpenseResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAllExpenses">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="findAllExpenses">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="findAllExpensesResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<!-- service -->
+	<wsdl:service name="ExpenseManagementService">
+		<wsdl:port name="ExpenseManagementPort" binding="ExpenseManagementServiceSoapBinding">
+			<soap:address location="http://localhost:9090/ExpenseManagementPort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

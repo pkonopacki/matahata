@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>matahata-parent</artifactId>
+		<groupId>com.zwort.matahata</groupId>
+		<version>1.2-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.zwort.matahata</groupId>
+	<artifactId>matahata-core-sp</artifactId>
+	<version>1.2-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>matahata-core-sp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf.version}</version>
+<!-- 				<dependencies> -->
+<!-- 					<dependency> -->
+<!-- 						<groupId>org.apache.cxf</groupId> -->
+<!-- 						<artifactId>cxf-rt-frontend-jaxws</artifactId> -->
+<!-- 						<version>${cxf.version}</version> -->
+<!-- 					</dependency> -->
+<!-- 					<dependency> -->
+<!-- 						<groupId>org.apache.cxf</groupId> -->
+<!-- 						<artifactId>cxf-rt-frontend-simple</artifactId> -->
+<!-- 						<version>${cxf.version}</version> -->
+<!-- 					</dependency> -->
+<!-- 				</dependencies> -->
+
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/MatahataService/MatahataService.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-quiet</extraarg>
+										<extraarg>-exsh</extraarg>
+										<extraarg>true</extraarg>
+									</extraargs>
+								</wsdlOption>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/DupaService/DupaService.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-quiet</extraarg>
+										<extraarg>-exsh</extraarg>
+										<extraarg>true</extraarg>
+									</extraargs>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>	
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<!-- Matahata libs -->
+		<dependency>
+			<groupId>com.zwort.matahata</groupId>
+			<artifactId>matahata-core</artifactId>
+		</dependency>
+
+		<!-- Commons libs -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+
+	</dependencies>
+</project>

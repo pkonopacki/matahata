@@ -1,0 +1,11 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://com.zwort/matahata/Common/ErrorInfo/1"
+	targetNamespace="http://com.zwort/matahata/Common/ErrorInfo/1">
+    <xs:element name="ErrorInfo" type="ErrorInfo" />
+    <xs:complexType name="ErrorInfo">
+    	<xs:sequence minOccurs="0" maxOccurs="1">
+    		<xs:element name="ErrorCode" type="xs:string" />
+    		<xs:element name="ErrorMessage" type="xs:string" />
+    	</xs:sequence>
+    </xs:complexType>
+</xs:schema>
