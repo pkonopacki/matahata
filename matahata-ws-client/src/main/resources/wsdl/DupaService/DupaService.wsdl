@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="DupaService"
+	targetNamespace="http://com.zwort/matahata/Services/1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://com.zwort/matahata/Services/1"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<!-- types -->
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://com.zwort/matahata/Services/1">
+			<xsd:include schemaLocation="../Service.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+
+		<!-- messages -->
+	<wsdl:message name="findExpensesByCategories">
+		<wsdl:part name="findExpensesByCategories" element="findExpensesByCategories">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findExpensesByCategoriesResponse">
+		<wsdl:part name="findExpensesByCategoriesResponse" element="findExpensesByCategoriesResponse">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="findExpensesByPlanForCategory">
+		<wsdl:part name="findExpensesByPlanForCategory" element="findExpensesByPlanForCategory">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findExpensesByPlanForCategoryResponse">
+		<wsdl:part name="findExpensesByPlanForCategoryResponse" element="findExpensesByPlanForCategoryResponse">
+		</wsdl:part>
+	</wsdl:message>
+
+	<!-- port type -->
+	<wsdl:portType name="DupaServicePortType">
+		<wsdl:operation name="findExpensesByCategories">
+			<wsdl:input name="findExpensesByCategories" message="findExpensesByCategories">
+			</wsdl:input>
+			<wsdl:output name="findExpensesByCategoriesResponse" message="findExpensesByCategoriesResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findExpensesByPlanForCategory">
+			<wsdl:input name="findExpensesByPlanForCategory" message="findExpensesByPlanForCategory">
+			</wsdl:input>
+			<wsdl:output name="findExpensesByPlanForCategoryResponse" message="findExpensesByPlanForCategoryResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<!-- binding -->
+	<wsdl:binding name="DupaServiceSoapBinding"
+		type="DupaServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="findExpensesByCategories">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="findExpensesByCategories">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="findExpensesByCategoriesResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findExpensesByPlanForCategory">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="findExpensesByPlanForCategory">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="findExpensesByPlanForCategoryResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<!-- service -->
+	<wsdl:service name="DupaService">
+		<wsdl:port name="DupaServicePort" binding="DupaServiceSoapBinding">
+			<soap:address location="http://localhost:8080/matahata-core.ws/DupaServicePortType" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>	

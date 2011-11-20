@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+	<com.zwort.matahata.ws.client.model.Item>
+	    <type>EXPENSE</type>
+	    <date>2011-09-30 23:25:36.329 EEST</date>
+	    <location>Dupa</location>
+		<srcAccountNo></srcAccountNo>
+		<destAccountNo></destAccountNo>
+	    <amount>5.0</amount>
+	    <description>Chuj</description>
+	    <refundable>true</refundable>
+	    <cleared>true</cleared>
+	    <debt>true</debt>
+	    <originalAmount>5.0</originalAmount>
+	    <originalCurrency>PLN</originalCurrency>
+	</com.zwort.matahata.ws.client.model.Item>
+</list>

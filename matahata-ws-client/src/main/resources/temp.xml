@@ -1,0 +1,34 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns3:findAllExpensesResponse xmlns:ns3="http://com.zwort/matahata/Services/1"
+			xmlns:ns2="http://com.zwort/matahata/Common/ErrorInfo/1">
+			<ns3:ExpenseWSList>
+				<ns3:ExpenseWS>
+					<date>2011-09-01T00:00:00.000+03:00</date>
+					<categoryAbbr>PTR</categoryAbbr>
+					<amount>270.0</amount>
+				</ns3:ExpenseWS>
+				<ns3:ExpenseWS>
+					<date>2011-09-03T00:00:00.000+03:00</date>
+					<categoryAbbr>PRZ</categoryAbbr>
+					<amount>11.0</amount>
+				</ns3:ExpenseWS>
+				<ns3:ExpenseWS>
+					<date>2011-09-01T00:00:00.000+03:00</date>
+					<categoryAbbr>KIE</categoryAbbr>
+					<amount>20.0</amount>
+				</ns3:ExpenseWS>
+				<ns3:ExpenseWS>
+					<date>2011-09-01T00:00:00.000+03:00</date>
+					<categoryAbbr>SZK</categoryAbbr>
+					<amount>5.0</amount>
+				</ns3:ExpenseWS>
+				<ns3:ExpenseWS>
+					<date>2011-09-01T00:00:00.000+03:00</date>
+					<categoryAbbr>SPO</categoryAbbr>
+					<amount>33.49</amount>
+				</ns3:ExpenseWS>
+			</ns3:ExpenseWSList>
+		</ns3:findAllExpensesResponse>
+	</soap:Body>
+</soap:Envelope>

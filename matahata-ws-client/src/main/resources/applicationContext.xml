@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+							http://www.springframework.org/schema/tx
+							http://www.springframework.org/schema/context
+							http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	
+<!-- 	<context:property-placeholder location="classpath:/client.properties" /> -->
+	
+	<bean id="requestDataFactory" class="com.zwort.matahata.ws.client.transformer.RequestDataFactory">
+		<property name="addExpenseRequestTransformer" ref="addExpenseRequestTransformer" />
+		<property name="addIncomeRequestTransformer" ref="addIncomeRequestTransformer" />
+		<property name="addTransferRequestTransformer" ref="addTransferRequestTransformer" />
+	</bean>
+	
+	<bean id="addExpenseRequestTransformer" class="com.zwort.matahata.ws.client.transformer.AddExpenseRequestTransformer" />
+	
+	<bean id="addIncomeRequestTransformer" class="com.zwort.matahata.ws.client.transformer.AddIncomeRequestTransformer" />
+							
+	<bean id="addTransferRequestTransformer" class="com.zwort.matahata.ws.client.transformer.AddTransferRequestTransformer" />
+							
+	<!-- WS client -->
+	
+	<bean id="matahataService" class="com.zwort.matahata.ws.client.service.impl.MatahataServiceImpl" init-method="init">
+		<property name="factory" ref="matahataServicePortFactory" />
+	</bean>
+	
+	<!-- Service invoker -->
+	
+	<bean id="serviceInvoker" class="com.zwort.matahata.ws.client.ServiceInvoker" >
+		<property name="factory" ref="requestDataFactory" />
+		<property name="service" ref="matahataService" />
+	</bean>
+	
+	<!-- WS Client config -->
+
+	<bean id="matahataServicePortFactory" class="com.zwort.matahata.ws.client.MatahataPortFactoryBean">
+		<!-- Standardowa konfiguracja z JaxWsProxyFactoryBean -->
+		<property name="outInterceptors">
+			<list>
+<!--				<bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">-->
+<!--					<constructor-arg>-->
+<!--						<map>-->
+<!--							<entry key="action" value="UsernameToken Timestamp" />-->
+<!--							<entry key="user">-->
+<!--								<bean factory-bean="insurerDirectServiceClientConfig" factory-method="getUser" />-->
+<!--							</entry>-->
+<!--							<entry key="passwordType" value="${insurer.connection.authentication.type}" />-->
+<!--							<entry key="passwordCallbackRef">-->
+<!--								<bean class="com.pzu.comw2.insurer.integration.client.InsurerPasswordHandler">-->
+<!--									<property name="password">-->
+<!--										<bean factory-bean="insurerDirectServiceClientConfig" factory-method="getPassword" />-->
+<!--									</property>-->
+<!--								</bean>-->
+<!--							</entry>-->
+<!--							<entry key="mustUnderstand" value="false" />-->
+<!--						</map>-->
+<!--					</constructor-arg>-->
+<!--				</bean>-->
+				<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
+			</list>
+		</property>
+		<property name="address">
+			<bean factory-bean="matahataClientConfig" factory-method="getUrl" />
+		</property>
+		<property name="serviceClass"
+			value="zwort.com.matahata.services._1.MatahataServicePortType" />
+		<!-- Poniżej konfiguracja dodana w UserPortFactoryBean -->
+<!--		<property name="tlsClientParameters">-->
+<!--			<bean class="org.apache.cxf.configuration.jsse.TLSClientParameters">-->
+<!--				<property name="disableCNCheck" value="true" />-->
+<!--				<property name="trustManagers" >-->
+<!--					<list>-->
+<!--						<bean class="com.pzu.comw2.esb.client.connector.utils.TrustAllX509TrustManager"/>-->
+<!--					</list>-->
+<!--				</property>-->
+<!--			</bean>-->
+<!--		</property>-->
+		<property name="ignoreCn">
+			<bean factory-bean="matahataClientConfig" factory-method="getIgnoreCnBig" />
+		</property>
+		<property name="inInterceptors">
+			<list>
+				<bean class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="matahataClientConfig" class="com.zwort.matahata.ws.client.MatahataClientConfig">
+<!-- 		<property name="user" value="${matahata.connection.user}" /> -->
+<!-- 		<property name="password" value="${matahata.connection.password}" /> -->
+<!-- 		<property name="url" value="${matahata.connection.url}" /> -->
+<!-- 		<property name="ignoreCn" value="${matahata.connection.ignoreCn}" /> -->
+		<property name="user" value="user" />
+		<property name="password" value="password" />
+		<property name="url" value="http://localhost:8090/iChuj/MatahataServicePortType" />
+		<property name="ignoreCn" value="true" />
+	</bean>
+
+	
+</beans>

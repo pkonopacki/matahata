@@ -1,0 +1,8 @@
+<list>
+  <com.zwort.matahata.ws.client.model.Item>
+    <type>EXPENSE</type>
+    <date>2011-10-01 00:55:03.654 EEST</date>
+    <amount>5.0</amount>
+    <description>Chuj</description>
+  </com.zwort.matahata.ws.client.model.Item>
+</list>
