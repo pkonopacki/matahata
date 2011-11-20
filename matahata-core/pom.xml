@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>matahata-parent</artifactId>
+		<groupId>com.zwort.matahata</groupId>
+		<version>1.2-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.zwort.matahata</groupId>
+	<artifactId>matahata-core</artifactId>
+	<version>1.2-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>matahata-core</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<enableAssertions>false</enableAssertions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<!-- JPA -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+		</dependency>
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+
+		<!-- Commons -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		
+	</dependencies>
+</project>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   						http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+							http://www.springframework.org/schema/tx
+							http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+						   
+	<!-- data source definition -->
+
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/matahataDS</value>
+		</property>
+	</bean>
+	
+<!-- 
+	<bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+		<property name="defaultDataSource" ref="dataSource" /> 		
+	</bean>
+ -->
+ 						   
+<!-- 	
+	<jee:jndi-lookup id="entityManagerFactory" jndi-name="persistence/matahata" />
+ -->
+ 
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+<!-- 
+ 		<property name="persistenceUnitManager" ref="persistenceUnitManager"/>		
+ -->
+  		<property name="persistenceUnitName" value="matahata" />
+ 		<property name="dataSource" ref="dataSource" />
+ 		<property name="loadTimeWeaver">
+ 			<bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
+ 		</property>	
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="database" value="MYSQL"/>
+				<property name="showSql" value="true"/>
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>	
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	
+ 	<!-- app ctx provider -->
+
+	<bean id="contextApplicationContextProvider" class="com.zwort.matahata.core.service.locator.ApplicationContextProvider" />
+ 
+ 
+ 	<!-- dao definitions -->
+	
+	<bean id="transferDAO" class="com.zwort.matahata.core.dao.impl.EntityDAOJpaImpl">
+		<constructor-arg value="com.zwort.matahata.core.model.Transfer" />
+	</bean>
+
+	<bean id="incomeDAO" class="com.zwort.matahata.core.dao.impl.EntityDAOJpaImpl">
+		<constructor-arg value="com.zwort.matahata.core.model.Income" />
+	</bean>
+
+	<bean id="creditDAO" class="com.zwort.matahata.core.dao.impl.EntityDAOJpaImpl">
+		<constructor-arg value="com.zwort.matahata.core.model.Credit" />
+	</bean>
+
+	<bean id="debitDAO" class="com.zwort.matahata.core.dao.impl.EntityDAOJpaImpl">
+		<constructor-arg value="com.zwort.matahata.core.model.Debit" />
+	</bean>
+
+	<bean id="accountDAO" class="com.zwort.matahata.core.dao.impl.AccountDAOJpaImpl" />
+
+	<bean id="categoryDAO" class="com.zwort.matahata.core.dao.impl.CategoryDAOJpaImpl" />
+	
+	<bean id="expenseDAO" class="com.zwort.matahata.core.dao.impl.ExpenseDAOJpaImpl" />
+	
+	<bean id="beneficiaryDAO" class="com.zwort.matahata.core.dao.impl.BeneficiaryDAOJpaImpl" />
+
+	<bean id="currencyDAO" class="com.zwort.matahata.core.dao.impl.CurrencyDAOJpaImpl" />
+	
+	<bean id="planDAO" class="com.zwort.matahata.core.dao.impl.PlanDAOJpaImpl" />
+
+	<!-- services definitions -->
+	
+	<bean id="accountService" class="com.zwort.matahata.core.service.impl.AccountServiceImpl">
+		<property name="dao" ref="accountDAO"/>
+	</bean>
+
+	<bean id="categoryService" class="com.zwort.matahata.core.service.impl.CategoryServiceImpl">
+		<property name="dao" ref="categoryDAO"/>
+	</bean>
+
+	<bean id="beneficiaryService" class="com.zwort.matahata.core.service.impl.BeneficiaryServiceImpl">
+		<property name="dao" ref="beneficiaryDAO"/>
+	</bean>
+
+	<bean id="currencyService" class="com.zwort.matahata.core.service.impl.CurrencyServiceImpl">
+		<property name="dao" ref="currencyDAO"/>
+	</bean>
+
+	<bean id="expenseService" class="com.zwort.matahata.core.service.impl.ExpenseServiceImpl">
+		<property name="dao" ref="expenseDAO"/>
+	</bean>
+
+	<bean id="transferService" class="com.zwort.matahata.core.service.impl.EntityServiceImpl">
+		<property name="dao" ref="transferDAO"/>
+	</bean>
+
+	<bean id="incomeService" class="com.zwort.matahata.core.service.impl.EntityServiceImpl">
+		<property name="dao" ref="incomeDAO"/>
+	</bean>
+
+	<bean id="debitService" class="com.zwort.matahata.core.service.impl.EntityServiceImpl">
+		<property name="dao" ref="debitDAO"/>
+	</bean>
+
+	<bean id="creditService" class="com.zwort.matahata.core.service.impl.EntityServiceImpl">
+		<property name="dao" ref="creditDAO"/>
+	</bean>
+
+	<bean id="planService" class="com.zwort.matahata.core.service.impl.PlanServiceImpl">
+		<property name="dao" ref="planDAO"/>
+	</bean>
+
+	<!-- Calculation services - no database interaction -->
+
+	<bean id="substituteService" class="com.zwort.matahata.core.substitute.impl.SubstituteServiceImpl" />
+
+	<!-- facade definition -->
+	
+	<bean id="facade" class="com.zwort.matahata.core.facade.impl.FacadeImpl">
+		<property name="expenseService" ref="expenseService"/>
+		<property name="transferService" ref="transferService"/>
+		<property name="incomeService" ref="incomeService"/>
+		<property name="debitService" ref="debitService"/>
+		<property name="creditService" ref="creditService"/>
+		<property name="accountService" ref="accountService"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="currencyService" ref="currencyService"/>
+		<property name="planService" ref="planService"/>
+		<property name="beneficiaryService" ref="beneficiaryService"/>
+		<property name="substituteService" ref="substituteService"/>
+	</bean>
+</beans>

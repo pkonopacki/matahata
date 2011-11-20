@@ -1,0 +1,5 @@
+CREATE DATABASE matahata_test
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_polish_ci;
+CREATE USER 'test'@'localhost' IDENTIFIED BY 'test';
+GRANT ALL PRIVILEGES ON *.* TO 'test'@'localhost' WITH GRANT OPTION;
