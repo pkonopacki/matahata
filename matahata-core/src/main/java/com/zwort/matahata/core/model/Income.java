@@ -24,6 +24,9 @@ public class Income extends Item {
 	@JoinColumn(name = "dest_account_id")
 	private Account destAccount;
 
+	@ManyToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "category_id")
+	private Category incomeCategory;
 
 	public String getSource() {
 		return source;
@@ -41,4 +44,12 @@ public class Income extends Item {
 		this.destAccount = destAccount;
 	}
 
+	public Category getIncomeCategory() {
+		return incomeCategory;
+	}
+
+	public void setIncomeCategory(Category incomeCategory) {
+		this.incomeCategory = incomeCategory;
+	}
+	
 }

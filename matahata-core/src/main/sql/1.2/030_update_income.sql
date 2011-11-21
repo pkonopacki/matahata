@@ -1,0 +1,1 @@
+update item set category_id = (select id from category where abbreviation = 'WYP') where object_type = 'INCOME';
