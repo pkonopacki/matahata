@@ -65,12 +65,18 @@
 			<xs:extension base="RequestBase">
 				<xs:sequence>
 					<xs:element name="Month" type="Month" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" name="PlanItemsList"
-						type="PlanItemWS" />
+					<xs:element ref="PlanItemsWSList" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:element name="PlanItemsWSList" type="PlanItemsWSList" />
+	<xs:complexType name="PlanItemsWSList">
+		<xs:sequence>
+			<xs:element ref="PlanItemWS" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="PlanItemWS" type="PlanItemWS" />
 	<xs:complexType name="PlanItemWS">
 		<xs:sequence>
 			<xs:element name="categoryAbbr" type="xs:string" minOccurs="1"
@@ -114,6 +120,7 @@
 			<xs:extension base="BaseRequestItem">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="Source" type="xs:string" />
+					<xs:element minOccurs="0" name="CategoryAbbr" type="xs:string" />
 					<xs:element minOccurs="0" name="DestAccountNo" type="xs:string" />
 					<xs:element minOccurs="0" name="BeneficiaryInitials"
 						type="xs:string" />

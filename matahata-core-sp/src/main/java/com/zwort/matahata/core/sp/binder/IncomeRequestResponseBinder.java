@@ -28,6 +28,7 @@ public class IncomeRequestResponseBinder {
 		
 		dto.setDate(ConversionUtils.xmlGregorianCalendarToDate(request.getDate()));
 		dto.setDescription(request.getDescription());
+		dto.setCategoryAbbr(request.getCategoryAbbr());
 		dto.setAmount(request.getAmount());
 		dto.setOriginalAmount(request.getOriginalAmount());
 		dto.setOriginalCurrencyISO(request.getOriginalCurrencyISO());

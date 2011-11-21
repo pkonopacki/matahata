@@ -57,6 +57,10 @@ public class InputValidator {
 					if (item.getSource() == null) {
 						errorList.add("Pos." + counter + ": Source cannot be null");
 					}
+
+					if (item.getCategoryAbbr() == null) {
+						errorList.add("Pos." + counter + ": Category abbreviation cannot be null");
+					}
 					break;
 					
 				case TRANSFER:

@@ -116,6 +116,20 @@ public abstract class CommonBinder {
 		
 		return cal.getTime();
 	}
+	
+	protected Category getCategory(String categoryAbbr) throws ServiceException, ServiceProviderException {
+		Category category = null;
+		
+		if (categoryAbbr != null && !categoryAbbr.equals("")) {
+			category = facade.getCategoryByAbbr(categoryAbbr);
+		
+		} else {
+			logger.error("Category abbreviation cannot be null nor an empty string");
+			throw new ServiceProviderException("Category abbreviation cannot be null nor an empty string");
+		}
+		
+		return category;
+	}
 
 	//Spring setter
 	

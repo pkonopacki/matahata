@@ -4,6 +4,8 @@ public class IncomeDTO extends ItemDTO {
 	
 	private String source;
 	
+	private String categoryAbbr;
+	
 	private String destAccountNo;
 	
 	private boolean isDebt;
@@ -17,6 +19,14 @@ public class IncomeDTO extends ItemDTO {
 
 	public void setSource(String source) {
 		this.source = source;
+	}
+
+	public String getCategoryAbbr() {
+		return categoryAbbr;
+	}
+
+	public void setCategoryAbbr(String categoryAbbr) {
+		this.categoryAbbr = categoryAbbr;
 	}
 
 	public String getDestAccountNo() {

@@ -120,6 +120,7 @@
 			<xs:extension base="BaseRequestItem">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="Source" type="xs:string" />
+					<xs:element minOccurs="0" name="CategoryAbbr" type="xs:string" />
 					<xs:element minOccurs="0" name="DestAccountNo" type="xs:string" />
 					<xs:element minOccurs="0" name="BeneficiaryInitials"
 						type="xs:string" />

@@ -14,6 +14,7 @@ public class AddIncomeRequestTransformer extends AbstractItemTransformer impleme
 		request.setBeneficiaryInitials(item.getBenefInitials());
 		request.setDestAccountNo(item.getDestAccountNo());
 		request.setSource(item.getSource());
+		request.setCategoryAbbr(item.getCategoryAbbr());
 		request.setDebt(item.getDebt());
 		
 		return request;

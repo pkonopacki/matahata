@@ -31,19 +31,7 @@ public class ExpenseManagementBinder extends CommonBinder {
 		
 		//TODO: This all to CommonBinder!
 		
-		if (dto.getCategoryAbbr() != null && !dto.getCategoryAbbr().equals("")) {
-			category = facade.getCategoryByAbbr(dto.getCategoryAbbr());
-		
-		} else {
-			logger.error("Category abbreviation cannot be null nor an empty string");
-			throw new ServiceProviderException("Category abbreviation cannot be null nor an empty string");
-		}
-		
-		if (category == null) {
-			logger.error("Category [" + dto.getCategoryAbbr() + "] is not in database");
-			throw new ServiceProviderException("Category [" + dto.getCategoryAbbr() + "] is not in database");
-		}
-
+		category = getCategory(dto.getCategoryAbbr());
 		account = getAccount(dto.getSrcAccountNo());
 		
 		if (account == null) {
