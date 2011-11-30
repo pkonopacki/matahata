@@ -1,34 +1,36 @@
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 	<soap:Body>
-		<ns3:findAllExpensesResponse xmlns:ns3="http://com.zwort/matahata/Services/1"
-			xmlns:ns2="http://com.zwort/matahata/Common/ErrorInfo/1">
-			<ns3:ExpenseWSList>
-				<ns3:ExpenseWS>
-					<date>2011-09-01T00:00:00.000+03:00</date>
-					<categoryAbbr>PTR</categoryAbbr>
-					<amount>270.0</amount>
-				</ns3:ExpenseWS>
-				<ns3:ExpenseWS>
-					<date>2011-09-03T00:00:00.000+03:00</date>
-					<categoryAbbr>PRZ</categoryAbbr>
-					<amount>11.0</amount>
-				</ns3:ExpenseWS>
-				<ns3:ExpenseWS>
-					<date>2011-09-01T00:00:00.000+03:00</date>
-					<categoryAbbr>KIE</categoryAbbr>
-					<amount>20.0</amount>
-				</ns3:ExpenseWS>
-				<ns3:ExpenseWS>
-					<date>2011-09-01T00:00:00.000+03:00</date>
-					<categoryAbbr>SZK</categoryAbbr>
-					<amount>5.0</amount>
-				</ns3:ExpenseWS>
-				<ns3:ExpenseWS>
-					<date>2011-09-01T00:00:00.000+03:00</date>
-					<categoryAbbr>SPO</categoryAbbr>
-					<amount>33.49</amount>
-				</ns3:ExpenseWS>
-			</ns3:ExpenseWSList>
-		</ns3:findAllExpensesResponse>
+		<ns2:addNewIncomeResponse
+			xmlns:ns3="http://com.zwort/matahata/Common/ErrorInfo/1" xmlns:ns2="http://com.zwort/matahata/Services/1">
+			<AddIncomeResponsesList>
+				<Id>579</Id>
+			</AddIncomeResponsesList>
+		</ns2:addNewIncomeResponse>
+	</soap:Body>
+</soap:Envelope>
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns2:addNewExpenseResponse
+			xmlns:ns3="http://com.zwort/matahata/Common/ErrorInfo/1" xmlns:ns2="http://com.zwort/matahata/Services/1">
+			<AddExpenseResponsesList>
+				<Id>573</Id>
+			</AddExpenseResponsesList>
+			<AddExpenseResponsesList>
+				<Id>574</Id>
+			</AddExpenseResponsesList>
+			<AddExpenseResponsesList>
+				<Id>575</Id>
+			</AddExpenseResponsesList>
+			<AddExpenseResponsesList>
+				<Id>576</Id>
+			</AddExpenseResponsesList>
+			<AddExpenseResponsesList>
+				<Id>577</Id>
+			</AddExpenseResponsesList>
+			<AddExpenseResponsesList>
+				<Id>578</Id>
+			</AddExpenseResponsesList>
+		</ns2:addNewExpenseResponse>
 	</soap:Body>
 </soap:Envelope>

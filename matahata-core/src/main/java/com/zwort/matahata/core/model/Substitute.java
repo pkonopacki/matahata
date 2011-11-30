@@ -1,7 +1,9 @@
 package com.zwort.matahata.core.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Substitute implements Serializable {
 	
@@ -12,6 +14,8 @@ public class Substitute implements Serializable {
 	private Map<Category, Map<Currency, Double>> expensesByCategoriesMap;
 	
 	private Map<Currency, Double> totalsMap;
+	
+	private Set<BudgetUsageForCategory> budgetForCategoriesList;
 
 	public Plan getPlan() {
 		return plan;
@@ -37,5 +41,14 @@ public class Substitute implements Serializable {
 	public void setTotalsMap(Map<Currency, Double> totalsMap) {
 		this.totalsMap = totalsMap;
 	}
-	
+
+	public Set<BudgetUsageForCategory> getBudgetForCategoriesList() {
+		
+		if (budgetForCategoriesList == null) {
+			budgetForCategoriesList = new HashSet<BudgetUsageForCategory>();
+		}
+		
+		return budgetForCategoriesList;
+	}
+
 }

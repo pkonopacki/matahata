@@ -1,5 +1,6 @@
 package com.zwort.matahata.ws.client;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import zwort.com.matahata.services._1.AddIncomeResponseList;
 import zwort.com.matahata.services._1.AddTransferRequestList;
 import zwort.com.matahata.services._1.AddTransferResponseList;
 import zwort.com.matahata.services._1.RequestBase;
+import zwort.com.matahata.services._1.ResponseBase;
 
 import com.zwort.matahata.ws.client.model.Item;
 import com.zwort.matahata.ws.client.model.ItemType;
@@ -69,7 +71,7 @@ public class ServiceInvoker {
 			case TRANSFER:
 				AddTransferRequestList addTransferRequestList = converToAppropriateRequest(paramMap.get(it));
 				AddTransferResponseList responsesTransferList = service.addNewTransfer(addTransferRequestList);
-				
+				break;
 			
 			default:
 				
@@ -77,6 +79,14 @@ public class ServiceInvoker {
 		}
 	
 	}
+	
+//	private <T extends ResponseBase> List<Long> convertResponseToId(List<T> requestList) {
+//		List<Long> returnList = new ArrayList<Long>();
+//		
+//		for (T response : requestList) {
+//			returnList.add(response.)
+//		}
+//	}
 
 	@SuppressWarnings("unchecked")
 	private <T extends RequestBase> T converToAppropriateRequest(RequestBase rawRequest) {

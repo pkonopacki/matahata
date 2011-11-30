@@ -39,5 +39,26 @@ public class Currency extends AbstractDictionaryEntity {
 	public void setDefaultCurrency(boolean defaultCurrency) {
 		this.defaultCurrency = defaultCurrency;
 	}
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (obj instanceof Currency) {
+			return this.isoCode.equals(((Currency) obj).getIsoCode());
+		
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+		
+		if (isoCode == null) {
+			return -1327;
+		}
+		
+		return isoCode.hashCode();
+	}
+	
 }

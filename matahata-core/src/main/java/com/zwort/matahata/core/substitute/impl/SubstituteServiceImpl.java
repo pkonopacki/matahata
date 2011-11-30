@@ -1,17 +1,20 @@
 package com.zwort.matahata.core.substitute.impl;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.zwort.matahata.core.exception.ServiceException;
+import com.zwort.matahata.core.model.BudgetUsageForCategory;
 import com.zwort.matahata.core.model.Category;
 import com.zwort.matahata.core.model.Currency;
 import com.zwort.matahata.core.model.Expense;
 import com.zwort.matahata.core.model.Plan;
+import com.zwort.matahata.core.model.PlanItem;
 import com.zwort.matahata.core.model.Substitute;
 import com.zwort.matahata.core.substitute.SubstituteService;
 
@@ -21,18 +24,18 @@ public class SubstituteServiceImpl implements SubstituteService {
 
 	
 	@Override
-	public Substitute getSubstitute(Plan plan, List<Expense> expenses) throws ServiceException {
-		logger.debug("SubstituteServiceImpl#getSubstitute start" + expenses.size());
+	public Substitute getSubstitute(Plan plan, Map<Expense, Double> exchangeRateMap) throws ServiceException {
+		Set<Expense> expensesList = exchangeRateMap.keySet();
+		logger.debug("SubstituteServiceImpl#getSubstitute start" + expensesList.size());
 		Substitute substitute = new Substitute();
 //		Double totals = new Double(0);
 		
-		logger.debug("SubstituteServiceImpl#getSubstitute expenses.size(): " + expenses.size());
+		logger.debug("SubstituteServiceImpl#getSubstitute expenses.size(): " + expensesList.size());
 		Map<Currency, Double> totalsMap = new HashMap<Currency, Double>();
 		Map<Category, Map<Currency, Double>> expensesByCategoryMap = new HashMap<Category, Map<Currency,Double>>();
-		
 		Map<Currency, Double> expByCurrMap = null;
 		
-		for (Expense exp : expenses) {
+		for (Expense exp : expensesList) {
 			
 			logger.debug("SubstituteServiceImpl#getSubstitute id:" + exp.getId());
 			logger.debug("SubstituteServiceImpl#getSubstitute cat:" + exp.getCategory().getDescription());
@@ -91,7 +94,48 @@ public class SubstituteServiceImpl implements SubstituteService {
 		substitute.setTotalsMap(totalsMap);
 		logger.debug("SubstituteServiceImpl#getSubstitute end");
 		
+		Set<BudgetUsageForCategory> budgetUsageList = generateBudgetUsageList(plan, exchangeRateMap);
+		substitute.getBudgetForCategoriesList().addAll(budgetUsageList);
+		
 		return substitute;
+	}
+
+	private Set<BudgetUsageForCategory> generateBudgetUsageList(Plan plan, Map<Expense, Double> exchangeRateMap) {
+		Set<BudgetUsageForCategory> budgetUsageForCategoryList= new HashSet<BudgetUsageForCategory>();
+		
+		for (PlanItem item : plan.getPlanItemsList()) {
+			BudgetUsageForCategory budUsageForCat = createUsageForCategory(item, exchangeRateMap);
+			budgetUsageForCategoryList.add(budUsageForCat);
+		}
+		
+		return budgetUsageForCategoryList;
+	}
+
+	private BudgetUsageForCategory createUsageForCategory(PlanItem item,
+			Map<Expense, Double> exchangeRateMap) {
+		BudgetUsageForCategory budUsageForCat = new BudgetUsageForCategory();
+		budUsageForCat.setCategory(item.getCategory());
+		budUsageForCat.setBudgetAmount(item.getAmount());
+		Double spentTillNow = getExpensesForCatFromMap(item.getCategory(), exchangeRateMap);
+		budUsageForCat.setSpentTillNow(spentTillNow);
+		
+		return budUsageForCat;
+	}
+
+	private Double getExpensesForCatFromMap(Category category,
+			Map<Expense, Double> exchangeRateMap) {
+		Set<Expense> keySet = exchangeRateMap.keySet();
+		Double spentTillNow = new Double(0);
+
+		for (Expense exp : keySet) {
+			
+			if (exp.getCategory().equals(category)) {
+				Double addition = exchangeRateMap.get(exp) == 0 ? exp.getAmount() : exp.getAmount() * exchangeRateMap.get(exp);
+				spentTillNow += addition;
+			}
+		}
+		
+		return spentTillNow;
 	}
 	
 }

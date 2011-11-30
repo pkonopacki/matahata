@@ -58,10 +58,6 @@
  
  	<!-- dao definitions -->
 	
-	<bean id="transferDAO" class="com.zwort.matahata.core.dao.impl.EntityDAOJpaImpl">
-		<constructor-arg value="com.zwort.matahata.core.model.Transfer" />
-	</bean>
-
 	<bean id="incomeDAO" class="com.zwort.matahata.core.dao.impl.EntityDAOJpaImpl">
 		<constructor-arg value="com.zwort.matahata.core.model.Income" />
 	</bean>
@@ -73,6 +69,8 @@
 	<bean id="debitDAO" class="com.zwort.matahata.core.dao.impl.EntityDAOJpaImpl">
 		<constructor-arg value="com.zwort.matahata.core.model.Debit" />
 	</bean>
+
+	<bean id="transferDAO" class="com.zwort.matahata.core.dao.impl.TransferDAOJpaImpl" />
 
 	<bean id="accountDAO" class="com.zwort.matahata.core.dao.impl.AccountDAOJpaImpl" />
 
@@ -108,7 +106,7 @@
 		<property name="dao" ref="expenseDAO"/>
 	</bean>
 
-	<bean id="transferService" class="com.zwort.matahata.core.service.impl.EntityServiceImpl">
+	<bean id="transferService" class="com.zwort.matahata.core.service.impl.TransferServiceImpl">
 		<property name="dao" ref="transferDAO"/>
 	</bean>
 

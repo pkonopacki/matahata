@@ -31,7 +31,7 @@ public class ExpenseDAOJpaImpl extends EntityDAOJpaImpl<Expense> implements Expe
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Expense> findByPlan(Plan plan) {
-		Query q = entityManager.createQuery("select e from Expense e inner join e.plan p where p.id = :planId");
+		Query q = entityManager.createQuery("select e from Expense e inner join e.plan p where p.id = :planId order by e.date");
 		q.setParameter("planId", plan.getId());
 		return q.getResultList();
 	}

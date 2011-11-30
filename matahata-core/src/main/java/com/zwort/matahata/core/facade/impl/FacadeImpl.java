@@ -1,8 +1,10 @@
 package com.zwort.matahata.core.facade.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -31,6 +33,7 @@ import com.zwort.matahata.core.service.CurrencyService;
 import com.zwort.matahata.core.service.EntityService;
 import com.zwort.matahata.core.service.ExpenseService;
 import com.zwort.matahata.core.service.PlanService;
+import com.zwort.matahata.core.service.TransferService;
 import com.zwort.matahata.core.substitute.SubstituteService;
 import com.zwort.matahata.core.utils.DateUtils;
 
@@ -43,7 +46,7 @@ public class FacadeImpl implements Facade {
 	
 	private ExpenseService expenseService;
 	
-	private EntityService<Transfer> transferService;
+	private TransferService transferService;
 
 	private EntityService<Income> incomeService;
 
@@ -71,7 +74,7 @@ public class FacadeImpl implements Facade {
 		this.expenseService = expenseService;
 	}
 
-	public void setTransferService(EntityService<Transfer> transferService) {
+	public void setTransferService(TransferService transferService) {
 		this.transferService = transferService;
 	}
 
@@ -345,8 +348,6 @@ public class FacadeImpl implements Facade {
 			}
 		}
 		
-		
-		
 		return planService.add(plan);
 	}
 
@@ -363,12 +364,43 @@ public class FacadeImpl implements Facade {
 		logger.debug("Plan end date: " + plan.getEndDate());
 		
 		List<Expense> expenses = expenseService.findExpensesByPlan(plan);
-
+		
+		//TODO:Redisign this crap
+		Map<Expense, Double> exchangeRateMap = getExchangeRateMap(expenses);
 		logger.debug("FacadeImpl#getSubstitute end");
 		
-		return substituteService.getSubstitute(plan, expenses);
+		return substituteService.getSubstitute(plan, exchangeRateMap);
 	}
 	
+	private Map<Expense, Double> getExchangeRateMap(List<Expense> expensesSordedList) throws ServiceException {
+		Map<Expense, Double> exchangeRateMap = new HashMap<Expense, Double>();
+		Currency referenceCurrency = currencyService.getReferenceCurrency();
+		
+		for (Expense expense : expensesSordedList) {
+			
+			if (!expense.getSrcAccount().getCurrency().equals(referenceCurrency)) {
+				Double exchgRate = findExchangeRateForForeignExpense(expense);
+				exchangeRateMap.put(expense, exchgRate);
+			
+			} else {
+				exchangeRateMap.put(expense, new Double(0));
+			}
+		}
+		
+		return exchangeRateMap;
+	}
+
+	private Double findExchangeRateForForeignExpense(Expense expense) throws ServiceException {
+		Transfer transfer = transferService.findLastTransferForForeignExpense(expense);
+		Double exchgRate = getExchangeRate(transfer);
+		
+		return exchgRate;
+	}
+
+	private Double getExchangeRate(Transfer transfer) {
+		return transfer.getAmount() / transfer.getOriginalAmount();
+	}
+
 	public List<Expense> findExpensesByPlanForCategory(String categoryAbbr, Month month) throws ServiceException {
 		Plan plan = planService.getPlanByDate(DateUtils.getBeginningDate(month));
 		Category category = categoryService.getByAbbreviation(categoryAbbr);

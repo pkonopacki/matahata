@@ -10,6 +10,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -32,10 +33,11 @@ public class Plan extends AbstractBaseEntitiy {
 	@Column(name = "end_date", nullable = false)
 	private Date endDate;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "plan_item_link",
 				joinColumns = { @JoinColumn(name = "plan_id") },
 				inverseJoinColumns = { @JoinColumn(name = "plan_Item_id") })
+	
 	private Set<PlanItem> planItemsList;
 	
 

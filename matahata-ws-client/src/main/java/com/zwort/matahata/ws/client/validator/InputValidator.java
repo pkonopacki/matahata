@@ -18,7 +18,19 @@ public class InputValidator {
 				errorList.add("Pos." + counter + ": Item type cannot be null");
 	
 			} else {
-			
+				
+				if (item.getAmount() == null) {
+					errorList.add("Pos." + counter + ": Amount cannot be null");
+				}
+				
+				if (item.getDate() == null) {
+					errorList.add("Pos." + counter + ": Date cannot be null");
+				}
+				
+				if (item.getDescription() == null) {
+					errorList.add("Pos." + counter + ": Description cannot be null");
+				}
+
 				switch(item.getType()) {
 				
 				case EXPENSE:
@@ -75,18 +87,6 @@ public class InputValidator {
 					break;
 					
 				default:
-					
-					if (item.getAmount() == null) {
-						errorList.add("Pos." + counter + ": Amount cannot be null");
-					}
-					
-					if (item.getDate() == null) {
-						errorList.add("Pos." + counter + ": Date cannot be null");
-					}
-					
-					if (item.getDescription() == null) {
-						errorList.add("Pos." + counter + ": Date cannot be null");
-					}
 					
 				}
 			}

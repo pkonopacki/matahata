@@ -43,6 +43,7 @@ INSERT INTO beneficiary (initials, first_name, middle_name, last_name, dob, desc
 INSERT INTO beneficiary (initials, first_name, middle_name, last_name, dob, description, creation_date, last_update, active) values ('AK', 'Amelka', 'Anna', 'Konopacka', '2004-04-27 07:00:00', 'Obibok', NOW(), NOW(), true);
 INSERT INTO beneficiary (initials, first_name, middle_name, last_name, dob, description, creation_date, last_update, active) values ('AD', 'Adzien', 'Filip', 'Konopacki', '1979-10-16 07:00:00', 'Obibok', NOW(), NOW(), true);
 INSERT INTO beneficiary (initials, first_name, middle_name, last_name, dob, description, creation_date, last_update, active) values ('US', 'Wszystkie', 'Dupa', 'Uszate', '1900-01-01 07:00:00', 'Obiboki', NOW(), NOW(), true);
+INSERT INTO beneficiary (initials, first_name, middle_name, last_name, dob, description, creation_date, last_update, active) values ('WI', 'Wieksze', 'Dupa', 'Uszate', '1900-01-01 07:00:00', 'Obiboki', NOW(), NOW(), true);
 
 INSERT INTO currency (iso_code, description, is_default, creation_date, last_update, active) values ('PLN', 'Złoty polski', true, NOW(), NOW(), true);
 INSERT INTO currency (iso_code, description, is_default, creation_date, last_update, active) values ('EUR', 'Euro', false, NOW(), NOW(), true);

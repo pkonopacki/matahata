@@ -97,7 +97,7 @@
 <!-- 		<property name="ignoreCn" value="${matahata.connection.ignoreCn}" /> -->
 		<property name="user" value="user" />
 		<property name="password" value="password" />
-		<property name="url" value="http://localhost:8080/matahata-service/MatahataServicePortType" />
+		<property name="url" value="http://localhost:8090/matahata-service/MatahataServicePortType" />
 		<property name="ignoreCn" value="true" />
 	</bean>
 
