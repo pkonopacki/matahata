@@ -113,6 +113,9 @@ public abstract class CommonBinder {
 		cal.set(Calendar.MONTH, month.ordinal());
 		int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		cal.set(Calendar.DAY_OF_MONTH, lastDay);
+		cal.set(Calendar.HOUR, 23);
+		cal.set(Calendar.MINUTE, 59);
+		cal.set(Calendar.SECOND, 59);
 		
 		return cal.getTime();
 	}

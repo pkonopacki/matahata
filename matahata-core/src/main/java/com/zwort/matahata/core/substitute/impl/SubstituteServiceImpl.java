@@ -95,6 +95,8 @@ public class SubstituteServiceImpl implements SubstituteService {
 		logger.debug("SubstituteServiceImpl#getSubstitute end");
 		
 		Set<BudgetUsageForCategory> budgetUsageList = generateBudgetUsageList(plan, exchangeRateMap);
+		logger.debug("SubstituteServiceImpl#getSubstitute budgetUsageList.size(): " + budgetUsageList.size());
+		
 		substitute.getBudgetForCategoriesList().addAll(budgetUsageList);
 		
 		return substitute;
@@ -102,6 +104,7 @@ public class SubstituteServiceImpl implements SubstituteService {
 
 	private Set<BudgetUsageForCategory> generateBudgetUsageList(Plan plan, Map<Expense, Double> exchangeRateMap) {
 		Set<BudgetUsageForCategory> budgetUsageForCategoryList= new HashSet<BudgetUsageForCategory>();
+		logger.debug("SubstituteServiceImpl#generateBudgetUsageList PlanItemsList.size(): " + plan.getPlanItemsList().size());
 		
 		for (PlanItem item : plan.getPlanItemsList()) {
 			BudgetUsageForCategory budUsageForCat = createUsageForCategory(item, exchangeRateMap);

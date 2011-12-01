@@ -1,6 +1,8 @@
 package com.zwort.matahata.core.sp.dto;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class SubstituteDTO {
 	
@@ -9,6 +11,8 @@ public class SubstituteDTO {
 	private PlanDTO plan;
 	
 	private Map<CategoryDTO, Map<CurrencyDTO, Double>> expensesByCatMap;
+	
+	private Set<BudgetUsageDTO> budgetUsageList;
 
 
 	public Map<CurrencyDTO, Double> getTotalsByCurrMap() {
@@ -34,6 +38,15 @@ public class SubstituteDTO {
 	public void setExpensesByCatMap(
 			Map<CategoryDTO, Map<CurrencyDTO, Double>> expensesByCatMap) {
 		this.expensesByCatMap = expensesByCatMap;
+	}
+
+	public Set<BudgetUsageDTO> getBudgetUsageList() {
+		
+		if (budgetUsageList == null) {
+			budgetUsageList = new HashSet<BudgetUsageDTO>();
+		}
+		
+		return budgetUsageList;
 	}
 
 }

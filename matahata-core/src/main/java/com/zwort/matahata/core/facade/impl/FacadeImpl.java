@@ -386,12 +386,20 @@ public class FacadeImpl implements Facade {
 				exchangeRateMap.put(expense, new Double(0));
 			}
 		}
+		logger.debug("FacadeImpl#getExchangeRateMap exchangeRateMap.size(): " + exchangeRateMap.size());
 		
 		return exchangeRateMap;
 	}
 
 	private Double findExchangeRateForForeignExpense(Expense expense) throws ServiceException {
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Expense date: " + expense.getDate());
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Expense amount: " + expense.getAmount());
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Expense currency: " + expense.getCurrency().getIsoCode());
 		Transfer transfer = transferService.findLastTransferForForeignExpense(expense);
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Transfer found: date:" + transfer.getDate());
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Transfer found: amount:" + transfer.getAmount());
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Transfer found: orig amount:" + transfer.getOriginalAmount());
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Transfer found: orig curr:" + transfer.getOriginalCurrency());
 		Double exchgRate = getExchangeRate(transfer);
 		
 		return exchgRate;

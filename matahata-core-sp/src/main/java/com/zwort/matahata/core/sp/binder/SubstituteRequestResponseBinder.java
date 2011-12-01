@@ -1,10 +1,13 @@
 package com.zwort.matahata.core.sp.binder;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import zwort.com.matahata.services._1.BudgetUsageByCategoriesWS;
+import zwort.com.matahata.services._1.BudgetUsageByCategoriesWSList;
 import zwort.com.matahata.services._1.ExpenseWS;
 import zwort.com.matahata.services._1.ExpensesByCategoriesWS;
 import zwort.com.matahata.services._1.ExpensesByCategoriesWSList;
@@ -16,6 +19,7 @@ import zwort.com.matahata.services._1.FindExpensesByCategoriesResponse;
 import zwort.com.matahata.services._1.FindExpensesByPlanForCategory;
 import zwort.com.matahata.services._1.FindExpensesByPlanForCategoryResponse;
 
+import com.zwort.matahata.core.sp.dto.BudgetUsageDTO;
 import com.zwort.matahata.core.sp.dto.CategoryDTO;
 import com.zwort.matahata.core.sp.dto.CriteriaDTO;
 import com.zwort.matahata.core.sp.dto.CurrencyDTO;
@@ -29,11 +33,17 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 		FindExpensesByCategoriesResponse response = new FindExpensesByCategoriesResponse();
 		ExpensesByCategoriesWSList exByCategoriesWSList = new ExpensesByCategoriesWSList();
 		ExpensesTotalsByCategoriesWSMap expTotalsByCurrWsMap = new ExpensesTotalsByCategoriesWSMap();
+		BudgetUsageByCategoriesWSList budgetUsageForCategoriesWSList = new BudgetUsageByCategoriesWSList();
 		
 		List<ExpensesTotalsByCurrenciesWS> expensesTotalsByCurrWsList = bindExpensesTotalsByCurrencyList(dto.getTotalsByCurrMap());
 		
 		List<ExpensesByCategoriesWS> expensesByCategoriesWSList = bindExpenseByCategoriesList(dto.getExpensesByCatMap());
 		
+		Set<BudgetUsageByCategoriesWS> budgetUsageByCatList = bindBudgetUsageByCatList(dto.getBudgetUsageList());
+		
+		budgetUsageForCategoriesWSList.getBudgetUsageByCategoriesWS().addAll(budgetUsageByCatList);
+		response.setBudgetUsageByCategoriesWSList(budgetUsageForCategoriesWSList);
+
 		exByCategoriesWSList.getExpensesByCategoriesWS().addAll(expensesByCategoriesWSList);
 		response.setExpensesByCategoriesWSList(exByCategoriesWSList);
 		
@@ -43,6 +53,31 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 		return response;
 	}
 	
+	private Set<BudgetUsageByCategoriesWS> bindBudgetUsageByCatList(
+			Set<BudgetUsageDTO> budgetUsageList) {
+		Set<BudgetUsageByCategoriesWS> budgetUsageByCatWSList = new HashSet<BudgetUsageByCategoriesWS>();
+		
+		for (BudgetUsageDTO dto : budgetUsageList) {
+			BudgetUsageByCategoriesWS budUsByCatWS = assembleBudgetUsageByCatWS(dto);
+			budgetUsageByCatWSList.add(budUsByCatWS);
+		}
+		
+		return budgetUsageByCatWSList;
+	
+	}
+
+	private BudgetUsageByCategoriesWS assembleBudgetUsageByCatWS(
+			BudgetUsageDTO dto) {
+		BudgetUsageByCategoriesWS budgetUsageByCatWS = new BudgetUsageByCategoriesWS();
+
+		budgetUsageByCatWS.setCategoryDesc(dto.getCategoryDesc());
+		budgetUsageByCatWS.setCategoryAbbr(dto.getCategoryAbbr());
+		budgetUsageByCatWS.setBudgetAmount(dto.getBudgetAmount());
+		budgetUsageByCatWS.setAmountUsed(dto.getUsedAmount());
+		
+		return budgetUsageByCatWS;
+	}
+
 	public FindExpensesByPlanForCategoryResponse bindFindExpByPlanForCatResponseFromDtoList(List<ExpenseDTO> expenseDtoList) {
 		FindExpensesByPlanForCategoryResponse response = new FindExpensesByPlanForCategoryResponse();
 		ExpensesWSList expensesWSList = new ExpensesWSList();

@@ -1,16 +1,19 @@
 package com.zwort.matahata.core.sp.assembler;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.zwort.matahata.core.model.BudgetUsageForCategory;
 import com.zwort.matahata.core.model.Category;
 import com.zwort.matahata.core.model.Currency;
 import com.zwort.matahata.core.model.Plan;
 import com.zwort.matahata.core.model.Substitute;
+import com.zwort.matahata.core.sp.dto.BudgetUsageDTO;
 import com.zwort.matahata.core.sp.dto.CategoryDTO;
 import com.zwort.matahata.core.sp.dto.CurrencyDTO;
 import com.zwort.matahata.core.sp.dto.PlanDTO;
@@ -26,13 +29,44 @@ public class SubstituteDtoAssembler {
 		
 		SubstituteDTO dto = new SubstituteDTO();
 		Map<CategoryDTO, Map<CurrencyDTO, Double>> expByCatDtoMap = assembleExpensesByCatMap(substitute.getExpensesByCategoriesMap());
+
 		PlanDTO planDto = assemblePlan(substitute.getPlan());
-		
 		dto.setExpensesByCatMap(expByCatDtoMap);
 		dto.setPlan(planDto);
+		
 		Map<CurrencyDTO, Double> totalsByCurrDtoMap = assembleExpensesByCurrencyDtoMap(substitute.getTotalsMap());
+		Set<BudgetUsageDTO> budgetUsageDtoList = assembleBudgetUsageDtoList(substitute.getBudgetForCategoriesList());
+		
+		dto.getBudgetUsageList().addAll(budgetUsageDtoList);
 		dto.setTotalsByCurrMap(totalsByCurrDtoMap);
 		logger.debug("SubstituteDtoAssembler#assembleSubstitute end");
+		
+		return dto;
+	}
+
+	private Set<BudgetUsageDTO> assembleBudgetUsageDtoList(
+			Set<BudgetUsageForCategory> budgetForCategoriesList) {
+		logger.debug("SubstituteDtoAssembler#assembleBudgetUsageDtoList start");
+		logger.debug("SubstituteDtoAssembler#assembleBudgetUsageDtoList budgetForCategoriesList.size: " + budgetForCategoriesList.size());
+		
+		Set<BudgetUsageDTO> budgetUsageDtoList = new HashSet<BudgetUsageDTO>();
+		
+		for (BudgetUsageForCategory budgetUsage : budgetForCategoriesList) {
+			BudgetUsageDTO dto = assembleBudgetUsageDTO(budgetUsage);
+			budgetUsageDtoList.add(dto);
+		}
+		
+		logger.debug("SubstituteDtoAssembler#assembleBudgetUsageDtoList end");
+		return budgetUsageDtoList;
+	}
+
+	private BudgetUsageDTO assembleBudgetUsageDTO(
+			BudgetUsageForCategory budgetUsage) {
+		BudgetUsageDTO dto = new BudgetUsageDTO();
+		dto.setCategoryAbbr(budgetUsage.getCategory().getAbbreviation());
+		dto.setCategoryDesc(budgetUsage.getCategory().getDescription());
+		dto.setBudgetAmount(budgetUsage.getBudgetAmount());
+		dto.setUsedAmount(budgetUsage.getSpentTillNow());
 		
 		return dto;
 	}
@@ -70,9 +104,9 @@ public class SubstituteDtoAssembler {
 			expByCatDtoMap.put(categoryDto, expByCurrMap);
 			
 		}
+		
 		logger.debug("SubstituteDtoAssembler#assembleExpensesByCatMap expByCatDtoMap.size(): " + expByCatDtoMap.size());
 		logger.debug("SubstituteDtoAssembler#assembleExpensesByCatMap start");
-
 		return expByCatDtoMap; 
 	}
 	
@@ -88,11 +122,10 @@ public class SubstituteDtoAssembler {
 			CurrencyDTO dto = currAssembler.currencyToDto(currency);
 			expensesByCurrencyDtoMap.put(dto, expByCurrMap.get(currency));
 		}
+
 		logger.debug("SubstituteDtoAssembler#assembleExpensesByCurrencyDtoMap expByCatDtoMap.size(): " + expensesByCurrencyDtoMap.size());
 		logger.debug("SubstituteDtoAssembler#assembleExpensesByCurrencyDtoMap start");
-		
 		return expensesByCurrencyDtoMap;
 	}
-	
 
 }
