@@ -64,8 +64,8 @@ public class PlanManagementBinder extends CommonBinder {
 			throw new ServiceProviderException("Category [" + dto.getCategoryAbbr() + "] is not in database");
 		}
 		
-		planItem.setCategory(category);
 		planItem.setAmount(getAmount(dto.getCatLimit()));
+		planItem.setCategory(category);
 		
 		return planItem;
 	}

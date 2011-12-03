@@ -343,7 +343,9 @@ public class FacadeImpl implements Facade {
 			if (!planCategoriesList.contains(category)) {
 				PlanItem planItem = new PlanItem();
 				planItem.setCategory(category);
-				planItem.setAmount(category.getMonthlyLimit());
+				
+				//TODO:Config!!!
+				planItem.setAmount(0.00);
 				plan.getPlanItemsList().add(planItem);
 			}
 		}
