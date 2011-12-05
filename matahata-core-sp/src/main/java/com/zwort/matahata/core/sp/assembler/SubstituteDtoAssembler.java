@@ -58,11 +58,8 @@ public class SubstituteDtoAssembler {
 		Set<BudgetUsageDTO> budgetUsageDtoList = new HashSet<BudgetUsageDTO>();
 		
 		for (BudgetUsageForCategory budgetUsage : budgetForCategoriesList) {
-			
-			if (budgetUsage.getSpentTillNow() != 0) {
-				BudgetUsageDTO dto = assembleBudgetUsageDTO(budgetUsage);
-				budgetUsageDtoList.add(dto);
-			}
+			BudgetUsageDTO dto = assembleBudgetUsageDTO(budgetUsage);
+			budgetUsageDtoList.add(dto);
 		}
 		
 		logger.debug("SubstituteDtoAssembler#assembleBudgetUsageDtoList end");

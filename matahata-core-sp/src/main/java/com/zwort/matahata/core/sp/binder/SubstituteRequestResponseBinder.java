@@ -112,8 +112,11 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 		Set<BudgetUsageByCategoriesWS> budgetUsageByCatWSList = new HashSet<BudgetUsageByCategoriesWS>();
 		
 		for (BudgetUsageDTO dto : budgetUsageList) {
-			BudgetUsageByCategoriesWS budUsByCatWS = assembleBudgetUsageByCatWS(dto);
-			budgetUsageByCatWSList.add(budUsByCatWS);
+			
+			if (dto.getUsedAmount() != 0) {
+				BudgetUsageByCategoriesWS budUsByCatWS = assembleBudgetUsageByCatWS(dto);
+				budgetUsageByCatWSList.add(budUsByCatWS);
+			}
 		}
 		
 		return budgetUsageByCatWSList;
