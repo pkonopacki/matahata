@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import zwort.com.matahata.services._1.BudgetUsageByCategoriesWS;
 import zwort.com.matahata.services._1.BudgetUsageByCategoriesWSList;
+import zwort.com.matahata.services._1.BudgetUsageTotalsWS;
 import zwort.com.matahata.services._1.ExpenseWS;
 import zwort.com.matahata.services._1.ExpensesByCategoriesWS;
 import zwort.com.matahata.services._1.ExpensesByCategoriesWSList;
@@ -19,8 +23,10 @@ import zwort.com.matahata.services._1.FindExpensesByCategoriesResponse;
 import zwort.com.matahata.services._1.FindExpensesByPlanForCategory;
 import zwort.com.matahata.services._1.FindExpensesByPlanForCategoryResponse;
 
+import com.zwort.matahata.core.sp.assembler.SubstituteDtoAssembler;
 import com.zwort.matahata.core.sp.dto.BudgetUsageDTO;
 import com.zwort.matahata.core.sp.dto.CategoryDTO;
+import com.zwort.matahata.core.sp.dto.CategoryType;
 import com.zwort.matahata.core.sp.dto.CriteriaDTO;
 import com.zwort.matahata.core.sp.dto.CurrencyDTO;
 import com.zwort.matahata.core.sp.dto.ExpenseDTO;
@@ -28,6 +34,8 @@ import com.zwort.matahata.core.sp.dto.SubstituteDTO;
 import com.zwort.matahata.core.sp.util.ConversionUtils;
 
 public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
+	
+	private static final Log logger = LogFactory.getLog(SubstituteDtoAssembler.class);
 	
 	public FindExpensesByCategoriesResponse bindResponseFromDto(SubstituteDTO dto) {
 		FindExpensesByCategoriesResponse response = new FindExpensesByCategoriesResponse();
@@ -41,6 +49,8 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 		
 		Set<BudgetUsageByCategoriesWS> budgetUsageByCatList = bindBudgetUsageByCatList(dto.getBudgetUsageList());
 		
+		BudgetUsageTotalsWS budgetUsageTotalsWS = bindBudgetUsageTotalsWS(dto.getBudgetUsageList());
+		
 		budgetUsageForCategoriesWSList.getBudgetUsageByCategoriesWS().addAll(budgetUsageByCatList);
 		response.setBudgetUsageByCategoriesWSList(budgetUsageForCategoriesWSList);
 
@@ -50,9 +60,53 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 		expTotalsByCurrWsMap.getExpensesTotalsByCurrenciesWS().addAll(expensesTotalsByCurrWsList);
 		response.setExpensesTotalsByCategoriesWSMap(expTotalsByCurrWsMap);
 		
+		response.setBudgetUsageTotalsWS(budgetUsageTotalsWS);
+		
 		return response;
 	}
 	
+	private BudgetUsageTotalsWS bindBudgetUsageTotalsWS(
+			Set<BudgetUsageDTO> budgetUsageList) {
+		BudgetUsageTotalsWS budgetUsageTotalsWS = new BudgetUsageTotalsWS();
+		Double budgetIncomesPlanned = new Double(0);
+		Double budgetExpensesPlanned = new Double(0);
+		Double budgetIncomesReal = new Double(0);
+		Double budgetExpensesReal = new Double(0);
+		
+		for (BudgetUsageDTO dto : budgetUsageList) {
+			logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS BudgetUsageDTO: " + dto.getCategoryAbbr() + ", " + dto.getCategoryType().toString() + ", " + dto.getBudgetAmount() + ", " + dto.getUsedAmount());
+
+			if (dto.getCategoryType().equals(CategoryType.EXPENSE)) {
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS EXPENSE");
+				budgetExpensesPlanned += dto.getBudgetAmount();
+				budgetExpensesReal += dto.getUsedAmount();
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetExpensesPlanned adding dto.getBudgetAmount(): " + dto.getBudgetAmount());
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetExpensesPlanned after addition: " + budgetExpensesPlanned);
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetExpensesPlanned adding dto.getUsedAmount(): " + dto.getUsedAmount());
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetExpensesPlanned after addition: " + budgetExpensesReal);
+				
+			} else {
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS INCOME");
+				budgetIncomesPlanned += dto.getBudgetAmount();
+				budgetIncomesReal += dto.getUsedAmount();
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetIncomesPlanned adding dto.getBudgetAmount(): " + dto.getBudgetAmount());
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetIncomesPlanned after addition: " + budgetIncomesPlanned);
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetIncomesReal adding dto.getUsedAmount(): " + dto.getUsedAmount());
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetIncomesReal after addition: " + budgetIncomesReal);
+			}
+		}
+		
+		budgetUsageTotalsWS.setBudgetExpenseTotals(budgetExpensesPlanned);
+		budgetUsageTotalsWS.setBudgeExpensetUsed(budgetExpensesReal);
+		budgetUsageTotalsWS.setBudgeExpenseDeff(budgetExpensesPlanned - budgetExpensesReal);
+		
+		budgetUsageTotalsWS.setBudgetIncomeTotals(budgetIncomesPlanned);
+		budgetUsageTotalsWS.setBudgetIncomeUsed(budgetIncomesReal);
+		budgetUsageTotalsWS.setBudgetIncomeDeff(budgetIncomesPlanned - budgetIncomesReal);
+		
+		return budgetUsageTotalsWS;
+	}
+
 	private Set<BudgetUsageByCategoriesWS> bindBudgetUsageByCatList(
 			Set<BudgetUsageDTO> budgetUsageList) {
 		Set<BudgetUsageByCategoriesWS> budgetUsageByCatWSList = new HashSet<BudgetUsageByCategoriesWS>();

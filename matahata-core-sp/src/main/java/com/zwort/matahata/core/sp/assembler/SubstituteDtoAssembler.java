@@ -15,6 +15,7 @@ import com.zwort.matahata.core.model.Plan;
 import com.zwort.matahata.core.model.Substitute;
 import com.zwort.matahata.core.sp.dto.BudgetUsageDTO;
 import com.zwort.matahata.core.sp.dto.CategoryDTO;
+import com.zwort.matahata.core.sp.dto.CategoryType;
 import com.zwort.matahata.core.sp.dto.CurrencyDTO;
 import com.zwort.matahata.core.sp.dto.PlanDTO;
 import com.zwort.matahata.core.sp.dto.SubstituteDTO;
@@ -38,6 +39,11 @@ public class SubstituteDtoAssembler {
 		Set<BudgetUsageDTO> budgetUsageDtoList = assembleBudgetUsageDtoList(substitute.getBudgetForCategoriesList());
 		
 		dto.getBudgetUsageList().addAll(budgetUsageDtoList);
+
+		for (BudgetUsageDTO dtoLog : dto.getBudgetUsageList()) {
+			logger.debug("SubstituteDtoAssembler#assembleSubstitute BudgetUsageDTO: " + dtoLog.getCategoryAbbr() + ", " + dtoLog.getBudgetAmount() + ", " + dtoLog.getUsedAmount());
+		}
+		
 		dto.setTotalsByCurrMap(totalsByCurrDtoMap);
 		logger.debug("SubstituteDtoAssembler#assembleSubstitute end");
 		
@@ -52,8 +58,11 @@ public class SubstituteDtoAssembler {
 		Set<BudgetUsageDTO> budgetUsageDtoList = new HashSet<BudgetUsageDTO>();
 		
 		for (BudgetUsageForCategory budgetUsage : budgetForCategoriesList) {
-			BudgetUsageDTO dto = assembleBudgetUsageDTO(budgetUsage);
-			budgetUsageDtoList.add(dto);
+			
+			if (budgetUsage.getSpentTillNow() != 0) {
+				BudgetUsageDTO dto = assembleBudgetUsageDTO(budgetUsage);
+				budgetUsageDtoList.add(dto);
+			}
 		}
 		
 		logger.debug("SubstituteDtoAssembler#assembleBudgetUsageDtoList end");
@@ -68,6 +77,8 @@ public class SubstituteDtoAssembler {
 		dto.setBudgetAmount(budgetUsage.getBudgetAmount());
 		dto.setUsedAmount(budgetUsage.getSpentTillNow());
 		
+		dto.setCategoryType(budgetUsage.getCategory().getCategoryType().equals(com.zwort.matahata.core.model.CategoryType.INCOME) ? CategoryType.INCOME : CategoryType.EXPENSE);
+		logger.debug("SubstituteDtoAssembler#assembleBudgetUsageDTO CategoryType for cat [" + budgetUsage.getCategory().getAbbreviation() + "]: " + budgetUsage.getCategory().getCategoryType().toString());
 		return dto;
 	}
 

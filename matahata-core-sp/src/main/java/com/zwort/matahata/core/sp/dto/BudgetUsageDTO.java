@@ -9,6 +9,8 @@ public class BudgetUsageDTO {
 	private Double budgetAmount;
 	
 	private Double usedAmount;
+	
+	private CategoryType categoryType;
 
 	public String getCategoryAbbr() {
 		return categoryAbbr;
@@ -40,6 +42,14 @@ public class BudgetUsageDTO {
 
 	public void setUsedAmount(Double usedAmount) {
 		this.usedAmount = usedAmount;
+	}
+
+	public CategoryType getCategoryType() {
+		return categoryType;
+	}
+
+	public void setCategoryType(CategoryType categoryType) {
+		this.categoryType = categoryType;
 	}
 	
 }

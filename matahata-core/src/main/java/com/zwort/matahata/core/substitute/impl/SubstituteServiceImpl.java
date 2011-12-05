@@ -108,6 +108,7 @@ public class SubstituteServiceImpl implements SubstituteService {
 		
 		for (PlanItem item : plan.getPlanItemsList()) {
 			BudgetUsageForCategory budUsageForCat = createUsageForCategory(item, exchangeRateMap);
+			logger.debug("SubstituteServiceImpl#generateBudgetUsageList Adding BudgetUsageForCategory: " + budUsageForCat.getCategory().getAbbreviation() + ", " + budUsageForCat.getBudgetAmount() + ", " + budUsageForCat.getSpentTillNow());
 			budgetUsageForCategoryList.add(budUsageForCat);
 		}
 		

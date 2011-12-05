@@ -228,6 +228,7 @@
 				<xs:sequence>
 					<xs:element ref="ExpensesTotalsByCategoriesWSMap" />
 					<xs:element ref="ExpensesByCategoriesWSList" />
+					<xs:element ref="BudgetUsageTotalsWS" />
 					<xs:element ref="BudgetUsageByCategoriesWSList" />
 				</xs:sequence>
 			</xs:extension>
@@ -277,9 +278,6 @@
 				maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
-
-
-
 	<xs:complexType name="ExpensesByCategoriesWS">
 		<xs:sequence>
 			<xs:element name="categoryAbbr" type="xs:string" minOccurs="0"
@@ -296,6 +294,23 @@
 			<xs:element name="currencyIso" type="xs:string" minOccurs="0"
 				maxOccurs="1" />
 			<xs:element name="amount" type="xs:double" minOccurs="0"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BudgetUsageTotalsWS" type="BudgetUsageTotalsWS" />
+	<xs:complexType name="BudgetUsageTotalsWS">
+		<xs:sequence>
+			<xs:element name="budgetIncomeTotals" type="xs:double" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="budgetIncomeUsed" type="xs:double" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="budgetIncomeDeff" type="xs:double" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="budgetExpenseTotals" type="xs:double" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="budgeExpensetUsed" type="xs:double" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="budgeExpenseDeff" type="xs:double" minOccurs="0"
 				maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
