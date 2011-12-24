@@ -7,8 +7,7 @@ create table plan (
 	amount			numeric(10,2)	not null,
 	object_type		varchar(20) 	not null,
 	
-	constraint pk_plan primary key (id),
-	constraint fk_plan_account_id foreign key (account_id) references account (id)
+	constraint pk_plan primary key (id)
 ) default charset utf8 collate utf8_polish_ci;
 
 create table plan_item (

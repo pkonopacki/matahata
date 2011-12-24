@@ -11,9 +11,11 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<cxf.version>2.2.11</cxf.version>
 		<org.springframework.version>3.0.6.RELEASE</org.springframework.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<build>
@@ -222,6 +224,11 @@
 				<artifactId>matahata-core-sp</artifactId>
 				<version>1.2-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>com.zwort.matahata</groupId>
+				<artifactId>matahata-ws-client</artifactId>
+				<version>1.2-SNAPSHOT</version>
+			</dependency>
 			
 			<!-- Hibernate -->
 			<dependency>
@@ -272,6 +279,20 @@
 			    <groupId>log4j</groupId>
 			    <artifactId>log4j</artifactId>
 			    <version>1.2.16</version>
+			</dependency>
+			
+			<!-- XStream -->
+			<dependency>
+				<groupId>com.thoughtworks.xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>1.2.2</version>
+			</dependency>
+			
+			<!-- WS Security -->
+			<dependency>
+				<groupId>org.apache.ws.security</groupId>
+				<artifactId>wss4j</artifactId>
+				<version>1.5.6</version>
 			</dependency>
 			
 			<!-- MySQL connector -->
