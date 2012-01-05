@@ -10,7 +10,7 @@ import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 
 public interface SubstituteSellerService {
 	
-	SubstituteDTO sellSubstitute(Month month) throws ServiceProviderException;
+	SubstituteDTO sellSubstitute(Month month, int year) throws ServiceProviderException;
 
 	List<ExpenseDTO> findExpensesByPlanForCategory(CriteriaDTO dto) throws ServiceProviderException;
 }

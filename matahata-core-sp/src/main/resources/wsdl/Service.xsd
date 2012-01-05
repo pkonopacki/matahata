@@ -220,6 +220,8 @@
 		<xs:sequence>
 			<xs:element name="Month" type="Month" minOccurs="0"
 				maxOccurs="1" />
+			<xs:element name="Year" type="xs:int" minOccurs="0"
+				maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="FindExpensesByCategoriesResponse">
@@ -331,6 +333,8 @@
 			<xs:element name="Month" type="Month" minOccurs="1"
 				maxOccurs="1" />
 			<xs:element name="CategoryAbbr" type="xs:string"
+				minOccurs="1" maxOccurs="1" />
+			<xs:element name="Year" type="xs:int"
 				minOccurs="1" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>

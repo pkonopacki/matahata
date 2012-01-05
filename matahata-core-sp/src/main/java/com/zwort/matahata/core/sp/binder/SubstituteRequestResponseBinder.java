@@ -243,6 +243,7 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 		CriteriaDTO dto = new CriteriaDTO();
 		dto.setCategoryAbbr(request.getCategoryAbbr());
 		dto.setMonth(bindMonthFromWSMonth(request.getMonth()));
+		dto.setYear(request.getYear());
 		
 		return dto;
 	}

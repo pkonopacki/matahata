@@ -354,13 +354,13 @@ public class FacadeImpl implements Facade {
 	}
 
 	@Override
-	public Substitute getSubstitute(Month month) throws ServiceException {
+	public Substitute getSubstitute(Month month, int year) throws ServiceException {
 		//TODO: Change logic (flexible plans / dates)
 		logger.debug("FacadeImpl#getSubstitute start");
 		logger.debug("Month: " + month);
-		logger.debug("Date from month: " + DateUtils.getBeginningDate(month));
+		logger.debug("Date from month: " + DateUtils.getBeginningDate(month, year));
 
-		Plan plan = planService.getPlanByDate(DateUtils.getBeginningDate(month));
+		Plan plan = planService.getPlanByDate(DateUtils.getBeginningDate(month, year));
 		
 		logger.debug("Plan beginning date: " + plan.getStartDate());
 		logger.debug("Plan end date: " + plan.getEndDate());
@@ -411,8 +411,8 @@ public class FacadeImpl implements Facade {
 		return transfer.getAmount() / transfer.getOriginalAmount();
 	}
 
-	public List<Expense> findExpensesByPlanForCategory(String categoryAbbr, Month month) throws ServiceException {
-		Plan plan = planService.getPlanByDate(DateUtils.getBeginningDate(month));
+	public List<Expense> findExpensesByPlanForCategory(String categoryAbbr, Month month, int year) throws ServiceException {
+		Plan plan = planService.getPlanByDate(DateUtils.getBeginningDate(month, year));
 		Category category = categoryService.getByAbbreviation(categoryAbbr);
 		return expenseService.findExpensesByPlandForCategory(plan, category);
 	}

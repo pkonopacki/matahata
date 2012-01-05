@@ -6,6 +6,8 @@ public class CriteriaDTO {
 	
 	private Month month;
 	
+	private int year;
+	
 	private String categoryAbbr;
 
 	public Month getMonth() {
@@ -14,6 +16,14 @@ public class CriteriaDTO {
 
 	public void setMonth(Month month) {
 		this.month = month;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
 	}
 
 	public String getCategoryAbbr() {

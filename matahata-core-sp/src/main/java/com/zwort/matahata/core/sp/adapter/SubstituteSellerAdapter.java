@@ -22,7 +22,7 @@ public class SubstituteSellerAdapter {
 		FindExpensesByCategoriesResponse response = new FindExpensesByCategoriesResponse();
 		
 		try {
-			response = binder.bindResponseFromDto(ServiceLocator.getInstance().getSubstituteSellerService().sellSubstitute(binder.bindMonthFromWSMonth(request.getMonth())));
+			response = binder.bindResponseFromDto(ServiceLocator.getInstance().getSubstituteSellerService().sellSubstitute(binder.bindMonthFromWSMonth(request.getMonth()), request.getYear()));
 		
 		} catch (Exception e) {
 			logger.error("SubstituteSellerAdapter.sellSubstitute failed: ", e);

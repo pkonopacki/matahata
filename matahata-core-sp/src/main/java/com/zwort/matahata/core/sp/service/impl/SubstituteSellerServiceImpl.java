@@ -28,12 +28,12 @@ public class SubstituteSellerServiceImpl extends AbstractManagementService imple
 	
 
 	@Override
-	public SubstituteDTO sellSubstitute(Month month) throws ServiceProviderException {
+	public SubstituteDTO sellSubstitute(Month month, int year) throws ServiceProviderException {
 		Substitute substitute = null;
 		SubstituteDtoAssembler substituteDtoAssembler = new SubstituteDtoAssembler();
 		
 		try {
-			substitute = facade.getSubstitute(month);
+			substitute = facade.getSubstitute(month, year);
 		
 		} catch (Exception e){
 			logger.error("SubstituteSellerServiceImpl.sellSubstitute failed: ", e);
@@ -77,7 +77,7 @@ public class SubstituteSellerServiceImpl extends AbstractManagementService imple
 		ExpenseDTOAssembler assembler = new ExpenseDTOAssembler();
 		List<Expense> expensesList = null;
 		try {
-			expensesList = facade.findExpensesByPlanForCategory(dto.getCategoryAbbr(), dto.getMonth());
+			expensesList = facade.findExpensesByPlanForCategory(dto.getCategoryAbbr(), dto.getMonth(), dto.getYear());
 			
 		} catch (Exception e) {
 			logger.error("SubstituteSellerServiceImpl.findExpensesByPlanForCategory failed: ", e);

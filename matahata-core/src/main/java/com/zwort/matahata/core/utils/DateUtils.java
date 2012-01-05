@@ -8,12 +8,13 @@ import com.zwort.matahata.core.model.Month;
 
 public class DateUtils {
 	
-	public static Date getBeginningDate(Month month) {
+	public static Date getBeginningDate(Month month, int year) {
 		Date now = new Date();
 		GregorianCalendar gcal = new GregorianCalendar();
 		gcal.setTime(now);
 		gcal.set(Calendar.DAY_OF_MONTH, 1);
 		gcal.set(Calendar.MONTH, month.ordinal());
+		gcal.set(Calendar.YEAR, year);
 		return gcal.getTime();
 	}
 	
