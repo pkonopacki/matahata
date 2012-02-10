@@ -80,6 +80,7 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS EXPENSE");
 				budgetExpensesPlanned += dto.getBudgetAmount();
 				budgetExpensesReal += dto.getUsedAmount();
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetIncomesPlanned cat" + dto.getCategoryAbbr());
 				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetExpensesPlanned adding dto.getBudgetAmount(): " + dto.getBudgetAmount());
 				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetExpensesPlanned after addition: " + budgetExpensesPlanned);
 				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetExpensesPlanned adding dto.getUsedAmount(): " + dto.getUsedAmount());
@@ -89,6 +90,7 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS INCOME");
 				budgetIncomesPlanned += dto.getBudgetAmount();
 				budgetIncomesReal += dto.getUsedAmount();
+				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetIncomesPlanned cat" + dto.getCategoryAbbr());
 				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetIncomesPlanned adding dto.getBudgetAmount(): " + dto.getBudgetAmount());
 				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetIncomesPlanned after addition: " + budgetIncomesPlanned);
 				logger.debug("SubstituteRequestResponseBinder#bindBudgetUsageTotalsWS budgetIncomesReal adding dto.getUsedAmount(): " + dto.getUsedAmount());

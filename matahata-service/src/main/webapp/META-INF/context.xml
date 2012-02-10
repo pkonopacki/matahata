@@ -10,7 +10,7 @@
               username="matahata"
               password="matahata"
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://192.168.0.160:3306/matahata"
+              url="jdbc:mysql://localhost:3306/matahata"
      />
 <!-- 
 	<Resource name="jdbc/matahataDS"

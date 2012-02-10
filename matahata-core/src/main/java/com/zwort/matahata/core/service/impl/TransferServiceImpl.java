@@ -3,6 +3,7 @@ package com.zwort.matahata.core.service.impl;
 import com.zwort.matahata.core.dao.TransferDAO;
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Expense;
+import com.zwort.matahata.core.model.Income;
 import com.zwort.matahata.core.model.Transfer;
 import com.zwort.matahata.core.service.TransferService;
 
@@ -22,6 +23,17 @@ public class TransferServiceImpl extends EntityServiceImpl<Transfer> implements 
 
 		try {
 			return getDao().findLastTransferForForeignExpense(expense);
+
+		} catch (Throwable t) {
+			throw new ServiceException("TransferServiceImpll#findLastTransferForForeignExpense failed", t);
+		}
+	}
+
+	@Override
+	public Transfer findLastTransferForForeignIncome(Income income) throws ServiceException {
+
+		try {
+			return getDao().findLastTransferForForeignIncome(income);
 
 		} catch (Throwable t) {
 			throw new ServiceException("TransferServiceImpll#findLastTransferForForeignExpense failed", t);

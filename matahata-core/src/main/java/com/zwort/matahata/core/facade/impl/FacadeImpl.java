@@ -21,6 +21,7 @@ import com.zwort.matahata.core.model.Currency;
 import com.zwort.matahata.core.model.Debit;
 import com.zwort.matahata.core.model.Expense;
 import com.zwort.matahata.core.model.Income;
+import com.zwort.matahata.core.model.Item;
 import com.zwort.matahata.core.model.Month;
 import com.zwort.matahata.core.model.Plan;
 import com.zwort.matahata.core.model.PlanItem;
@@ -45,6 +46,8 @@ public class FacadeImpl implements Facade {
 	private static final Log logger = LogFactory.getLog(FacadeImpl.class);
 	
 	private ExpenseService expenseService;
+	
+	private EntityService<Item> itemService;
 	
 	private TransferService transferService;
 
@@ -366,32 +369,77 @@ public class FacadeImpl implements Facade {
 		logger.debug("Plan end date: " + plan.getEndDate());
 		
 		List<Expense> expenses = expenseService.findExpensesByPlan(plan);
+		List<Income> incomesList = incomeService.findByDates(plan.getStartDate(), plan.getEndDate());
 		
 		//TODO:Redisign this crap
-		Map<Expense, Double> exchangeRateMap = getExchangeRateMap(expenses);
+		Map<Expense, Double> expEexchangeRateMap = getExchangeRateMap(expenses);
+		Map<Income, Double> incExchangeRateMap = getExchangeRateMapForIncomes(incomesList);
+		
 		logger.debug("FacadeImpl#getSubstitute end");
 		
-		return substituteService.getSubstitute(plan, exchangeRateMap);
+		return substituteService.getSubstitute(plan, expEexchangeRateMap);
 	}
 	
-	private Map<Expense, Double> getExchangeRateMap(List<Expense> expensesSordedList) throws ServiceException {
+//	private Map<Expense, Double> getExchangeRateMap(List<Expense> expensesSordedList) throws ServiceException {
+//		Map<Expense, Double> exchangeRateMap = new HashMap<Expense, Double>();
+//		Currency referenceCurrency = currencyService.getReferenceCurrency();
+//		
+//		for (Expense expense : expensesSordedList) {
+//			
+//			if (!expense.getSrcAccount().getCurrency().equals(referenceCurrency)) {
+//				Double exchgRate = findExchangeRateForForeignExpense(expense);
+//				exchangeRateMap.put(expense, exchgRate);
+//			
+//			} else {
+//				exchangeRateMap.put(expense, new Double(0));
+//			}
+//		}
+//		logger.debug("FacadeImpl#getExchangeRateMap exchangeRateMap.size(): " + exchangeRateMap.size());
+//		
+//		return exchangeRateMap;
+//	}
+
+	private Map<Expense, Double> getExchangeRateMap(List<Expense> expensesSortedList) throws ServiceException {
 		Map<Expense, Double> exchangeRateMap = new HashMap<Expense, Double>();
 		Currency referenceCurrency = currencyService.getReferenceCurrency();
 		
-		for (Expense expense : expensesSordedList) {
+		for (Expense exp: expensesSortedList) {
 			
-			if (!expense.getSrcAccount().getCurrency().equals(referenceCurrency)) {
-				Double exchgRate = findExchangeRateForForeignExpense(expense);
-				exchangeRateMap.put(expense, exchgRate);
-			
+			if (!exp.getSrcAccount().getCurrency().equals(referenceCurrency)) {
+				Double exchgRate = findExchangeRateForForeignExpense(exp);
+				exchangeRateMap.put(exp, exchgRate);
+		
 			} else {
-				exchangeRateMap.put(expense, new Double(0));
+				exchangeRateMap.put(exp, new Double(0));
 			}
-		}
-		logger.debug("FacadeImpl#getExchangeRateMap exchangeRateMap.size(): " + exchangeRateMap.size());
+
+			logger.debug("FacadeImpl#getExchangeRateMap exchangeRateMap.size(): " + exchangeRateMap.size());
+		}	
 		
 		return exchangeRateMap;
 	}
+
+	private Map<Income, Double> getExchangeRateMapForIncomes(List<Income> incomeSortedList) throws ServiceException {
+		Map<Income, Double> exchangeRateMap = new HashMap<Income, Double>();
+		Currency referenceCurrency = currencyService.getReferenceCurrency();
+		
+		for (Income inc: incomeSortedList) {
+			
+			if (!inc.getDestAccount().getCurrency().equals(referenceCurrency)) {
+				Double exchgRate = findExchangeRateForForeignIncome(inc);
+				exchangeRateMap.put(inc, exchgRate);
+		
+			} else {
+				exchangeRateMap.put(inc, new Double(0));
+			}
+			logger.debug("FacadeImpl#getExchangeRateMapForIncomes exchangeRateMap.size(): " + exchangeRateMap.size());
+		}
+		
+		return exchangeRateMap;
+	}
+
+	
+
 
 	private Double findExchangeRateForForeignExpense(Expense expense) throws ServiceException {
 		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Expense date: " + expense.getDate());
@@ -402,6 +450,20 @@ public class FacadeImpl implements Facade {
 		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Transfer found: amount:" + transfer.getAmount());
 		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Transfer found: orig amount:" + transfer.getOriginalAmount());
 		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignExpense: Transfer found: orig curr:" + transfer.getOriginalCurrency());
+		Double exchgRate = getExchangeRate(transfer);
+		
+		return exchgRate;
+	}
+
+	private Double findExchangeRateForForeignIncome(Income income) throws ServiceException {
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignIncome: Income date: " + income.getDate());
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignIncome: Income amount: " + income.getAmount());
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignIncome: Income currency: " + income.getCurrency().getIsoCode());
+		Transfer transfer = transferService.findLastTransferForForeignIncome(income);
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignIncome: Transfer found: date:" + transfer.getDate());
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignIncome: Transfer found: amount:" + transfer.getAmount());
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignIncome: Transfer found: orig amount:" + transfer.getOriginalAmount());
+		logger.debug("FacadeImpl#getExchangeRateMap#findExchangeRateForForeignIncome: Transfer found: orig curr:" + transfer.getOriginalCurrency());
 		Double exchgRate = getExchangeRate(transfer);
 		
 		return exchgRate;

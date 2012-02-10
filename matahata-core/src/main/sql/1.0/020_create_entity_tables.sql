@@ -10,16 +10,6 @@ create table plan (
 	constraint pk_plan primary key (id)
 ) default charset utf8 collate utf8_polish_ci;
 
-create table plan_item (
-	id				bigint			auto_increment,
-	category_id		bigint			not null,
-	limit			numeric(10,2)	not null,
-	
-	constraint pk_plan_item primary key (id),
-	constraint fk_plan_item_category_id foreign key (category_id) references category (id)
-) default charset utf8 collate utf8_polish_ci;
-
-
 drop table item cascade;
 
 create table item (
