@@ -14,4 +14,6 @@ public interface ExpenseDAO extends EntityDAO<Expense> {
 	
 	List<Expense> findByPlanForCategory(Plan plan, Category category);
 	
+	List<Expense> findByCriteria(Expense expense);
+
 }

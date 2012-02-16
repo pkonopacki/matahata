@@ -228,9 +228,9 @@ public class FacadeImpl implements Facade {
 	public Expense saveExpense(Expense expense) throws ServiceException {
 		logger.debug("FacadeImpl#saveExpense start");
 		Account acc = expense.getSrcAccount();
-		Currency originalCurrency = (acc.getCurrency());
 		double balance = acc.getBalance();
-		double amount = expense.getOriginalAmount();
+		Currency originalCurrency = expense.getOriginalCurrency();
+		double amount = expense.getAmount();
 		Expense savedExpense = expenseService.add(expense);
 		Debit operation = new Debit();
 		//Category category = savedExpense.getCategory();

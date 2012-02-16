@@ -49,6 +49,12 @@ public class ExpenseServiceImpl extends EntityServiceImpl<Expense> implements Ex
 			Category category) {
 		return getDao().findByPlanForCategory(plan, category);
 	}
+
+	@Override
+	public List<Expense> findExpensesByCriteria(Expense expense)
+			throws ServiceException {
+		return getDao().findByCriteria(expense);
+	}
 	
 	
 	
