@@ -1,5 +1,6 @@
 package com.zwort.matahata.core.model;
 
+
 public class BudgetUsageForCategory {
 	
 	private Category category;
@@ -32,5 +33,5 @@ public class BudgetUsageForCategory {
 	public void setSpentTillNow(Double spentTillNow) {
 		this.spentTillNow = spentTillNow;
 	}
-
+	
 }

@@ -1,6 +1,8 @@
 package com.zwort.matahata.core.sp.binder;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +55,8 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 		
 		budgetUsageForCategoriesWSList.getBudgetUsageByCategoriesWS().addAll(budgetUsageByCatList);
 		response.setBudgetUsageByCategoriesWSList(budgetUsageForCategoriesWSList);
+		
+		Collections.sort(response.getBudgetUsageByCategoriesWSList().getBudgetUsageByCategoriesWS(), new BudgetUsageByCategoriesWSComparable());
 
 		exByCategoriesWSList.getExpensesByCategoriesWS().addAll(expensesByCategoriesWSList);
 		response.setExpensesByCategoriesWSList(exByCategoriesWSList);
@@ -128,11 +132,13 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 	private BudgetUsageByCategoriesWS assembleBudgetUsageByCatWS(
 			BudgetUsageDTO dto) {
 		BudgetUsageByCategoriesWS budgetUsageByCatWS = new BudgetUsageByCategoriesWS();
+		
+		DecimalFormat df = new DecimalFormat("###.00");
 
 		budgetUsageByCatWS.setCategoryDesc(dto.getCategoryDesc());
 		budgetUsageByCatWS.setCategoryAbbr(dto.getCategoryAbbr());
 		budgetUsageByCatWS.setBudgetAmount(dto.getBudgetAmount());
-		budgetUsageByCatWS.setAmountUsed(dto.getUsedAmount());
+		budgetUsageByCatWS.setAmountUsed(new Double(df.format(dto.getUsedAmount())));
 		
 		return budgetUsageByCatWS;
 	}

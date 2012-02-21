@@ -1,5 +1,6 @@
 package com.zwort.matahata.core.sp.dto;
 
+
 public class BudgetUsageDTO {
 	
 	private String categoryAbbr;
