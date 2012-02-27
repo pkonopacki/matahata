@@ -43,7 +43,7 @@ public class ExpenseDAOJpaImpl extends EntityDAOJpaImpl<Expense> implements
 	@SuppressWarnings("unchecked")
 	public List<Expense> findByPlanForCategory(Plan plan, Category category) {
 		Query q = entityManager
-				.createQuery("select e from Expense e inner join e.plan p inner join e.category c where p.id = :planId and c.id = :catId");
+				.createQuery("select e from Expense e inner join e.plan p inner join e.category c where p.id = :planId and c.id = :catId and e.cleared = false order by e.date");
 		q.setParameter("planId", plan.getId());
 		q.setParameter("catId", category.getId());
 		return q.getResultList();
