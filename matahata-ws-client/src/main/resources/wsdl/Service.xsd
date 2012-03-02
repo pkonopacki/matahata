@@ -347,6 +347,72 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+
+	
+	
+	
+	<xs:element name="getAccountState" type="GetAccountStateRequestList" />
+	<xs:element name="getAccountStateResponse" type="GetAccountStateResponse" />
+	<xs:complexType name="GetAccountStateResponse">
+		<xs:complexContent>
+			<xs:extension base="ResponseBase">
+				<xs:sequence>
+					<xs:element ref="AccountWSStatesList" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="AccountWSStatesList" type="AccountWSStatesList" />
+	<xs:complexType name="AccountWSStatesList">
+		<xs:sequence>
+			<xs:element ref="AccountWSState" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AccountWSState" type="AccountWSState" />
+	<xs:complexType name="AccountWSState">
+		<xs:sequence>
+			<xs:element name="AccountNumber" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="AccountState" type="xs:double" minOccurs="1"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AccountNumbersList">
+		<xs:sequence>
+			<xs:element ref="AccountNumberWS" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="GetAccountStateRequestList">
+		<xs:complexContent>
+			<xs:extension base="RequestBase">
+				<xs:sequence>
+					<xs:element ref="AccountNumbersList" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element	name="AccountNumbersList" type="AccountNumbersList" />
+	<xs:element name="AccountNumberWS" type="AccountNumberWS" />
+	<xs:complexType name="AccountNumberWS">
+		<xs:sequence>
+			<xs:element name="AccountNumber" type="xs:string" minOccurs="0"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>		
+	
+
+
+
+
+
+
+
+
+
 	<xs:element name="addNewTransfer" type="AddTransferRequestList" />
 	<xs:element name="addNewTransferResponse" type="AddTransferResponseList" />
 	<xs:complexType name="AddIncomeResponse">

@@ -8,10 +8,8 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.zwort.matahata</groupId>
 	<artifactId>matahata-core-wtp-ws</artifactId>
 	<packaging>war</packaging>
-	<version>1.2-SNAPSHOT</version>
 	<name>matahata-core-wtp-ws Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	

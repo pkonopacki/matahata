@@ -35,6 +35,8 @@ public interface Facade  {
 
 	public Account getAccountByNumber(String accNo) throws ServiceException;
 	
+	public List<Account> findActiveAccounts() throws ServiceException;
+	
 	public Plan getCurrentAccountPlan(Date expDate, String accNo) throws ServiceException;
 	
 	public Beneficiary getBeneficiaryByInitials(String initials) throws ServiceException;

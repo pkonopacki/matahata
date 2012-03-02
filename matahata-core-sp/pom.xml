@@ -7,9 +7,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.zwort.matahata</groupId>
 	<artifactId>matahata-core-sp</artifactId>
-	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>matahata-core-sp</name>

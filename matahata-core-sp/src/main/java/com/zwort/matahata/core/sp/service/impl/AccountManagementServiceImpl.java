@@ -1,15 +1,20 @@
 package com.zwort.matahata.core.sp.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import zwort.com.matahata.services._1.AccountNumberWS;
 
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Account;
 import com.zwort.matahata.core.model.Currency;
 import com.zwort.matahata.core.service.AccountService;
 import com.zwort.matahata.core.service.CurrencyService;
+import com.zwort.matahata.core.sp.assembler.AccountDTOAssembler;
 import com.zwort.matahata.core.sp.dto.AccountDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.AccountManagementService;
@@ -99,6 +104,33 @@ public class AccountManagementServiceImpl implements AccountManagementService {
 	
 	}
 
+	@Override
+	public List<AccountDTO> getAccountsStates(List<AccountNumberWS> accountsNumbers) throws ServiceProviderException {
+		List<Account> accountsList = new ArrayList<Account>();
+		AccountDTOAssembler assembler = new AccountDTOAssembler();
+		
+		try {
+			
+			if (accountsNumbers.size() > 0) {
+				
+				for (AccountNumberWS accNo : accountsNumbers) {
+					accountsList.add(accountService.getByNumber(accNo.getAccountNumber()));
+				}
+			
+			} else {
+				accountsList = accountService.findActive();
+			}
+
+		} catch (ServiceException se) {
+			logger.error("AccountManagementServiceImpl.getAccountsStates failed: ", se);
+			throw new ServiceProviderException("AccountManagementServiceImpl.getAccountsStates failed: ", se);	
+		}
+		
+		return assembler.accountsListToDtosList(accountsList);
+	}
+
+	//Spring setters
+	
 	public void setCurrencyService(CurrencyService currencyService) {
 		this.currencyService = currencyService;
 	}

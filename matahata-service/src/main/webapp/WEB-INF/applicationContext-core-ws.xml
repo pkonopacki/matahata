@@ -93,6 +93,7 @@
 
 	<bean id="dupaServiceWS" class="com.zwort.matahata.core.sp.ws.impl.DupaServiceImpl">
 		<property name="substituteSellerAdapter" ref="substituteSellerAdapter" />
+		<property name="accountManagementAdapter" ref="accountManagementAdapter" />
 	</bean>
 
 	<!-- CXF services endpoints -->

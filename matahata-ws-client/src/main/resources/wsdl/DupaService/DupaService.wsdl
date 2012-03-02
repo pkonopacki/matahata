@@ -32,6 +32,15 @@
 		</wsdl:part>
 	</wsdl:message>
 
+	<wsdl:message name="getAccountState">
+		<wsdl:part name="getAccountState" element="getAccountState">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAccountStateResponse">
+		<wsdl:part name="getAccountStateResponse" element="getAccountStateResponse">
+		</wsdl:part>
+	</wsdl:message>
+
 	<!-- port type -->
 	<wsdl:portType name="DupaServicePortType">
 		<wsdl:operation name="findExpensesByCategories">
@@ -44,6 +53,12 @@
 			<wsdl:input name="findExpensesByPlanForCategory" message="findExpensesByPlanForCategory">
 			</wsdl:input>
 			<wsdl:output name="findExpensesByPlanForCategoryResponse" message="findExpensesByPlanForCategoryResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAccountState">
+			<wsdl:input name="getAccountState" message="getAccountState">
+			</wsdl:input>
+			<wsdl:output name="getAccountStateResponse" message="getAccountStateResponse">
 			</wsdl:output>
 		</wsdl:operation>
 	</wsdl:portType>
@@ -67,6 +82,15 @@
 				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output name="findExpensesByPlanForCategoryResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAccountState">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getAccountState">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getAccountStateResponse">
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>

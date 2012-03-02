@@ -293,6 +293,11 @@ public class FacadeImpl implements Facade {
 	}
 
 	@Override
+	public List<Account> findActiveAccounts() throws ServiceException {
+		return accountService.findActive();
+	}
+	
+	@Override
 	public Plan getCurrentAccountPlan(Date expDate, String accNo) throws ServiceException {
 		return planService.getPlanByDate(expDate);
 	}
