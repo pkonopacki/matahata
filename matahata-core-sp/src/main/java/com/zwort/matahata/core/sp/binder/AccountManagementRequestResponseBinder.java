@@ -46,7 +46,7 @@ public class AccountManagementRequestResponseBinder {
 		
 		for (AccountDTO dto : dtosList) {
 			AccountWSState state = bindAccountWSState(dto);
-			accountWSStatesList.getAccountWSStatesList().add(state);
+			accountWSStatesList.getAccountWSState().add(state);
 		}
 
 		response.setAccountWSStatesList(accountWSStatesList);
