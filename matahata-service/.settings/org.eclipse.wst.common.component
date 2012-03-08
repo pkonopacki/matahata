@@ -2,14 +2,15 @@
 <project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="matahata-service">
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <dependent-module archiveName="matahata-core-sp-1.2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/matahata-core-sp/matahata-core-sp">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="matahata-core-1.2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/matahata-core/matahata-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="matahata-ws-client-1.2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/matahata-ws-client/matahata-ws-client">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/matahata-service/target/classes"/>
