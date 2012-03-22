@@ -7,6 +7,8 @@ import zwort.com.matahata.services._1.FindExpensesByCategories;
 import zwort.com.matahata.services._1.FindExpensesByCategoriesResponse;
 import zwort.com.matahata.services._1.FindExpensesByPlanForCategory;
 import zwort.com.matahata.services._1.FindExpensesByPlanForCategoryResponse;
+import zwort.com.matahata.services._1.GetAccountStateRequestList;
+import zwort.com.matahata.services._1.GetAccountStateResponse;
 
 import com.zwort.matahata.ws.client.DupaPortFactoryBean;
 import com.zwort.matahata.ws.client.service.DupaService;
@@ -34,6 +36,13 @@ public class DupaServiceImpl implements DupaService {
 		return service.findExpensesByPlanForCategory(findExpensesByPlanForCategory);
 	}
 
+	@Override
+	public GetAccountStateResponse getAccountStates(
+			GetAccountStateRequestList getAccountStateRequestList) {
+		return service.getAccountState(getAccountStateRequestList);
+	}
+
+	
 	//Spring setters
 
 	public void setFactory(DupaPortFactoryBean factory) {
@@ -43,6 +52,5 @@ public class DupaServiceImpl implements DupaService {
 	public void setService(DupaServicePortType service) {
 		this.service = service;
 	}
-	
 
 }

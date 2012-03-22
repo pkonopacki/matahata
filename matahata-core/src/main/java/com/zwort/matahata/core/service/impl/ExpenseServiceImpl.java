@@ -55,8 +55,5 @@ public class ExpenseServiceImpl extends EntityServiceImpl<Expense> implements Ex
 			throws ServiceException {
 		return getDao().findByCriteria(expense);
 	}
-	
-	
-	
 
 }

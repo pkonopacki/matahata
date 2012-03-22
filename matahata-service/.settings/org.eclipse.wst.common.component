@@ -4,6 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
         <dependent-module archiveName="matahata-core-sp-1.2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/matahata-core-sp/matahata-core-sp">
             <dependency-type>uses</dependency-type>
         </dependent-module>

@@ -41,14 +41,31 @@
 		</wsdl:part>
 	</wsdl:message>
 
+	<wsdl:message name="findExpensesByBeneficiaries">
+		<wsdl:part name="findExpensesByBeneficiaries" element="findExpensesByBeneficiaries">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findExpensesByBeneficiariesResp">
+		<wsdl:part name="findExpensesByBeneficiariesResp" element="findExpensesByBeneficiariesResp">
+		</wsdl:part>
+	</wsdl:message>
+
 	<!-- port type -->
 	<wsdl:portType name="DupaServicePortType">
+		<wsdl:operation name="findExpensesByBeneficiaries">
+			<wsdl:input name="findExpensesByBeneficiaries" message="findExpensesByBeneficiaries">
+			</wsdl:input>
+			<wsdl:output name="findExpensesByBeneficiariesResp" message="findExpensesByBeneficiariesResp">
+			</wsdl:output>
+		</wsdl:operation>
+
 		<wsdl:operation name="findExpensesByCategories">
 			<wsdl:input name="findExpensesByCategories" message="findExpensesByCategories">
 			</wsdl:input>
 			<wsdl:output name="findExpensesByCategoriesResponse" message="findExpensesByCategoriesResponse">
 			</wsdl:output>
 		</wsdl:operation>
+
 		<wsdl:operation name="findExpensesByPlanForCategory">
 			<wsdl:input name="findExpensesByPlanForCategory" message="findExpensesByPlanForCategory">
 			</wsdl:input>
@@ -76,6 +93,17 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
+
+		<wsdl:operation name="findExpensesByBeneficiaries">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="findExpensesByBeneficiaries">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="findExpensesByBeneficiariesResp">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
 		<wsdl:operation name="findExpensesByPlanForCategory">
 			<soap:operation soapAction="" style="document" />
 			<wsdl:input name="findExpensesByPlanForCategory">

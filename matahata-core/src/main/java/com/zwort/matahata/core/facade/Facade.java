@@ -74,5 +74,7 @@ public interface Facade  {
 	public Substitute getSubstitute(Month month, int year) throws ServiceException;
 	
 	List<Expense> findExpensesByPlanForCategory(String categoryAbbr, Month month, int year) throws ServiceException;
+	
+	public List<Expense> findExpensesByPlanForBeneficiary(Month month, int year) throws ServiceException;	
 
 }

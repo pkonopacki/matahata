@@ -15,12 +15,16 @@ import zwort.com.matahata.services._1.BudgetUsageByCategoriesWS;
 import zwort.com.matahata.services._1.BudgetUsageByCategoriesWSList;
 import zwort.com.matahata.services._1.BudgetUsageTotalsWS;
 import zwort.com.matahata.services._1.ExpenseWS;
+import zwort.com.matahata.services._1.ExpensesByBenWS;
 import zwort.com.matahata.services._1.ExpensesByCategoriesWS;
 import zwort.com.matahata.services._1.ExpensesByCategoriesWSList;
 import zwort.com.matahata.services._1.ExpensesByCurrenciesWS;
 import zwort.com.matahata.services._1.ExpensesTotalsByCategoriesWSMap;
 import zwort.com.matahata.services._1.ExpensesTotalsByCurrenciesWS;
 import zwort.com.matahata.services._1.ExpensesWSList;
+import zwort.com.matahata.services._1.FindExpensesByBeneficiaries;
+import zwort.com.matahata.services._1.FindExpensesByBeneficiariesList;
+import zwort.com.matahata.services._1.FindExpensesByBeneficiariesResp;
 import zwort.com.matahata.services._1.FindExpensesByCategoriesResponse;
 import zwort.com.matahata.services._1.FindExpensesByPlanForCategory;
 import zwort.com.matahata.services._1.FindExpensesByPlanForCategoryResponse;
@@ -47,18 +51,19 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 		
 		List<ExpensesTotalsByCurrenciesWS> expensesTotalsByCurrWsList = bindExpensesTotalsByCurrencyList(dto.getTotalsByCurrMap());
 		
-		List<ExpensesByCategoriesWS> expensesByCategoriesWSList = bindExpenseByCategoriesList(dto.getExpensesByCatMap());
+		//List<ExpensesByCategoriesWS> expensesByCategoriesWSList = bindExpenseByCategoriesList(dto.getExpensesByCatMap());
 		
 		Set<BudgetUsageByCategoriesWS> budgetUsageByCatList = bindBudgetUsageByCatList(dto.getBudgetUsageList());
 		
-		BudgetUsageTotalsWS budgetUsageTotalsWS = bindBudgetUsageTotalsWS(dto.getBudgetUsageList());
+		//BudgetUsageTotalsWS budgetUsageTotalsWS = bindBudgetUsageTotalsWS(dto.getBudgetUsageList());
+		BudgetUsageTotalsWS budgetUsageTotalsWS = new BudgetUsageTotalsWS();
 		
 		budgetUsageForCategoriesWSList.getBudgetUsageByCategoriesWS().addAll(budgetUsageByCatList);
 		response.setBudgetUsageByCategoriesWSList(budgetUsageForCategoriesWSList);
 		
 		Collections.sort(response.getBudgetUsageByCategoriesWSList().getBudgetUsageByCategoriesWS(), new BudgetUsageByCategoriesWSComparable());
 
-		exByCategoriesWSList.getExpensesByCategoriesWS().addAll(expensesByCategoriesWSList);
+		//exByCategoriesWSList.getExpensesByCategoriesWS().addAll(expensesByCategoriesWSList);
 		response.setExpensesByCategoriesWSList(exByCategoriesWSList);
 		
 		expTotalsByCurrWsMap.getExpensesTotalsByCurrenciesWS().addAll(expensesTotalsByCurrWsList);
@@ -254,6 +259,41 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 		dto.setYear(request.getYear());
 		
 		return dto;
+	}
+	
+	public CriteriaDTO bindCriteriaDtoFromFindExpByBeneficiariesRequest(FindExpensesByBeneficiaries request) {
+		CriteriaDTO dto = new CriteriaDTO();
+		dto.setCategoryAbbr(request.getCategoryAbbr());
+		dto.setMonth(bindMonthFromWSMonth(request.getMonth()));
+		dto.setYear(request.getYear());
+		
+		return dto;
+	}
+
+	public FindExpensesByBeneficiariesResp bindFindExpensesByBeneficiariesResp(Map<String, Double> expenseByBenMap) {
+		FindExpensesByBeneficiariesResp response = new FindExpensesByBeneficiariesResp();
+		FindExpensesByBeneficiariesList expByBenList = new FindExpensesByBeneficiariesList();
+		List<ExpensesByBenWS> expByBenWSList = new ArrayList<ExpensesByBenWS>();
+		Set<String> keySet = expenseByBenMap.keySet();
+		
+		for (String key : keySet) {
+			ExpensesByBenWS expensesByBenWS = new ExpensesByBenWS();
+			expensesByBenWS.setBen(key);
+			expensesByBenWS.setAmount(expenseByBenMap.get(key));
+			expByBenWSList.add(expensesByBenWS);
+		}
+		expByBenList.getExpensesByBenWS().addAll(expByBenWSList);
+		response.setFindExpensesByBeneficiariesList(expByBenList);
+		
+		return response;
+	}
+	
+	public List<String> bindInitialListFromRequest(FindExpensesByBeneficiaries findExpensesByBeneficiaries) {
+		List<String> returnList = new ArrayList<String>();
+		
+		//TODO: Implement this crap
+		
+		return returnList;
 	}
 	
 }

@@ -484,4 +484,9 @@ public class FacadeImpl implements Facade {
 		return expenseService.findExpensesByPlandForCategory(plan, category);
 	}
 	
-}
+	public List<Expense> findExpensesByPlanForBeneficiary(Month month, int year) throws ServiceException {
+		Plan plan = planService.getPlanByDate(DateUtils.getBeginningDate(month, year));
+		return expenseService.findExpensesByPlan(plan);
+	}
+
+}	

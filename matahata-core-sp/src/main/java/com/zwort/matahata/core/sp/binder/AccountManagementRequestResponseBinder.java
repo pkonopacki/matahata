@@ -58,6 +58,8 @@ public class AccountManagementRequestResponseBinder {
 		AccountWSState accState = new AccountWSState();
 		accState.setAccountNumber(dto.getAccountNumber());
 		accState.setAccountState(dto.getBalance());
+		accState.setAccountName(dto.getAccountName());
+		accState.setCurrIso(dto.getCurrencyISOCode());
 		
 		return accState;
 	}

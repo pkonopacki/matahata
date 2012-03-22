@@ -1,6 +1,8 @@
 package com.zwort.matahata.core.sp.ws.impl;
 
 import zwort.com.matahata.services._1.DupaServicePortType;
+import zwort.com.matahata.services._1.FindExpensesByBeneficiaries;
+import zwort.com.matahata.services._1.FindExpensesByBeneficiariesResp;
 import zwort.com.matahata.services._1.FindExpensesByCategories;
 import zwort.com.matahata.services._1.FindExpensesByCategoriesResponse;
 import zwort.com.matahata.services._1.FindExpensesByPlanForCategory;
@@ -35,6 +37,13 @@ public class DupaServiceImpl implements DupaServicePortType {
 		return accountManagementAdapter.getAccountState(getAccountState);
 	}
 	
+	@Override
+	public FindExpensesByBeneficiariesResp findExpensesByBeneficiaries(
+			FindExpensesByBeneficiaries findExpensesByBeneficiaries) {
+		return substituteSellerAdapter.findExpensesByBeneficiaries(findExpensesByBeneficiaries);
+	}
+
+
 	//Spring setters
 	
 	public void setSubstituteSellerAdapter(

@@ -88,6 +88,23 @@ public class SubstituteSellerServiceImpl extends AbstractManagementService imple
 		
 	}
 
+	@Override
+	public Map<String, Double> findExpSumByBeneficiary(Month month, int year) throws ServiceProviderException {
+		ExpenseDTOAssembler assembler = new ExpenseDTOAssembler();
+		List<Expense> expensesList = null;
+
+		try {
+			expensesList = facade.findExpensesByPlanForBeneficiary(month, year);
+			
+		} catch (Exception e) {
+			logger.error("SubstituteSellerServiceImpl.findExpSumByBeneficiary failed: ", e);
+			throw new ServiceProviderException("SubstituteSellerServiceImpl.findExpSumByBeneficiary ", e);			
+		}
+		
+		return assembler.assembleExpSumByBeneficiaries(expensesList);
+		
+	}
+	
 	// Spring setters
 	//TODO: Maybe change to expenseService
 

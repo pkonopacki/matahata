@@ -1,7 +1,9 @@
 package com.zwort.matahata.core.sp.assembler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.zwort.matahata.core.model.Expense;
 import com.zwort.matahata.core.sp.dto.ExpenseDTO;
@@ -37,6 +39,18 @@ public class ExpenseDTOAssembler {
 		dto.setSrcAccountNo(exp.getSrcAccount().getAccountNumber());
 		
 		return dto;
+	}
+	
+	//TODO: Maybe move?
+	public Map<String, Double> assembleExpSumByBeneficiaries(List<Expense> expensesList) {
+		Map<String, Double> expSumByBenMap = new HashMap<String, Double>();
+		
+		for (Expense exp : expensesList) {
+			Double newSum = expSumByBenMap.get(exp.getBeneficiary().getInitials()) == null ? new Double(0) : expSumByBenMap.get(exp.getBeneficiary().getInitials()) + exp.getAmount();
+			expSumByBenMap.put(exp.getBeneficiary().getInitials(), newSum);	
+		}
+		
+		return expSumByBenMap;
 	}
 
 }
