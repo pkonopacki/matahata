@@ -55,8 +55,7 @@ public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 		
 		Set<BudgetUsageByCategoriesWS> budgetUsageByCatList = bindBudgetUsageByCatList(dto.getBudgetUsageList());
 		
-		//BudgetUsageTotalsWS budgetUsageTotalsWS = bindBudgetUsageTotalsWS(dto.getBudgetUsageList());
-		BudgetUsageTotalsWS budgetUsageTotalsWS = new BudgetUsageTotalsWS();
+		BudgetUsageTotalsWS budgetUsageTotalsWS = bindBudgetUsageTotalsWS(dto.getBudgetUsageList());
 		
 		budgetUsageForCategoriesWSList.getBudgetUsageByCategoriesWS().addAll(budgetUsageByCatList);
 		response.setBudgetUsageByCategoriesWSList(budgetUsageForCategoriesWSList);
