@@ -23,7 +23,7 @@ public class TransferManagementAdapter {
 		
 		} catch (Exception e) {
 			logger.error("TransferManagementAdapter.addNewTransfer failed: ", e);
-			response = (AddTransferResponseList) ErrorPropertiesUtils.setErrorInfo(response, e, "TransferManagementAdapter.addNewTransfer failed: ");
+			response = (AddTransferResponseList) ErrorPropertiesUtils.setErrorInfo(response, e, "TransferManagementAdapter.addNewTransfer failed: " + e.getMessage());
 		}
 		
 		return response;

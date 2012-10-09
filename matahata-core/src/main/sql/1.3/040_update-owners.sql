@@ -1,0 +1,12 @@
+update account set owner_id = 1 where id = 1;
+update account set owner_id = 1 where id = 2;
+update account set owner_id = 1 where id = 3;
+update account set owner_id = 1 where id = 4;
+update account set owner_id = 1 where id = 5;
+update account set owner_id = 1 where id = 6;
+update account set owner_id = 1 where id = 7;
+update account set owner_id = 2 where id = 8;
+update account set owner_id = 1 where id = 9;
+update account set owner_id = 2 where id = 10;
+update account set owner_id = 1 where id = 11;
+update account set owner_id = 5 where id = 12;

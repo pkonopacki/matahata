@@ -1,0 +1,1 @@
+alter table account add constraint account_owner_fk foreign key (owner_id) references beneficiary (id);

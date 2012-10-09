@@ -30,9 +30,13 @@ public class Account extends AbstractDictionaryEntity implements Serializable {
 	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "currency_id")
 	private Currency currency;
-	
 
-	public long getBankId() {
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "owner_id")
+    private Beneficiary owner;
+
+
+    public long getBankId() {
 		return bankId;
 	}
 
@@ -72,7 +76,15 @@ public class Account extends AbstractDictionaryEntity implements Serializable {
 		this.currency = currency;
 	}
 
-	public String toString() {
+    public Beneficiary getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Beneficiary owner) {
+        this.owner = owner;
+    }
+
+    public String toString() {
 		return String.valueOf(bankId) + accountName + accountNumber + String.valueOf(balance);
 	}
 	

@@ -1,28 +1,41 @@
 <Context path="/matahata-core-ws" docBase="matahata-core-ws"
         debug="5" reloadable="true" crossContext="true">
 
-	<Resource name="jdbc/matahataDS"
-			  auth="Container"
-			  type="javax.sql.DataSource"
-			  maxActive="100"
-			  maxIdle="30"
-			  maxWait="10000"
-              username="matahata"
-              password="matahata"
-              driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://ziut.local:3306/matahata"
-     />
-<!-- 
-	<Resource name="jdbc/matahataDS"
-			  auth="Container"
-			  type="javax.sql.DataSource"
-			  maxActive="100"
-			  maxIdle="30"
-			  maxWait="10000"
-              username="test"
-              password="test"
-              driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/matahata_test"
-     />
- -->
+    <!--
+       <Resource name="jdbc/matahataDS"
+                 auth="Container"
+                 type="javax.sql.DataSource"
+                 maxActive="100"
+                 maxIdle="30"
+                 maxWait="10000"
+                 username="matahata"
+                 password="matahata"
+                 driverClassName="com.mysql.jdbc.Driver"
+                 url="jdbc:mysql://ziut.local:3306/matahata_test"
+        />
+    -->
+    <!--
+       <Resource name="jdbc/matahataDS"
+                 auth="Container"
+                 type="javax.sql.DataSource"
+                 maxActive="100"
+                 maxIdle="30"
+                 maxWait="10000"
+                 username="matahata"
+                 password="matahata"
+                 driverClassName="com.mysql.jdbc.Driver"
+                 url="jdbc:mysql://localhost:3306/matahata_test"
+        />
+    -->
+    <Resource name="jdbc/matahataDS"
+                 auth="Container"
+                 type="javax.sql.DataSource"
+                 maxActive="100"
+                 maxIdle="30"
+                 maxWait="10000"
+                 username="matahata"
+                 password="matahata"
+                 driverClassName="com.mysql.jdbc.Driver"
+                 url="jdbc:mysql://localhost:3306/matahata"
+        />
 </Context>

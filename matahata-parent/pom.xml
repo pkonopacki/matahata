@@ -4,7 +4,7 @@
 
 	<groupId>com.zwort.matahata</groupId>
 	<artifactId>matahata-parent</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>matahata-parent</name>
@@ -217,17 +217,17 @@
 			<dependency>
 				<groupId>com.zwort.matahata</groupId>
 				<artifactId>matahata-core</artifactId>
-				<version>1.2-SNAPSHOT</version>
+				<version>1.3-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.zwort.matahata</groupId>
 				<artifactId>matahata-core-sp</artifactId>
-				<version>1.2-SNAPSHOT</version>
+				<version>1.3-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.zwort.matahata</groupId>
 				<artifactId>matahata-ws-client</artifactId>
-				<version>1.2-SNAPSHOT</version>
+				<version>1.3-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- Hibernate -->

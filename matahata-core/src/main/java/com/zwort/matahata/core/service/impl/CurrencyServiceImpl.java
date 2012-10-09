@@ -5,6 +5,8 @@ import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Currency;
 import com.zwort.matahata.core.service.CurrencyService;
 
+import javax.persistence.NoResultException;
+
 public class CurrencyServiceImpl extends DictionaryServiceImpl<Currency>
 		implements CurrencyService {
 
@@ -22,9 +24,12 @@ public class CurrencyServiceImpl extends DictionaryServiceImpl<Currency>
 
 		try {
 			return getDao().getByISOCode(isoCode);
-		
-		} catch (Throwable t) {
-			throw new ServiceException("CurrencyServiceImpl#findByIsoCode failed: ", t);
+
+        } catch (NoResultException nre) {
+            throw new ServiceException("CurrencyServiceImpl#getByfindByIsoCodeNumber failed. No currency with ISO code [" + isoCode + "] found.");
+
+        } catch (Throwable t) {
+			throw new ServiceException("CurrencyServiceImpl#findByIsoCode failed: " + t.getMessage(), t);
 		}
 	}
 
@@ -33,9 +38,12 @@ public class CurrencyServiceImpl extends DictionaryServiceImpl<Currency>
 
 		try {
 			return getDao().getReferenceCurrency();
-		
-		} catch (Throwable t) {
-			throw new ServiceException("CurrencyServiceImpl#findByIsoCode failed: ", t);
+
+        } catch (NoResultException nre) {
+            throw new ServiceException("CurrencyServiceImpl#getReferenceCurrency failed. No reference currency defined.");
+
+        } catch (Throwable t) {
+			throw new ServiceException("CurrencyServiceImpl#getReferenceCurrency failed: " + t.getMessage(), t);
 		}
 	}
 

@@ -25,7 +25,6 @@ public class ExpenseManagementBinder extends CommonBinder {
 		Currency originalCurrency = null;
 		Category category = null;
 		Beneficiary beneficiary = null;
-		Beneficiary payer = null;
 		Account account = null;
 		Plan plan = null;
 		
@@ -67,19 +66,6 @@ public class ExpenseManagementBinder extends CommonBinder {
 			throw new ServiceProviderException("Beneficiary [" + dto.getBeneficiaryInitials() + "] is not in database");
 		}
 		
-		if (dto.getPayerInitials() != null && !dto.getPayerInitials().equals("")) {
-			payer = facade.getBeneficiaryByInitials(dto.getPayerInitials());
-		
-		} else {
-			logger.error("Payer initials cannot be null nor an empty string");
-			throw new ServiceProviderException("Payer initials cannot be null nor an empty string");
-		}
-		
-		if (payer == null) {
-			logger.error("Payer [" + dto.getBeneficiaryInitials() + "] is not in database");
-			throw new ServiceProviderException("Payer [" + dto.getBeneficiaryInitials() + "] is not in database");
-		}
-
 		currency = account.getCurrency();
 		originalCurrency = getOriginalCurrency(dto.getOriginalCurrencyISO(), account);
 
@@ -93,7 +79,6 @@ public class ExpenseManagementBinder extends CommonBinder {
 		expense.setSrcAccount(account);
 		expense.setBeneficiary(beneficiary);
 		expense.setPlan(plan);
-		expense.setPayer(payer);
 		expense.setDate(expDate);
 		expense.setLocation(dto.getLocation());
 		expense.setDescription(dto.getDescription());

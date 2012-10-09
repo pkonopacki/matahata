@@ -5,6 +5,8 @@ import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Account;
 import com.zwort.matahata.core.service.AccountService;
 
+import javax.persistence.NoResultException;
+
 public class AccountServiceImpl extends DictionaryServiceImpl<Account>
 		implements AccountService {
 
@@ -22,8 +24,11 @@ public class AccountServiceImpl extends DictionaryServiceImpl<Account>
 		try {
 			return getDao().getByNumber(accNumber);
 		
+        } catch (NoResultException nre) {
+            throw new ServiceException("AccountServiceImpl#getByNumber failed. No account with number [" + accNumber + "] found.");
+
 		} catch (Throwable t) {
-			throw new ServiceException("AccountServiceImpl#findByNumber failed: ", t);
+			throw new ServiceException("AccountServiceImpl#getByNumber failed: " +  t.getMessage(), t);
 		}
 	}
 

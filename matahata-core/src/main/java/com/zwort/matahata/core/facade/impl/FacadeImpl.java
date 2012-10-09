@@ -161,40 +161,40 @@ public class FacadeImpl implements Facade {
 		
 		operationDeb.setAccount(accSrc);
 		operationDeb.setAmount(amount);
-		operationDeb.setCurrency(refCurrency);
-		operationDeb.setOriginalAmount(transfer.getOriginalAmount());
-		operationDeb.setOriginalCurrency(originalCurrency);
 		operationDeb.setItem(transferRet);
 		operationDeb.setDate(new java.sql.Date(transfer.getDate().getTime()));
 		operationCr.setAccount(accDest);
-		operationCr.setAmount(amount);
-		operationCr.setCurrency(refCurrency);
-		operationCr.setOriginalAmount(transfer.getOriginalAmount());
-		operationCr.setOriginalCurrency(originalCurrency);
+		operationCr.setAmount(transfer.getOriginalAmount());
 		operationCr.setItem(transferRet);
 		operationCr.setDate(new java.sql.Date(transfer.getDate().getTime()));
 
 		//TODO: to the contrary :)
 		
 		if (!refCurrency.equals(srcAccCurrency)) {
-			accSrc.setBalance(balanceSrc - originalAmount);
-			accDest.setBalance(balanceDest + amount);
+            operationDeb.setBalance(balanceSrc - originalAmount);
+            accSrc.setBalance(operationDeb.getBalance());
+            operationCr.setBalance(balanceDest + amount);
+			accDest.setBalance(operationCr.getBalance());
 			
 		} else if (!refCurrency.equals(destAccCurrency)) {
-			accSrc.setBalance(balanceSrc - amount);
-			accDest.setBalance(balanceDest + originalAmount);
-		
-		} else if (refCurrency.equals(srcAccCurrency) && refCurrency.equals(destAccCurrency)) {
-			accSrc.setBalance(balanceSrc - amount);
-			accDest.setBalance(balanceDest + amount);
-			
-		} else {
+            operationDeb.setBalance(balanceSrc - amount);
+            accSrc.setBalance(operationDeb.getBalance());
+            operationCr.setBalance(balanceDest + originalAmount);
+            accDest.setBalance(operationCr.getBalance());
+
+        } else if (refCurrency.equals(srcAccCurrency) && refCurrency.equals(destAccCurrency)) {
+            operationDeb.setBalance(balanceSrc - amount);
+            accSrc.setBalance(operationDeb.getBalance());
+            operationCr.setBalance(balanceDest + amount);
+            accDest.setBalance(operationCr.getBalance());
+
+        } else {
 			throw new ServiceException("One of the currencies must be a reference currency");
 		}
-		accountService.update(accSrc);
+        creditService.add(operationCr);
+        debitService.add(operationDeb);
+        accountService.update(accSrc);
 		accountService.update(accDest);
-		creditService.add(operationCr);
-		debitService.add(operationDeb);
 
 		return transferRet;
 		
@@ -209,17 +209,15 @@ public class FacadeImpl implements Facade {
 		Income retValue = incomeService.add(income);
 		Credit operation = new Credit();
 		operation.setAccount(income.getDestAccount());
-		operation.setCurrency(income.getCurrency());
 		operation.setAmount(amount);
-		operation.setOriginalCurrency(income.getOriginalCurrency());
-		operation.setOriginalAmount(income.getOriginalAmount());
 		operation.setItem(retValue);
 		operation.setDate(new java.sql.Date(income.getDate().getTime()));
-		acc.setBalance(balance + amount);
-		accountService.update(acc);
+        operation.setBalance(balance + amount);
+		acc.setBalance(operation.getBalance());
 		creditService.add(operation);
+        accountService.update(acc);
 
-		return retValue;
+        return retValue;
 	
 	}
 	
@@ -238,16 +236,14 @@ public class FacadeImpl implements Facade {
 		//category.getExpenses().add(savedExpense);
 		//categoryService.update(category);
 		operation.setAccount(savedExpense.getSrcAccount());
-		operation.setCurrency(savedExpense.getCurrency());
-		operation.setOriginalCurrency(originalCurrency);
-		operation.setOriginalAmount(savedExpense.getOriginalAmount());
 		operation.setAmount(amount);
 		operation.setItem(savedExpense);
 		operation.setDate(new java.sql.Date(savedExpense.getDate().getTime()));
-		acc.setBalance(balance - amount);
-		accountService.update(acc);
+        operation.setBalance(balance - amount);
+		acc.setBalance(operation.getBalance());
 		debitService.add(operation);
-		logger.debug("FacadeImpl#saveExpense end");
+        accountService.update(acc);
+        logger.debug("FacadeImpl#saveExpense end");
 
 		return savedExpense;
 	

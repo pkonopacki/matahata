@@ -35,10 +35,6 @@ public class Expense extends Item {
 	private Category category;
 	
 	@ManyToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "payer_id")
-	private Beneficiary payer;
-	
-	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "beneficiary_id")
 	private Beneficiary beneficiary;
 
@@ -89,14 +85,6 @@ public class Expense extends Item {
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-
-	public Beneficiary getPayer() {
-		return payer;
-	}
-
-	public void setPayer(Beneficiary payer) {
-		this.payer = payer;
 	}
 
 	public Beneficiary getBeneficiary() {

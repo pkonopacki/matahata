@@ -5,6 +5,8 @@ import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Category;
 import com.zwort.matahata.core.service.CategoryService;
 
+import javax.persistence.NoResultException;
+
 public class CategoryServiceImpl extends DictionaryServiceImpl<Category>
 		implements CategoryService {
 
@@ -21,9 +23,12 @@ public class CategoryServiceImpl extends DictionaryServiceImpl<Category>
 		
 		try {
 			return getDao().getByAbbreviation(abbr);
-		
-		} catch (Throwable t){
-			throw new ServiceException("CategoryServiceImpl#findByAbbreviation failed: ", t);
+
+        } catch (NoResultException nre) {
+            throw new ServiceException("CategoryServiceImpl#findByAbbreviation failed. No category with abbreviation [" + abbr + "] found.");
+
+        } catch (Throwable t){
+			throw new ServiceException("CategoryServiceImpl#findByAbbreviation failed: " + t.getMessage(), t);
 		}
 	}
 

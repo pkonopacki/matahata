@@ -1,0 +1,1 @@
+alter table operation add balance decimal (10,2) not null;

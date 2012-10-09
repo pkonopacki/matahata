@@ -30,8 +30,9 @@ public class TransferDAOJpaImpl extends EntityDAOJpaImpl<Transfer> implements Tr
 		Query q = entityManager.createQuery("FROM Transfer t WHERE t.originalCurrency = :currency and t.destAccount = :account and t.date <= :date order by t.date desc");
 		
 		logger.debug("KRP: Date " + expense.getDate());
-		logger.debug("KRP: Account " + expense.getSrcAccount());
-		logger.debug("KRP: Currency " + expense.getCurrency());
+        logger.debug("KRP: Location " + expense.getLocation());
+        logger.debug("KRP: Account " + expense.getSrcAccount().getAccountNumber());
+		logger.debug("KRP: Currency " + expense.getOriginalCurrency().getIsoCode());
 		
 		q.setParameter("date", expense.getDate());
 		q.setParameter("account", expense.getSrcAccount());

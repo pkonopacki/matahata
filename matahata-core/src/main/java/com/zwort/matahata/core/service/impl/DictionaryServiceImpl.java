@@ -25,7 +25,7 @@ public class DictionaryServiceImpl<E> extends AbstractBaseService<E> implements 
 			return getDao().findActive();
 		
 		} catch (Throwable t) {
-			throw new ServiceException("AbstractBaseService<E>.add failed: ", t);
+			throw new ServiceException("AbstractBaseService<E>.findActive failed: ", t);
 		}
 	
 	}

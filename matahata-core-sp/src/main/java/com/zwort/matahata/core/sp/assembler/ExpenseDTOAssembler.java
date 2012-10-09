@@ -34,7 +34,6 @@ public class ExpenseDTOAssembler {
 		dto.setLocation(exp.getLocation());
 		dto.setOriginalAmount(exp.getOriginalAmount());
 		dto.setOriginalCurrencyISO(exp.getOriginalCurrency().getIsoCode());
-		dto.setPayerInitials(exp.getPayer().getInitials());
 		dto.setRefundable(exp.isRefundable());
 		dto.setSrcAccountNo(exp.getSrcAccount().getAccountNumber());
 		

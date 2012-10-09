@@ -5,6 +5,8 @@ import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Beneficiary;
 import com.zwort.matahata.core.service.BeneficiaryService;
 
+import javax.persistence.NoResultException;
+
 public class BeneficiaryServiceImpl extends DictionaryServiceImpl<Beneficiary>
 		implements BeneficiaryService{
 
@@ -21,9 +23,12 @@ public class BeneficiaryServiceImpl extends DictionaryServiceImpl<Beneficiary>
 		
 		try {
 			return getDao().getByInitials(initials);
-		
-		} catch (Throwable t) {
-			throw new ServiceException("BeneficiaryServiceImpl#findByInitials failed: ", t);
+
+        } catch (NoResultException nre) {
+            throw new ServiceException("BeneficiaryServiceImpl#getByInitials failed. No beneficiary with initials [" + initials + "] found.");
+
+        } catch (Throwable t) {
+			throw new ServiceException("BeneficiaryServiceImpl#findByInitials failed: " + t.getMessage(), t);
 		}
 	}
 

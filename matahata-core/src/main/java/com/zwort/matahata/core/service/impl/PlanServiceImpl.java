@@ -12,6 +12,8 @@ import com.zwort.matahata.core.model.Plan;
 import com.zwort.matahata.core.model.PlanItem;
 import com.zwort.matahata.core.service.PlanService;
 
+import javax.persistence.NoResultException;
+
 public class PlanServiceImpl extends EntityServiceImpl<Plan> implements
 		PlanService {
 	
@@ -31,8 +33,11 @@ public class PlanServiceImpl extends EntityServiceImpl<Plan> implements
 		try {
 			return getDao().getCurrentAccountPlan(date);
 
-		} catch (Throwable t) {
-			throw new ServiceException("PlanServiceImpl#PlanServiceImpl failed", t);
+        } catch (NoResultException nre) {
+            throw new ServiceException("PlanServiceImpl#getPlanByDate failed. No plan for date [" + date.toString() + "] found.");
+
+        } catch (Throwable t) {
+			throw new ServiceException("PlanServiceImpl#getPlanByDate failed:" + t.getMessage(), t);
 		}
 	}
 	
@@ -58,7 +63,7 @@ public class PlanServiceImpl extends EntityServiceImpl<Plan> implements
 			return super.add(entity);
 
 		} catch (Throwable t) {
-			throw new ServiceException("PlanServiceImpl#PlanServiceImpl failed", t);
+			throw new ServiceException("PlanServiceImpl#PlanServiceImpl failed:" + t.getMessage(), t);
 		}
 	}
 

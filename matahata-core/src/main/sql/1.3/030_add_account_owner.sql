@@ -1,0 +1,1 @@
+alter table account add owner_id bigint not null after bank_id;

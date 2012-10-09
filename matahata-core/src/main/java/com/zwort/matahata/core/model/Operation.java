@@ -34,22 +34,14 @@ public class Operation extends AbstractBaseEntitiy {
 	private double amount;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "currency_id")
-	private Currency currency;
-
-	@Column(name = "orig_amount")
-	private double originalAmount;
-	
-	@ManyToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "orig_currency_id")
-	private Currency originalCurrency;
-
-	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "item_id")
 	private Item item;
 
+    @Column(name = "balance")
+    private double balance;
 
-	public Date getDate() {
+
+    public Date getDate() {
 		return date;
 	}
 
@@ -73,30 +65,6 @@ public class Operation extends AbstractBaseEntitiy {
 		this.amount = amount;
 	}
 
-	public Currency getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
-	}
-	
-	public double getOriginalAmount() {
-		return originalAmount;
-	}
-
-	public void setOriginalAmount(double originalAmount) {
-		this.originalAmount = originalAmount;
-	}
-
-	public Currency getOriginalCurrency() {
-		return originalCurrency;
-	}
-
-	public void setOriginalCurrency(Currency originalCurrency) {
-		this.originalCurrency = originalCurrency;
-	}
-
 	public Item getItem() {
 		return item;
 	}
@@ -104,5 +72,13 @@ public class Operation extends AbstractBaseEntitiy {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
 }
