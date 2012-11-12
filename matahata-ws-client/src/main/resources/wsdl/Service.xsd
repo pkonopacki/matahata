@@ -1,474 +1,610 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://com.zwort/matahata/Services/1"
-	xmlns:err="http://com.zwort/matahata/Common/ErrorInfo/1"
-	targetNamespace="http://com.zwort/matahata/Services/1">
-	<xs:import namespace="http://com.zwort/matahata/Common/ErrorInfo/1"
-		schemaLocation="ErrorInfo.xsd" />
-	<xs:simpleType name="Month">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="JANUARY" />
-			<xs:enumeration value="FEBRUARY" />
-			<xs:enumeration value="MARCH" />
-			<xs:enumeration value="APRIL" />
-			<xs:enumeration value="MAY" />
-			<xs:enumeration value="JUNE" />
-			<xs:enumeration value="JULY" />
-			<xs:enumeration value="AUGUST" />
-			<xs:enumeration value="SEPTEMBER" />
-			<xs:enumeration value="OCTOBER" />
-			<xs:enumeration value="NOVEMBER" />
-			<xs:enumeration value="DECEMBER" />
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:complexType name="RequestBase">
-		<xs:sequence>
-			<xs:element minOccurs="0" name="System" type="xs:string" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="BaseRequestItem">
-		<xs:sequence>
-			<xs:element minOccurs="0" name="Date" type="xs:dateTime" />
-			<xs:element minOccurs="0" name="Description" type="xs:string" />
-			<xs:element minOccurs="0" name="Amount" type="xs:double" />
-			<xs:element minOccurs="0" name="CurrencyISO" type="xs:string" />
-			<xs:element minOccurs="0" name="OriginalAmount" type="xs:double" />
-			<xs:element minOccurs="0" name="OriginalCurrencyISO" type="xs:string" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="AddExpenseRequest">
-		<xs:complexContent>
-			<xs:extension base="BaseRequestItem">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="Location" type="xs:string" />
-					<xs:element minOccurs="0" name="CategoryAbbr" type="xs:string" />
-					<xs:element minOccurs="0" name="SrcAccountNo" type="xs:string" />
-					<xs:element minOccurs="0" name="PayerInitials" type="xs:string" />
-					<xs:element minOccurs="0" name="BeneficiaryInitials"
-						type="xs:string" />
-					<xs:element minOccurs="0" name="Refundable" type="xs:boolean" />
-					<xs:element minOccurs="0" name="Cleared" type="xs:boolean" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="AddExpenseRequestsList">
-		<xs:complexContent>
-			<xs:extension base="RequestBase">
-				<xs:sequence>
-					<xs:element minOccurs="0" maxOccurs="unbounded"
-						name="AddExpenseRequestsList" type="AddExpenseRequest" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="AddPlanRequest">
-		<xs:complexContent>
-			<xs:extension base="RequestBase">
-				<xs:sequence>
-					<xs:element name="Month" type="Month" />
-					<xs:element ref="PlanItemsWSList" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:element name="PlanItemsWSList" type="PlanItemsWSList" />
-	<xs:complexType name="PlanItemsWSList">
-		<xs:sequence>
-			<xs:element ref="PlanItemWS" minOccurs="0" maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="PlanItemWS" type="PlanItemWS" />
-	<xs:complexType name="PlanItemWS">
-		<xs:sequence>
-			<xs:element name="categoryAbbr" type="xs:string" minOccurs="1"
-				maxOccurs="1" />
-			<xs:element name="catLimit" type="xs:double"
-				minOccurs="0" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="AddPlanResponse">
-		<xs:complexContent>
-			<xs:extension base="ResponseBase">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" minOccurs="0"
-						maxOccurs="1" />
-					</xs:sequence>		
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="AddTransferRequest">
-		<xs:complexContent>
-			<xs:extension base="BaseRequestItem">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="SrcAccountNo" type="xs:string" />
-					<xs:element minOccurs="0" name="DestAccountNo" type="xs:string" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="AddTransferRequestList">
-		<xs:complexContent>
-			<xs:extension base="RequestBase">
-				<xs:sequence>
-					<xs:element minOccurs="0" maxOccurs="unbounded"
-						name="AddTransferRequestList" type="AddTransferRequest" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="AddIncomeRequest">
-		<xs:complexContent>
-			<xs:extension base="BaseRequestItem">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="Source" type="xs:string" />
-					<xs:element minOccurs="0" name="CategoryAbbr" type="xs:string" />
-					<xs:element minOccurs="0" name="DestAccountNo" type="xs:string" />
-					<xs:element minOccurs="0" name="BeneficiaryInitials"
-						type="xs:string" />
-					<xs:element minOccurs="0" name="Debt" type="xs:boolean" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="AddIncomeRequestList">
-		<xs:complexContent>
-			<xs:extension base="RequestBase">
-				<xs:sequence>
-					<xs:element minOccurs="0" maxOccurs="unbounded" name="AddIncomeRequestList"
-						type="AddIncomeRequest" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="ResponseBase">
-		<xs:sequence>
-			<xs:element ref="err:ErrorInfo" minOccurs="0" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="AddExpenseResponseList">
-		<xs:complexContent>
-			<xs:extension base="ResponseBase">
-				<xs:sequence>
-					<xs:element minOccurs="0" maxOccurs="unbounded"
-						name="AddExpenseResponsesList" type="AddExpenseResponse" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>		
-	</xs:complexType>
-	<xs:complexType name="AddTransferResponseList">
-		<xs:complexContent>
-			<xs:extension base="ResponseBase">
-				<xs:sequence>
-					<xs:element minOccurs="0" maxOccurs="unbounded"
-						name="AddTransferResponsesList" type="AddTransferResponse" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>		
-	</xs:complexType>
-	<xs:complexType name="AddIncomeResponseList">
-		<xs:complexContent>
-			<xs:extension base="ResponseBase">
-				<xs:sequence>
-					<xs:element minOccurs="0" maxOccurs="unbounded"
-						name="AddIncomeResponsesList" type="AddIncomeResponse" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>		
-	</xs:complexType>
-	<xs:complexType name="AddExpenseResponse">
-		<xs:sequence>
-			<xs:element name="Id" type="xs:long" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="FindExpenseResponse">
-		<xs:complexContent>
-			<xs:extension base="ResponseBase">
-				<xs:sequence>
-					<xs:element ref="ExpensesWSList" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:element name="ExpensesWSList" type="ExpensesWSList" />
-	<xs:complexType name="ExpensesWSList">
-		<xs:sequence>
-			<xs:element ref="ExpenseWS" minOccurs="0" maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="ExpenseWS" type="ExpenseWS" />
-	<xs:complexType name="ExpenseWS">
-		<xs:sequence>
-			<xs:element name="date" type="xs:dateTime" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="categoryDesc" type="xs:string"
-				minOccurs="0" maxOccurs="1" />
-			<xs:element name="location" type="xs:string"
-				minOccurs="0" maxOccurs="1" />
-			<xs:element name="description" type="xs:string"
-				minOccurs="0" maxOccurs="1" />
-			<xs:element name="amount" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="currencyIso" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="origAmount" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="OrigcurrIso" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="FindExpensesByCategories">
-		<xs:sequence>
-			<xs:element name="Month" type="Month" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="Year" type="xs:int" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="FindExpensesByCategoriesResponse">
-		<xs:complexContent>
-			<xs:extension base="ResponseBase">
-				<xs:sequence>
-					<xs:element ref="ExpensesTotalsByCategoriesWSMap" />
-					<xs:element ref="ExpensesByCategoriesWSList" />
-					<xs:element ref="BudgetUsageTotalsWS" />
-					<xs:element ref="BudgetUsageByCategoriesWSList" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:element name="ExpensesByCategoriesWSList" type="ExpensesByCategoriesWSList" />
-	<xs:complexType name="ExpensesByCategoriesWSList">
-		<xs:sequence>
-			<xs:element ref="ExpensesByCategoriesWS" minOccurs="0"
-				maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="ExpensesTotalsByCategoriesWSMap" type="ExpensesTotalsByCategoriesWSMap" />
-	<xs:complexType name="ExpensesTotalsByCategoriesWSMap">
-		<xs:sequence>
-			<xs:element ref="ExpensesTotalsByCurrenciesWS" minOccurs="0"
-				maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="ExpensesByCategoriesWS" type="ExpensesByCategoriesWS" />
-	<xs:element name="ExpensesByCurrenciesWS" type="ExpensesByCurrenciesWS" />
-	<xs:element name="BudgetUsageByCategoriesWS" type="BudgetUsageByCategoriesWS" />
-	<xs:element name="BudgetUsageByCategoriesWSList" type="BudgetUsageByCategoriesWSList" />
-	<xs:complexType name="BudgetUsageByCategoriesWSList">
-		<xs:sequence>
-			<xs:element ref="BudgetUsageByCategoriesWS" minOccurs="0"
-				maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ExpensesByCurrenciesWS">
-		<xs:sequence>
-			<xs:element name="currencyIso" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="amount" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="BudgetUsageByCategoriesWS">
-		<xs:sequence>
-			<xs:element name="categoryAbbr" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="categoryDesc" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="budgetAmount" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="amountUsed" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="ExpensesByCategoriesWS">
-		<xs:sequence>
-			<xs:element name="categoryAbbr" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="categoryDesc" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="expByCurrMap" type="ExpensesByCurrenciesWS"
-				minOccurs="0" maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="ExpensesTotalsByCurrenciesWS" type="ExpensesTotalsByCurrenciesWS" />
-	<xs:complexType name="ExpensesTotalsByCurrenciesWS">
-		<xs:sequence>
-			<xs:element name="currencyIso" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="amount" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="BudgetUsageTotalsWS" type="BudgetUsageTotalsWS" />
-	<xs:complexType name="BudgetUsageTotalsWS">
-		<xs:sequence>
-			<xs:element name="budgetIncomeTotals" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="budgetIncomeUsed" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="budgetIncomeDeff" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="budgetExpenseTotals" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="budgeExpensetUsed" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="budgeExpenseDeff" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="addNewExpense" type="AddExpenseRequestsList" />
-	<xs:element name="addNewExpenseResponse" type="AddExpenseResponseList" />
-	<xs:element name="findExpensesByCategories" type="FindExpensesByCategories" />
-	<xs:element name="findExpensesByCategoriesResponse" type="FindExpensesByCategoriesResponse" />
-	<xs:complexType name="AddTransferResponse">
-		<xs:sequence>
-			<xs:element name="Id" type="xs:long" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="findExpensesByPlanForCategory" type="FindExpensesByPlanForCategory" />
-	<xs:element name="findExpensesByPlanForCategoryResponse" type="FindExpensesByPlanForCategoryResponse" />
-	<xs:complexType name="FindExpensesByPlanForCategory">
-		<xs:sequence>
-			<xs:element name="Month" type="Month" minOccurs="1"
-				maxOccurs="1" />
-			<xs:element name="Year" type="xs:int" minOccurs="1"
-				maxOccurs="1" />
-			<xs:element name="CategoryAbbr" type="xs:string"
-				minOccurs="1" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="FindExpensesByPlanForCategoryResponse">
-		<xs:complexContent>
-			<xs:extension base="ResponseBase">
-				<xs:sequence>
-					<xs:element ref="ExpensesWSList" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
+           xmlns:err="http://com.zwort/matahata/Common/ErrorInfo/1" xmlns:s="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://com.zwort/matahata/Services/1">
+    <xs:import namespace="http://com.zwort/matahata/Common/ErrorInfo/1"
+               schemaLocation="ErrorInfo.xsd"/>
+    <xs:simpleType name="Month">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="JANUARY"/>
+            <xs:enumeration value="FEBRUARY"/>
+            <xs:enumeration value="MARCH"/>
+            <xs:enumeration value="APRIL"/>
+            <xs:enumeration value="MAY"/>
+            <xs:enumeration value="JUNE"/>
+            <xs:enumeration value="JULY"/>
+            <xs:enumeration value="AUGUST"/>
+            <xs:enumeration value="SEPTEMBER"/>
+            <xs:enumeration value="OCTOBER"/>
+            <xs:enumeration value="NOVEMBER"/>
+            <xs:enumeration value="DECEMBER"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="RequestBase">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="System" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BaseRequestItem">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Date" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="Description" type="xs:string"/>
+            <xs:element minOccurs="0" name="Amount" type="xs:double"/>
+            <xs:element minOccurs="0" name="CurrencyISO" type="xs:string"/>
+            <xs:element minOccurs="0" name="OriginalAmount" type="xs:double"/>
+            <xs:element minOccurs="0" name="OriginalCurrencyISO" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AddExpenseRequest">
+        <xs:complexContent>
+            <xs:extension base="BaseRequestItem">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Location" type="xs:string"/>
+                    <xs:element minOccurs="0" name="CategoryAbbr" type="xs:string"/>
+                    <xs:element minOccurs="0" name="SrcAccountNo" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PayerInitials" type="xs:string"/>
+                    <xs:element minOccurs="0" name="BeneficiaryInitials"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" name="Refundable" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="Cleared" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AddExpenseRequestsList">
+        <xs:complexContent>
+            <xs:extension base="RequestBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded"
+                                name="AddExpenseRequestsList" type="AddExpenseRequest"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AddPlanRequest">
+        <xs:complexContent>
+            <xs:extension base="RequestBase">
+                <xs:sequence>
+                    <xs:element name="Month" type="Month"/>
+                    <xs:element ref="PlanItemsWSList"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="PlanItemsWSList" type="PlanItemsWSList"/>
+    <xs:complexType name="PlanItemsWSList">
+        <xs:sequence>
+            <xs:element ref="PlanItemWS" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="PlanItemWS" type="PlanItemWS"/>
+    <xs:complexType name="PlanItemWS">
+        <xs:sequence>
+            <xs:element name="categoryAbbr" type="xs:string" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="catLimit" type="xs:double"
+                        minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AddPlanResponse">
+        <xs:complexContent>
+            <xs:extension base="ResponseBase">
+                <xs:sequence>
+                    <xs:element name="Id" type="xs:long" minOccurs="0"
+                                maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AddTransferRequest">
+        <xs:complexContent>
+            <xs:extension base="BaseRequestItem">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="SrcAccountNo" type="xs:string"/>
+                    <xs:element minOccurs="0" name="DestAccountNo" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AddTransferRequestList">
+        <xs:complexContent>
+            <xs:extension base="RequestBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded"
+                                name="AddTransferRequestList" type="AddTransferRequest"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AddIncomeRequest">
+        <xs:complexContent>
+            <xs:extension base="BaseRequestItem">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Source" type="xs:string"/>
+                    <xs:element minOccurs="0" name="CategoryAbbr" type="xs:string"/>
+                    <xs:element minOccurs="0" name="DestAccountNo" type="xs:string"/>
+                    <xs:element minOccurs="0" name="BeneficiaryInitials"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" name="Debt" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AddIncomeRequestList">
+        <xs:complexContent>
+            <xs:extension base="RequestBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="AddIncomeRequestList"
+                                type="AddIncomeRequest"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ResponseBase">
+        <xs:sequence>
+            <xs:element ref="err:ErrorInfo" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AddExpenseResponseList">
+        <xs:complexContent>
+            <xs:extension base="ResponseBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded"
+                                name="AddExpenseResponsesList" type="AddExpenseResponse"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AddTransferResponseList">
+        <xs:complexContent>
+            <xs:extension base="ResponseBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded"
+                                name="AddTransferResponsesList" type="AddTransferResponse"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AddIncomeResponseList">
+        <xs:complexContent>
+            <xs:extension base="ResponseBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded"
+                                name="AddIncomeResponsesList" type="AddIncomeResponse"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AddExpenseResponse">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:long" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FindExpenseResponse">
+        <xs:complexContent>
+            <xs:extension base="ResponseBase">
+                <xs:sequence>
+                    <xs:element ref="ExpensesWSList"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="ExpensesWSList" type="ExpensesWSList"/>
+    <xs:complexType name="ExpensesWSList">
+        <xs:sequence>
+            <xs:element ref="ExpenseWS" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ExpenseWS" type="ExpenseWS"/>
+    <xs:complexType name="ExpenseWS">
+        <xs:sequence>
+            <xs:element name="date" type="xs:dateTime" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="categoryDesc" type="xs:string"
+                        minOccurs="0" maxOccurs="1"/>
+            <xs:element name="location" type="xs:string"
+                        minOccurs="0" maxOccurs="1"/>
+            <xs:element name="description" type="xs:string"
+                        minOccurs="0" maxOccurs="1"/>
+            <xs:element name="amount" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="currencyIso" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="origAmount" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="OrigcurrIso" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FindExpensesByCategories">
+        <xs:sequence>
+            <xs:element name="Month" type="Month" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="Year" type="xs:int" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FindExpensesByCategoriesResponse">
+        <xs:complexContent>
+            <xs:extension base="ResponseBase">
+                <xs:sequence>
+                    <xs:element ref="ExpensesTotalsByCategoriesWSMap"/>
+                    <xs:element ref="ExpensesByCategoriesWSList"/>
+                    <xs:element ref="BudgetUsageTotalsWS"/>
+                    <xs:element ref="BudgetUsageByCategoriesWSList"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="ExpensesByCategoriesWSList" type="ExpensesByCategoriesWSList"/>
+    <xs:complexType name="ExpensesByCategoriesWSList">
+        <xs:sequence>
+            <xs:element ref="ExpensesByCategoriesWS" minOccurs="0"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ExpensesTotalsByCategoriesWSMap" type="ExpensesTotalsByCategoriesWSMap"/>
+    <xs:complexType name="ExpensesTotalsByCategoriesWSMap">
+        <xs:sequence>
+            <xs:element ref="ExpensesTotalsByCurrenciesWS" minOccurs="0"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ExpensesByCategoriesWS" type="ExpensesByCategoriesWS"/>
+    <xs:element name="ExpensesByCurrenciesWS" type="ExpensesByCurrenciesWS"/>
+    <xs:element name="BudgetUsageByCategoriesWS" type="BudgetUsageByCategoriesWS"/>
+    <xs:element name="BudgetUsageByCategoriesWSList" type="BudgetUsageByCategoriesWSList"/>
+    <xs:complexType name="BudgetUsageByCategoriesWSList">
+        <xs:sequence>
+            <xs:element ref="BudgetUsageByCategoriesWS" minOccurs="0"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ExpensesByCurrenciesWS">
+        <xs:sequence>
+            <xs:element name="currencyIso" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="amount" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BudgetUsageByCategoriesWS">
+        <xs:sequence>
+            <xs:element name="categoryAbbr" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="categoryDesc" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="budgetAmount" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="amountUsed" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ExpensesByCategoriesWS">
+        <xs:sequence>
+            <xs:element name="categoryAbbr" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="categoryDesc" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="expByCurrMap" type="ExpensesByCurrenciesWS"
+                        minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ExpensesTotalsByCurrenciesWS" type="ExpensesTotalsByCurrenciesWS"/>
+    <xs:complexType name="ExpensesTotalsByCurrenciesWS">
+        <xs:sequence>
+            <xs:element name="currencyIso" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="amount" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="BudgetUsageTotalsWS" type="BudgetUsageTotalsWS"/>
+    <xs:complexType name="BudgetUsageTotalsWS">
+        <xs:sequence>
+            <xs:element name="budgetIncomeTotals" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="budgetIncomeUsed" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="budgetIncomeDeff" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="budgetExpenseTotals" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="budgeExpensetUsed" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="budgeExpenseDeff" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="addNewExpense" type="AddExpenseRequestsList"/>
+    <xs:element name="addNewExpenseResponse" type="AddExpenseResponseList"/>
+    <xs:element name="findExpensesByCategories" type="FindExpensesByCategories"/>
+    <xs:element name="findExpensesByCategoriesResponse" type="FindExpensesByCategoriesResponse"/>
+    <xs:complexType name="AddTransferResponse">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:long" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="findExpensesByPlanForCategory" type="FindExpensesByPlanForCategory"/>
+    <xs:element name="findExpensesByPlanForCategoryResponse" type="FindExpensesByPlanForCategoryResponse"/>
+    <xs:complexType name="FindExpensesByPlanForCategory">
+        <xs:sequence>
+            <xs:element name="Month" type="Month" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="Year" type="xs:int" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="CategoryAbbr" type="xs:string"
+                        minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FindExpensesByPlanForCategoryResponse">
+        <xs:complexContent>
+            <xs:extension base="ResponseBase">
+                <xs:sequence>
+                    <xs:element ref="ExpensesWSList"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
-	
-	<xs:element name="findExpensesByBeneficiaries" type="FindExpensesByBeneficiaries" />
-	<xs:complexType name="FindExpensesByBeneficiaries" >
-		<xs:sequence>
-			<xs:element name="Month" type="Month" minOccurs="1"
-				maxOccurs="1" />
-			<xs:element name="Year" type="xs:int" minOccurs="1"
-				maxOccurs="1" />
-			<xs:element name="CategoryAbbr" type="xs:string"
-				minOccurs="0" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	
-	<xs:element name="findExpensesByBeneficiariesResp" type="FindExpensesByBeneficiariesResp" />
-	<xs:complexType name="FindExpensesByBeneficiariesResp">
-		<xs:complexContent>
-			<xs:extension base="ResponseBase">
-				<xs:sequence>
-					<xs:element ref="FindExpensesByBeneficiariesList" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>	
-	</xs:complexType>
-	
-	<xs:element name="FindExpensesByBeneficiariesList" type="FindExpensesByBeneficiariesList" />
-	<xs:complexType name="FindExpensesByBeneficiariesList">
-		<xs:sequence>
-			<xs:element ref="ExpensesByBenWS" minOccurs="0" maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	
-	<xs:element name="ExpensesByBenByCatWS" type="ExpensesByBenByCatWS" />
-	<xs:complexType name="ExpensesByBenByCatWS">
-		<xs:sequence>
-			<xs:element name="categoryAbbr" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="categoryDesc" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="expBybenMap" type="ExpensesByBenWS"
-				minOccurs="0" maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="ExpensesByBenWS" type="ExpensesByBenWS" />
-	<xs:complexType name="ExpensesByBenWS">
-		<xs:sequence>
-			<xs:element name="ben" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-			<xs:element name="amount" type="xs:double" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	
-	
-	
-	<xs:element name="getAccountState" type="GetAccountStateRequestList" />
-	<xs:element name="getAccountStateResponse" type="GetAccountStateResponse" />
-	<xs:complexType name="GetAccountStateResponse">
-		<xs:complexContent>
-			<xs:extension base="ResponseBase">
-				<xs:sequence>
-					<xs:element ref="AccountWSStatesList" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
+    <!-- Sums by categories and currencies split by beneficiary -->
 
-	<xs:element name="AccountWSStatesList" type="AccountWSStatesList" />
-	<xs:complexType name="AccountWSStatesList">
-		<xs:sequence>
-			<xs:element ref="AccountWSState" minOccurs="0" maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="AccountWSState" type="AccountWSState" />
-	<xs:complexType name="AccountWSState">
-		<xs:sequence>
-			<xs:element name="AccountName" type="xs:string" minOccurs="1"
-				maxOccurs="1" />
-			<xs:element name="CurrIso" type="xs:string" minOccurs="1"
-				maxOccurs="1" />
-			<xs:element name="AccountNumber" type="xs:string" minOccurs="1"
-				maxOccurs="1" />
-			<xs:element name="AccountState" type="xs:double" minOccurs="1"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	
-	<xs:complexType name="AccountNumbersList">
-		<xs:sequence>
-			<xs:element ref="AccountNumberWS" minOccurs="0" maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	
-	<xs:complexType name="GetAccountStateRequestList">
-		<xs:complexContent>
-			<xs:extension base="RequestBase">
-				<xs:sequence>
-					<xs:element ref="AccountNumbersList" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	
-	<xs:element	name="AccountNumbersList" type="AccountNumbersList" />
-	<xs:element name="AccountNumberWS" type="AccountNumberWS" />
-	<xs:complexType name="AccountNumberWS">
-		<xs:sequence>
-			<xs:element name="AccountNumber" type="xs:string" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>		
-	
-	<xs:element name="addNewTransfer" type="AddTransferRequestList" />
-	<xs:element name="addNewTransferResponse" type="AddTransferResponseList" />
-	<xs:complexType name="AddIncomeResponse">
-		<xs:sequence>
-			<xs:element name="Id" type="xs:long" minOccurs="0"
-				maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="addNewIncome" type="AddIncomeRequestList" />
-	<xs:element name="addNewIncomeResponse" type="AddIncomeResponseList" />
-	<xs:element name="addNewPlan" type="AddPlanRequest" />
-	<xs:element name="addNewPlanResponse" type="AddPlanResponse" />
+    <xs:element name="findSumsByCategoriesAndCurrencies" type="FindSumsByCategoriesAndCurrencies"/>
+    <xs:complexType name="FindSumsByCategoriesAndCurrencies">
+        <xs:complexContent>
+            <xs:extension base="RequestBase">
+                <xs:sequence>
+                    <xs:element name="DateFrom" type="xs:date" minOccurs="1"
+                                maxOccurs="1"/>
+                    <xs:element name="DateTo" type="xs:date" minOccurs="1"
+                                maxOccurs="1"/>
+                    <xs:element ref="AccountNumbersList" />
+                    <xs:element ref="BeneficiaryInitialsList" />
+                    <xs:element ref="CategoryAbbreviationsList" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="findSumsByCategoriesAndCurrenciesResp" type="FindSumsByCategoriesAndCurrenciesResp"/>
+    <xs:complexType name="FindSumsByCategoriesAndCurrenciesResp">
+        <xs:complexContent>
+            <xs:extension base="ResponseBase">
+                <xs:sequence>
+                    <xs:element ref="FindSumsByCategoriesAndCurrenciesList" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="FindSumsByCategoriesAndCurrenciesList" type="FindSumsByCategoriesAndCurrenciesList" />
+    <xs:complexType name="FindSumsByCategoriesAndCurrenciesList">
+        <xs:sequence>
+            <xs:element ref="SumsByCategoriesAndCurrenciesWS" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="SumsByCurrencyForBeneficiariesList" type="SumsByCurrencyForBeneficiariesList" />
+    <xs:complexType name="SumsByCurrencyForBeneficiariesList">
+        <xs:sequence>
+            <xs:element ref="SumsByCurrencyForBeneficiariesWS" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="SumsByCurrencyForBeneficiariesWS" type="SumsByCurrencyForBeneficiariesWS" />
+    <xs:complexType name="SumsByCurrencyForBeneficiariesWS">
+        <xs:sequence>
+            <xs:element ref="CurrencyWS" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Totals" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+            <xs:element ref="SumsByBeneficiariesList" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="SumsByBeneficiariesList" type="SumsByBeneficiariesList" />
+    <xs:complexType name="SumsByBeneficiariesList">
+        <xs:sequence>
+            <xs:element ref="SumsByBeneficiariesWS" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="SumsByBeneficiariesWS" type="SumsByBeneficiariesWS" />
+    <xs:complexType name="SumsByBeneficiariesWS">
+        <xs:sequence>
+            <xs:element ref="BeneficiaryWS" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Amount" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="SumsByCategoriesAndCurrenciesWS" type="SumsByCategoriesAndCurrenciesWS"/>
+    <xs:complexType name="SumsByCategoriesAndCurrenciesWS">
+        <xs:sequence>
+            <xs:element name="CategoryAbbr" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="CategoryDesc" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element ref="SumsByCurrencyForBeneficiariesList" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Sums by categories and currencies split by beneficiary -->
+
+    <xs:element name="findExpensesByBeneficiaries" type="FindExpensesByBeneficiaries"/>
+    <xs:complexType name="FindExpensesByBeneficiaries">
+        <xs:sequence>
+            <xs:element name="Month" type="Month" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="Year" type="xs:int" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="CategoryAbbr" type="xs:string"
+                        minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="findExpensesByBeneficiariesResp" type="FindExpensesByBeneficiariesResp"/>
+    <xs:complexType name="FindExpensesByBeneficiariesResp">
+        <xs:complexContent>
+            <xs:extension base="ResponseBase">
+                <xs:sequence>
+                    <xs:element ref="FindExpensesByBeneficiariesList"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="FindExpensesByBeneficiariesList" type="FindExpensesByBeneficiariesList"/>
+    <xs:complexType name="FindExpensesByBeneficiariesList">
+        <xs:sequence>
+            <xs:element ref="ExpensesByBenWS" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="ExpensesByBenByCatWS" type="ExpensesByBenByCatWS"/>
+    <xs:complexType name="ExpensesByBenByCatWS">
+        <xs:sequence>
+            <xs:element name="categoryAbbr" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="categoryDesc" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="expBybenMap" type="ExpensesByBenWS"
+                        minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ExpensesByBenWS" type="ExpensesByBenWS"/>
+    <xs:complexType name="ExpensesByBenWS">
+        <xs:sequence>
+            <xs:element name="ben" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+            <xs:element name="amount" type="xs:double" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:element name="getAccountState" type="GetAccountStateRequestList"/>
+    <xs:element name="getAccountStateResponse" type="GetAccountStateResponse"/>
+    <xs:complexType name="GetAccountStateResponse">
+        <xs:complexContent>
+            <xs:extension base="ResponseBase">
+                <xs:sequence>
+                    <xs:element ref="AccountWSStatesList"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="AccountWSStatesList" type="AccountWSStatesList"/>
+    <xs:complexType name="AccountWSStatesList">
+        <xs:sequence>
+            <xs:element ref="AccountWSState" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AccountWSState" type="AccountWSState"/>
+    <xs:complexType name="AccountWSState">
+        <xs:sequence>
+            <xs:element name="AccountName" type="xs:string" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="CurrIso" type="xs:string" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="AccountNumber" type="xs:string" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="AccountState" type="xs:double" minOccurs="1"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetAccountStateRequestList">
+        <xs:complexContent>
+            <xs:extension base="RequestBase">
+                <xs:sequence>
+                    <xs:element ref="AccountNumbersList"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- CurrencyWS -->
+
+    <xs:element name="CurrencyWS" type="CurrencyWS" />
+    <xs:complexType name="CurrencyWS">
+        <xs:sequence>
+            <xs:element name="CurrencyISO" type="xs:string" minOccurs="1" maxOccurs="1" block="" />
+            <xs:element name="CurrencyName" type="xs:string" minOccurs="0" maxOccurs="1" block="" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- BeneficiaryWS -->
+
+    <xs:element name="BeneficiaryWS" type="BeneficiaryWS" />
+    <xs:complexType name="BeneficiaryWS">
+        <xs:sequence>
+            <xs:element name="BeneficiaryInitials" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="BeneficiaryFName" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="BeneficiaryLName" type="xs:string" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Account numbers list -->
+
+    <xs:element name="AccountNumbersList" type="AccountNumbersList"/>
+    <xs:element name="AccountNumberWS" type="AccountNumberWS"/>
+
+    <xs:complexType name="AccountNumbersList">
+        <xs:sequence>
+            <xs:element ref="AccountNumberWS" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AccountNumberWS">
+        <xs:sequence>
+            <xs:element name="AccountNumber" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Beneficiaries initials list -->
+
+    <xs:element name="BeneficiaryInitialsList" type="BeneficiaryInitialsList"/>
+    <xs:element name="BeneficiaryInitialsWS" type="BeneficiaryInitialsWS"/>
+
+    <xs:complexType name="BeneficiaryInitialsList">
+        <xs:sequence>
+            <xs:element ref="BeneficiaryInitialsWS" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="BeneficiaryInitialsWS">
+        <xs:sequence>
+            <xs:element name="BeneficiaryInitials" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Category abbreviations list -->
+    <xs:element name="CategoryAbbreviationsList" type="CategoryAbbreviationsList"/>
+    <xs:element name="CategoryAbbreviationsWS" type="CategoryAbbreviationsWS"/>
+
+    <xs:complexType name="CategoryAbbreviationsList">
+        <xs:sequence>
+            <xs:element ref="CategoryAbbreviationsWS" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CategoryAbbreviationsWS">
+        <xs:sequence>
+            <xs:element name="CategoryAbbreviationsWS" type="xs:string" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="addNewTransfer" type="AddTransferRequestList"/>
+    <xs:element name="addNewTransferResponse" type="AddTransferResponseList"/>
+    <xs:complexType name="AddIncomeResponse">
+        <xs:sequence>
+            <xs:element name="Id" type="xs:long" minOccurs="0"
+                        maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="addNewIncome" type="AddIncomeRequestList"/>
+    <xs:element name="addNewIncomeResponse" type="AddIncomeResponseList"/>
+    <xs:element name="addNewPlan" type="AddPlanRequest"/>
+    <xs:element name="addNewPlanResponse" type="AddPlanResponse"/>
 </xs:schema>

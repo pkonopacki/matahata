@@ -12,6 +12,7 @@ import com.zwort.matahata.core.sp.binder.ExpenseManagementBinder;
 import com.zwort.matahata.core.sp.dto.ExpenseDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.ExpenseManagementService;
+import org.springframework.transaction.annotation.Transactional;
 
 public class ExpenseManagementServiceImpl extends AbstractManagementService implements ExpenseManagementService {
 	
@@ -21,6 +22,7 @@ public class ExpenseManagementServiceImpl extends AbstractManagementService impl
 	
 
 	@Override
+    @Transactional
 	public List<Long> addNewExpense(List<ExpenseDTO> dtosList) throws ServiceProviderException {
 		List<Long> returnValue = new ArrayList<Long>();
 

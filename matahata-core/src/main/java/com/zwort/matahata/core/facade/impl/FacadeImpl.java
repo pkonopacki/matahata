@@ -142,7 +142,8 @@ public class FacadeImpl implements Facade {
 	@Override
 	@Transactional
 	public Transfer saveTransfer(Transfer transfer) throws Exception {
-		Account accSrc = transfer.getSrcAccount();
+		java.sql.Date operationDate = DateUtils.getCurrentSqlDate();
+        Account accSrc = transfer.getSrcAccount();
 		Account accDest = transfer.getDestAccount();
 		double balanceSrc = accSrc.getBalance();
 		double balanceDest = accDest.getBalance();
@@ -162,11 +163,11 @@ public class FacadeImpl implements Facade {
 		operationDeb.setAccount(accSrc);
 		operationDeb.setAmount(amount);
 		operationDeb.setItem(transferRet);
-		operationDeb.setDate(new java.sql.Date(transfer.getDate().getTime()));
+		operationDeb.setDate(operationDate);
 		operationCr.setAccount(accDest);
 		operationCr.setAmount(transfer.getOriginalAmount());
 		operationCr.setItem(transferRet);
-		operationCr.setDate(new java.sql.Date(transfer.getDate().getTime()));
+		operationCr.setDate(operationDate);
 
 		//TODO: to the contrary :)
 		
@@ -211,7 +212,7 @@ public class FacadeImpl implements Facade {
 		operation.setAccount(income.getDestAccount());
 		operation.setAmount(amount);
 		operation.setItem(retValue);
-		operation.setDate(new java.sql.Date(income.getDate().getTime()));
+		operation.setDate(DateUtils.getCurrentSqlDate());
         operation.setBalance(balance + amount);
 		acc.setBalance(operation.getBalance());
 		creditService.add(operation);
@@ -238,7 +239,7 @@ public class FacadeImpl implements Facade {
 		operation.setAccount(savedExpense.getSrcAccount());
 		operation.setAmount(amount);
 		operation.setItem(savedExpense);
-		operation.setDate(new java.sql.Date(savedExpense.getDate().getTime()));
+		operation.setDate(DateUtils.getCurrentSqlDate());
         operation.setBalance(balance - amount);
 		acc.setBalance(operation.getBalance());
 		debitService.add(operation);

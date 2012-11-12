@@ -12,8 +12,9 @@ import com.zwort.matahata.core.exception.DAOException;
 public abstract class AbstractJpaDAO<E> implements BaseDAO<E> {
 
 	protected Class<E> entityClass;
-	
-	protected EntityManager entityManager;
+
+    @PersistenceContext
+    protected EntityManager entityManager;
 	
 
 	public AbstractJpaDAO() {
@@ -24,7 +25,6 @@ public abstract class AbstractJpaDAO<E> implements BaseDAO<E> {
 		this.entityClass = type;
 	}
 
-	@PersistenceContext
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}

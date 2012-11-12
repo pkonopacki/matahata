@@ -80,8 +80,14 @@ public class DateUtils {
 		
 		return gcal.getTime();
 	}
-	
-	private static boolean isLeapYear(int year) {
+
+    public static java.sql.Date getCurrentSqlDate() {
+        Date now = new Date();
+        return new java.sql.Date(now.getTime());
+    }
+
+
+    private static boolean isLeapYear(int year) {
         boolean isLeapYear;
 
         // divisible by 4
@@ -95,6 +101,5 @@ public class DateUtils {
 
         return isLeapYear;
 	}
-	
 
 }

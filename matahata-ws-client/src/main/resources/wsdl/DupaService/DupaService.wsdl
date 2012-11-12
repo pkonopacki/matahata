@@ -50,9 +50,25 @@
 		</wsdl:part>
 	</wsdl:message>
 
-	<!-- port type -->
+    <wsdl:message name="findSumsByCategoriesAndCurrencies">
+        <wsdl:part name="findSumsByCategoriesAndCurrencies" element="findSumsByCategoriesAndCurrencies">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="findSumsByCategoriesAndCurrenciesResp">
+        <wsdl:part name="findSumsByCategoriesAndCurrenciesResp" element="findSumsByCategoriesAndCurrenciesResp">
+        </wsdl:part>
+    </wsdl:message>
+
+    <!-- port type -->
 	<wsdl:portType name="DupaServicePortType">
-		<wsdl:operation name="findExpensesByBeneficiaries">
+        <wsdl:operation name="findSumsByCategoriesAndCurrencies">
+            <wsdl:input name="findSumsByCategoriesAndCurrencies" message="findSumsByCategoriesAndCurrencies">
+            </wsdl:input>
+            <wsdl:output name="findSumsByCategoriesAndCurrenciesResp" message="findSumsByCategoriesAndCurrenciesResp">
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="findExpensesByBeneficiaries">
 			<wsdl:input name="findExpensesByBeneficiaries" message="findExpensesByBeneficiaries">
 			</wsdl:input>
 			<wsdl:output name="findExpensesByBeneficiariesResp" message="findExpensesByBeneficiariesResp">
@@ -72,7 +88,8 @@
 			<wsdl:output name="findExpensesByPlanForCategoryResponse" message="findExpensesByPlanForCategoryResponse">
 			</wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="getAccountState">
+
+        <wsdl:operation name="getAccountState">
 			<wsdl:input name="getAccountState" message="getAccountState">
 			</wsdl:input>
 			<wsdl:output name="getAccountStateResponse" message="getAccountStateResponse">
@@ -94,7 +111,17 @@
 			</wsdl:output>
 		</wsdl:operation>
 
-		<wsdl:operation name="findExpensesByBeneficiaries">
+        <wsdl:operation name="findSumsByCategoriesAndCurrencies">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="findSumsByCategoriesAndCurrencies">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="findSumsByCategoriesAndCurrenciesResp">
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="findExpensesByBeneficiaries">
 			<soap:operation soapAction="" style="document" />
 			<wsdl:input name="findExpensesByBeneficiaries">
 				<soap:body use="literal" />

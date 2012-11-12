@@ -103,7 +103,7 @@ public abstract class CommonBinder {
 		cal.setTime(new Date());
 		cal.set(Calendar.MONTH, month.ordinal());
 		cal.set(Calendar.DAY_OF_MONTH, 1);
-		cal.set(Calendar.HOUR, 5);
+		cal.set(Calendar.HOUR, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		
