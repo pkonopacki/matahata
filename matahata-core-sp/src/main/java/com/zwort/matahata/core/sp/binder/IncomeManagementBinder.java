@@ -1,8 +1,5 @@
 package com.zwort.matahata.core.sp.binder;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Account;
 import com.zwort.matahata.core.model.Category;
@@ -10,7 +7,11 @@ import com.zwort.matahata.core.model.Currency;
 import com.zwort.matahata.core.model.Income;
 import com.zwort.matahata.core.sp.dto.IncomeDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class IncomeManagementBinder extends CommonBinder {
 
 	private static final Log logger = LogFactory.getLog(IncomeManagementBinder.class);

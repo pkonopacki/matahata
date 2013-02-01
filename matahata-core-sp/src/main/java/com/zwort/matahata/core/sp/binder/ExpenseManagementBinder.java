@@ -1,20 +1,16 @@
 package com.zwort.matahata.core.sp.binder;
 
-import java.util.Date;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.zwort.matahata.core.exception.ServiceException;
-import com.zwort.matahata.core.model.Account;
-import com.zwort.matahata.core.model.Beneficiary;
-import com.zwort.matahata.core.model.Category;
-import com.zwort.matahata.core.model.Currency;
-import com.zwort.matahata.core.model.Expense;
-import com.zwort.matahata.core.model.Plan;
+import com.zwort.matahata.core.model.*;
 import com.zwort.matahata.core.sp.dto.ExpenseDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
+@Component
 public class ExpenseManagementBinder extends CommonBinder {
 	
 	private static final Log logger = LogFactory.getLog(ExpenseManagementBinder.class);

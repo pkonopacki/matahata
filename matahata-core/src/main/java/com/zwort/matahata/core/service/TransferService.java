@@ -6,7 +6,7 @@ import com.zwort.matahata.core.model.Income;
 import com.zwort.matahata.core.model.Transfer;
 
 
-public interface TransferService extends EntityService<Transfer>{
+public interface TransferService extends EntityService<Transfer> {
 	
 	public Transfer findLastTransferForForeignExpense(Expense expense) throws ServiceException;
 

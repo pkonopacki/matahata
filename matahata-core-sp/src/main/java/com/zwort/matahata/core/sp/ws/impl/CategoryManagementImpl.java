@@ -1,17 +1,19 @@
 package com.zwort.matahata.core.sp.ws.impl;
 
-import javax.jws.WebService;
-
 import com.zwort.matahata.core.sp.adapter.CategoryManagementAdapter;
 import com.zwort.matahata.core.sp.request.AddCategoryRequest;
 import com.zwort.matahata.core.sp.response.FindCategoryResponse;
 import com.zwort.matahata.core.sp.response.ResponseBase;
 import com.zwort.matahata.core.sp.ws.CategoryManagement;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.jws.WebService;
 
 @WebService
 public class CategoryManagementImpl implements CategoryManagement {
 
-	private CategoryManagementAdapter adapter;
+	@Autowired
+    private CategoryManagementAdapter adapter;
 	
 	@Override
 	public ResponseBase addNewCategory(AddCategoryRequest request) {

@@ -1,12 +1,14 @@
 package com.zwort.matahata.core.sp.binder;
 
-import java.util.Date;
-
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Category;
 import com.zwort.matahata.core.sp.dto.CategoryDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
+import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
+@Component
 public class CategoryManagementBinder extends CommonBinder {
 	
 	public Category bindCategory(CategoryDTO dto) throws ServiceException, ServiceProviderException {

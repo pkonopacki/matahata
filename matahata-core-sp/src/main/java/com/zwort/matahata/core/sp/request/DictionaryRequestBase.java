@@ -1,10 +1,9 @@
 package com.zwort.matahata.core.sp.request;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DictionaryRequestBase extends RequestBase {

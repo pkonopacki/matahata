@@ -5,7 +5,9 @@ import javax.persistence.Query;
 import com.zwort.matahata.core.dao.CategoryDAO;
 import com.zwort.matahata.core.exception.DAOException;
 import com.zwort.matahata.core.model.Category;
+import org.springframework.stereotype.Repository;
 
+@Repository(value = "categoryDAO")
 public class CategoryDAOJpaImpl extends DictionaryDAOJpaImpl<Category>
 		implements CategoryDAO {
 	

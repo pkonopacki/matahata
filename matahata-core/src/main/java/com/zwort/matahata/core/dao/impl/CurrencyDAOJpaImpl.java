@@ -5,7 +5,9 @@ import javax.persistence.Query;
 import com.zwort.matahata.core.dao.CurrencyDAO;
 import com.zwort.matahata.core.exception.DAOException;
 import com.zwort.matahata.core.model.Currency;
+import org.springframework.stereotype.Repository;
 
+@Repository(value = "currencyDAO")
 public class CurrencyDAOJpaImpl extends DictionaryDAOJpaImpl<Currency>
 		implements CurrencyDAO {
 

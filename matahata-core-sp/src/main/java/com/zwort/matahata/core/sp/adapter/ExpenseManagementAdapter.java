@@ -1,21 +1,26 @@
 package com.zwort.matahata.core.sp.adapter;
 
+import com.zwort.matahata.core.sp.binder.ExpenseRequestResopnseBinder;
+import com.zwort.matahata.core.sp.exception.util.ErrorPropertiesUtils;
+import com.zwort.matahata.core.sp.service.ExpenseManagementService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import zwort.com.matahata.services._1.AddExpenseRequestsList;
 import zwort.com.matahata.services._1.AddExpenseResponseList;
 import zwort.com.matahata.services._1.FindExpenseResponse;
 
-import com.zwort.matahata.core.sp.ServiceLocator;
-import com.zwort.matahata.core.sp.binder.ExpenseRequestResopnseBinder;
-import com.zwort.matahata.core.sp.exception.util.ErrorPropertiesUtils;
-
+@Component
 public class ExpenseManagementAdapter extends BaseAdapter {
 
-	public AddExpenseResponseList addNewExpense(AddExpenseRequestsList request) {
+	@Autowired
+    private ExpenseManagementService expenseManagementService;
+
+    public AddExpenseResponseList addNewExpense(AddExpenseRequestsList request) {
 		AddExpenseResponseList response = new AddExpenseResponseList();
 		ExpenseRequestResopnseBinder binder = new ExpenseRequestResopnseBinder();
 		
 		try {
-			response = binder.bindAddExpenseResponseList(ServiceLocator.getInstance().getExpenseManagementService().addNewExpense(binder.bindExpenseDtoListFromAddExpenseRequestsList(request)));
+			response = binder.bindAddExpenseResponseList(expenseManagementService.addNewExpense(binder.bindExpenseDtoListFromAddExpenseRequestsList(request)));
 		
 		} catch (Exception e) {
 			logger.error("ExpenseManagementAdapter.addNewExpense failed: ", e);
@@ -31,7 +36,7 @@ public class ExpenseManagementAdapter extends BaseAdapter {
 		FindExpenseResponse response = new FindExpenseResponse();
 		
 		try {
-			response = binder.bindResponse(ServiceLocator.getInstance().getExpenseManagementService().findAll());
+			response = binder.bindResponse(expenseManagementService.findAll());
 		
 		} catch (Exception e) {
 			logger.error("ExpenseManagementAdapter.findAllExpenses failed: ", e);

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zwort.matahata.core.dao.PlanDAO;
@@ -14,6 +16,7 @@ import com.zwort.matahata.core.service.PlanService;
 
 import javax.persistence.NoResultException;
 
+@Service
 public class PlanServiceImpl extends EntityServiceImpl<Plan> implements
 		PlanService {
 	
@@ -22,7 +25,8 @@ public class PlanServiceImpl extends EntityServiceImpl<Plan> implements
 		return (PlanDAO) dao;
 	}
 	
-	public void setDao(PlanDAO dao) {
+	@Autowired
+    public void setDao(PlanDAO dao) {
 		super.setDao(dao);
 	}
 	

@@ -1,14 +1,5 @@
 package com.zwort.matahata.core.sp.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import zwort.com.matahata.services._1.AccountNumberWS;
-
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Account;
 import com.zwort.matahata.core.model.Currency;
@@ -18,14 +9,27 @@ import com.zwort.matahata.core.sp.assembler.AccountDTOAssembler;
 import com.zwort.matahata.core.sp.dto.AccountDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.AccountManagementService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import zwort.com.matahata.services._1.AccountNumberWS;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Service(value = "accountManagementService")
 public class AccountManagementServiceImpl implements AccountManagementService {
 	
 	//TODO: validation numbers, unique stuff, etc
 	
 	private static final Log logger = LogFactory.getLog(AccountManagementServiceImpl.class);
 	
-	private CurrencyService currencyService;
+	@Autowired
+    private CurrencyService currencyService;
+
+    @Autowired
 	private AccountService accountService;
 
 	@Override
@@ -133,10 +137,6 @@ public class AccountManagementServiceImpl implements AccountManagementService {
 	
 	public void setCurrencyService(CurrencyService currencyService) {
 		this.currencyService = currencyService;
-	}
-
-	public void setAccountService(AccountService accountService) {
-		this.accountService = accountService;
 	}
 
 }

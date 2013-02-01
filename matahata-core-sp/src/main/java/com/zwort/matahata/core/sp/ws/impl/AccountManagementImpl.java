@@ -1,11 +1,11 @@
 package com.zwort.matahata.core.sp.ws.impl;
 
-import javax.jws.WebService;
-
 import com.zwort.matahata.core.sp.adapter.AccountManagementAdapter;
 import com.zwort.matahata.core.sp.request.AddAccountRequest;
 import com.zwort.matahata.core.sp.response.AddAccountResponse;
 import com.zwort.matahata.core.sp.ws.AccountManagement;
+
+import javax.jws.WebService;
 
 @WebService
 public class AccountManagementImpl implements AccountManagement {

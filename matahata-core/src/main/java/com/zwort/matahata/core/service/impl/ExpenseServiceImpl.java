@@ -12,13 +12,17 @@ import com.zwort.matahata.core.model.Category;
 import com.zwort.matahata.core.model.Expense;
 import com.zwort.matahata.core.model.Plan;
 import com.zwort.matahata.core.service.ExpenseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ExpenseServiceImpl extends EntityServiceImpl<Expense> implements ExpenseService {
 	
 	private static final Log logger = LogFactory.getLog(FacadeImpl.class);
 
 
-	public void setDao(ExpenseDAO dao) {
+	@Autowired
+    public void setDao(ExpenseDAO dao) {
 		super.setDao(dao);
 	}
 

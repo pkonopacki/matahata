@@ -1,12 +1,5 @@
 package com.zwort.matahata.core.sp.binder;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import com.zwort.matahata.core.utils.DateUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Category;
 import com.zwort.matahata.core.model.Plan;
@@ -14,7 +7,14 @@ import com.zwort.matahata.core.model.PlanItem;
 import com.zwort.matahata.core.sp.dto.PlanDTO;
 import com.zwort.matahata.core.sp.dto.PlanItemDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@Component
 public class PlanManagementBinder extends CommonBinder {
 	
 	private static final Log logger = LogFactory.getLog(PlanManagementBinder.class);	

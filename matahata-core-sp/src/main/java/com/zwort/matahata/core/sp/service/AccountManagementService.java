@@ -1,11 +1,10 @@
 package com.zwort.matahata.core.sp.service;
 
-import java.util.List;
-
-import zwort.com.matahata.services._1.AccountNumberWS;
-
 import com.zwort.matahata.core.sp.dto.AccountDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
+import zwort.com.matahata.services._1.AccountNumberWS;
+
+import java.util.List;
 
 public interface AccountManagementService {
 	

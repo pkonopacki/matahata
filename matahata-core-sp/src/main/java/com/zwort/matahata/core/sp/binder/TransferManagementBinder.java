@@ -6,7 +6,9 @@ import com.zwort.matahata.core.model.Currency;
 import com.zwort.matahata.core.model.Transfer;
 import com.zwort.matahata.core.sp.dto.TransferDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TransferManagementBinder extends CommonBinder {
 	
 	public Transfer bindTransferFromDto(TransferDTO dto) throws ServiceException, ServiceProviderException {

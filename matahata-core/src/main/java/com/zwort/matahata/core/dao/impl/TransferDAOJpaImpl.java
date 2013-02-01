@@ -10,7 +10,9 @@ import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Expense;
 import com.zwort.matahata.core.model.Income;
 import com.zwort.matahata.core.model.Transfer;
+import org.springframework.stereotype.Repository;
 
+@Repository(value = "transferDAO")
 public class TransferDAOJpaImpl extends EntityDAOJpaImpl<Transfer> implements TransferDAO {
 
 	private static final Log logger = LogFactory.getLog(TransferDAOJpaImpl.class);

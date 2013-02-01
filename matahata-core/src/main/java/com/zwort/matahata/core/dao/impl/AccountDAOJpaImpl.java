@@ -1,11 +1,13 @@
 package com.zwort.matahata.core.dao.impl;
 
-import javax.persistence.Query;
-
 import com.zwort.matahata.core.dao.AccountDAO;
 import com.zwort.matahata.core.exception.DAOException;
 import com.zwort.matahata.core.model.Account;
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
+
+@Repository(value = "accountDAO")
 public class AccountDAOJpaImpl extends DictionaryDAOJpaImpl<Account> implements
 		AccountDAO {
 

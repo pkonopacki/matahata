@@ -8,7 +8,9 @@ import com.zwort.matahata.core.dao.PlanDAO;
 import com.zwort.matahata.core.exception.DAOException;
 import com.zwort.matahata.core.model.Plan;
 import com.zwort.matahata.core.model.PlanItem;
+import org.springframework.stereotype.Repository;
 
+@Repository(value = "planDAO")
 public class PlanDAOJpaImpl extends EntityDAOJpaImpl<Plan> implements PlanDAO {
 
 	public PlanDAOJpaImpl() {

@@ -1,0 +1,1 @@
+INSERT INTO account (bank_id, owner_id, account_name, account_number, description, balance, currency_id, creation_date, last_update, active) values (1, 1, 'Kapsa HUF', '15001904', 'Kapsa Ziuta w HUF', 0, 4, NOW(), NOW(), true);

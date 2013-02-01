@@ -46,19 +46,22 @@ INSERT INTO beneficiary (initials, first_name, middle_name, last_name, dob, desc
 INSERT INTO beneficiary (initials, first_name, middle_name, last_name, dob, description, creation_date, last_update, active) values ('WI', 'Wieksze', 'Dupa', 'Uszate', '1900-01-01 07:00:00', 'Obiboki', NOW(), NOW(), true);
 INSERT INTO beneficiary (initials, first_name, middle_name, last_name, dob, description, creation_date, last_update, active) values ('TK', 'Teresa', 'Konopacka', 'Lekki zwort', '1948-10-24 07:00:00', 'Wczuwacz', NOW(), NOW(), true);
 INSERT INTO beneficiary (initials, first_name, middle_name, last_name, dob, description, creation_date, last_update, active) values ('DI', 'Dariusz', 'Arkadiusz', 'Imporowicz', '1972-09-01 07:00:00', 'Obibok', NOW(), NOW(), true);
+INSERT INTO beneficiary (initials, first_name, middle_name, last_name, dob, description, creation_date, last_update, active) values ('MC', 'Marzena', '', 'Czubak', '1973-09-01 07:00:00', 'Obibok', NOW(), NOW(), true);
 
 INSERT INTO currency (iso_code, description, is_default, creation_date, last_update, active) values ('PLN', 'Złoty polski', true, NOW(), NOW(), true);
 INSERT INTO currency (iso_code, description, is_default, creation_date, last_update, active) values ('EUR', 'Euro', false, NOW(), NOW(), true);
 INSERT INTO currency (iso_code, description, is_default, creation_date, last_update, active) values ('GBP', 'Pound Sterling', false, NOW(), NOW(), true);
+INSERT INTO currency (iso_code, description, is_default, creation_date, last_update, active) values ('HUF', 'Forint', false, NOW(), NOW(), true);
+INSERT INTO currency (iso_code, description, is_default, creation_date, last_update, active) values ('MAD', 'Moroccan Dirham', false, NOW(), NOW(), true);
 
 INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Rachunek bieżący', '27114020040000320245406966', 'Rachunek bieżący ziuta', 0, 1, 1, NOW(), NOW(), true);
 INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Kapsa', '15001900', 'Kapsa ziuta', 0, 1, 1, NOW(), NOW(), true);
-INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Kapsa EUR', '15001901', 'Kapsa ziuta w Euro', 0, 1, 1, NOW(), NOW(), true);
+INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Kapsa EUR', '15001901', 'Kapsa ziuta w Euro', 0, 1, 2, NOW(), NOW(), true);
 INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('MasterCard', '5396039505017614', 'Karta kredytowa MasterCard', 0, 1, 1, NOW(), NOW(), true);
 INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Visa Gold', '4041939677842967', 'Karta kredytowa Visa Gold', 0, 1, 1, NOW(), NOW(), true);
-INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Kapsa GBP', '15001903', 'Kapsa Ziuta w funciochach', 0, 3, 1, NOW(), NOW(), true);
-INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Kapsa Ani GBP', '16001900', 'Kapsa Myszy w funciochach', 0, 3, 1, NOW(), NOW(), true);
-INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Savings Ziuta', '20274943229580', 'Savings Account Ziuta Barclays', 0, 3, 1, NOW(), NOW(), true);
-INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Savings Myszy', '20274903533484', 'Savings Account Myszy Barclays', 0, 3, 1, NOW(), NOW(), true);
-INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Current Ziuta', '20274923072851', 'Current Account Ziuta Barclays', 0, 3, 1, NOW(), NOW(), true);
-INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Wspólna kasiora', '17001900', 'Wspólna kasiora Flat3, 4A Grange Park', 0, 3, 1, NOW(), NOW(), true);
+INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Kapsa GBP', '15001903', 'Kapsa Ziuta w funciochach', 0, 1, 3, NOW(), NOW(), true);
+INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Kapsa Ani GBP', '16001900', 'Kapsa Myszy w funciochach', 0, 1, 3, NOW(), NOW(), true);
+INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Savings Ziuta', '20274943229580', 'Savings Account Ziuta Barclays', 0, 1, 3, NOW(), NOW(), true);
+INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Savings Myszy', '20274903533484', 'Savings Account Myszy Barclays', 0, 1, 3, NOW(), NOW(), true);
+INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Current Ziuta', '20274923072851', 'Current Account Ziuta Barclays', 0, 1, 3, NOW(), NOW(), true);
+INSERT INTO account (account_name, account_number, description, balance, bank_id, currency_id, creation_date, last_update, active) values ('Wspólna kasiora', '17001900', 'Wspólna kasiora Flat3, 4A Grange Park', 0, 1, 3, NOW(), NOW(), true);

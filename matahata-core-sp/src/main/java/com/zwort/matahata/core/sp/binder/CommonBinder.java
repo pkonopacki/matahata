@@ -1,23 +1,20 @@
 package com.zwort.matahata.core.sp.binder;
 
+import com.zwort.matahata.core.exception.ServiceException;
+import com.zwort.matahata.core.facade.Facade;
+import com.zwort.matahata.core.model.*;
+import com.zwort.matahata.core.sp.exception.ServiceProviderException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.zwort.matahata.core.exception.ServiceException;
-import com.zwort.matahata.core.facade.Facade;
-import com.zwort.matahata.core.model.Account;
-import com.zwort.matahata.core.model.Beneficiary;
-import com.zwort.matahata.core.model.Category;
-import com.zwort.matahata.core.model.Currency;
-import com.zwort.matahata.core.model.Month;
-import com.zwort.matahata.core.sp.exception.ServiceProviderException;
-
 public abstract class CommonBinder {
 	
-	protected Facade facade;
+	@Autowired
+    protected Facade facade;
 	
 	private static final Log logger = LogFactory.getLog(CommonBinder.class);
 
@@ -137,10 +134,4 @@ public abstract class CommonBinder {
 		return category;
 	}
 
-	//Spring setter
-	
-	public void setFacade(Facade facade) {
-		this.facade = facade;
-	}
-	
 }

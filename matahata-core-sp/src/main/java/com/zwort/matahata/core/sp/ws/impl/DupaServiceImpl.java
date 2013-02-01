@@ -1,15 +1,18 @@
 package com.zwort.matahata.core.sp.ws.impl;
 
-import zwort.com.matahata.services._1.*;
-
 import com.zwort.matahata.core.sp.adapter.AccountManagementAdapter;
 import com.zwort.matahata.core.sp.adapter.SubstituteSellerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
+import zwort.com.matahata.services._1.*;
 
 import javax.jws.WebParam;
 
 public class DupaServiceImpl implements DupaServicePortType {
 
+    @Autowired
     private SubstituteSellerAdapter substituteSellerAdapter;
+
+    @Autowired
     private AccountManagementAdapter accountManagementAdapter;
 
 
@@ -40,19 +43,6 @@ public class DupaServiceImpl implements DupaServicePortType {
     public FindExpensesByBeneficiariesResp findExpensesByBeneficiaries(
             FindExpensesByBeneficiaries findExpensesByBeneficiaries) {
         return substituteSellerAdapter.findExpensesByBeneficiaries(findExpensesByBeneficiaries);
-    }
-
-
-    //Spring setters
-
-    public void setSubstituteSellerAdapter(
-            SubstituteSellerAdapter substituteSellerAdapter) {
-        this.substituteSellerAdapter = substituteSellerAdapter;
-    }
-
-    public void setAccountManagementAdapter(
-            AccountManagementAdapter accountManagementAdapter) {
-        this.accountManagementAdapter = accountManagementAdapter;
     }
 
 }

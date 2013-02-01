@@ -1,21 +1,22 @@
 package com.zwort.matahata.core.sp.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.zwort.matahata.core.sp.binder.TransferManagementBinder;
 import com.zwort.matahata.core.sp.dto.TransferDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.TransferManagementService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransferManagementServiceImpl extends AbstractManagementService implements TransferManagementService {
 
 	private static final Log logger = LogFactory.getLog(TransferManagementServiceImpl.class);
 	
-	private TransferManagementBinder binder;
+	@Autowired
+    private TransferManagementBinder binder;
 	
 	@Override
 	public List<Long> addNewTransfer(List<TransferDTO> dtoList) throws ServiceProviderException {
@@ -37,10 +38,4 @@ public class TransferManagementServiceImpl extends AbstractManagementService imp
 
 	}
 
-	//Spring setter
-	
-	public void setBinder(TransferManagementBinder binder) {
-		this.binder = binder;
-	}
-	
 }

@@ -17,7 +17,9 @@ import com.zwort.matahata.core.model.Plan;
 import com.zwort.matahata.core.model.PlanItem;
 import com.zwort.matahata.core.model.Substitute;
 import com.zwort.matahata.core.substitute.SubstituteService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SubstituteServiceImpl implements SubstituteService {
 
 	private static final Log logger = LogFactory.getLog(SubstituteServiceImpl.class);

@@ -1,23 +1,28 @@
 package com.zwort.matahata.core.sp.adapter;
 
-import zwort.com.matahata.services._1.GetAccountStateRequestList;
-import zwort.com.matahata.services._1.GetAccountStateResponse;
-
-import com.zwort.matahata.core.sp.ServiceLocator;
 import com.zwort.matahata.core.sp.binder.AccountManagementRequestResponseBinder;
 import com.zwort.matahata.core.sp.exception.util.ErrorPropertiesUtils;
 import com.zwort.matahata.core.sp.request.AddAccountRequest;
 import com.zwort.matahata.core.sp.response.AddAccountResponse;
+import com.zwort.matahata.core.sp.service.AccountManagementService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import zwort.com.matahata.services._1.GetAccountStateRequestList;
+import zwort.com.matahata.services._1.GetAccountStateResponse;
 
+@Component
 public class AccountManagementAdapter extends BaseAdapter {
 	
-	public AddAccountResponse addAccount(AddAccountRequest request) {
+	@Autowired
+    private AccountManagementService accountManagementService;
+
+    public AddAccountResponse addAccount(AddAccountRequest request) {
 		AccountManagementRequestResponseBinder binder = new AccountManagementRequestResponseBinder();
 		AddAccountResponse response = new AddAccountResponse();
 		
 		try {
 			//TODO: Add logs
-			binder.bindAddAccountResponse(ServiceLocator.getInstance().getAccountManagementService().addNewAccount(binder.bindAccountDTOWithAddAccountRequest(request)));
+			binder.bindAddAccountResponse(accountManagementService.addNewAccount(binder.bindAccountDTOWithAddAccountRequest(request)));
 		
 		} catch (Exception e) {
 			logger.error("AccountManagementAdapter.addAccount failed: ", e);
@@ -33,7 +38,7 @@ public class AccountManagementAdapter extends BaseAdapter {
 		GetAccountStateResponse response = null;
 		
 		try {
-			response = binder.bindGetAccStateResponse(ServiceLocator.getInstance().getAccountManagementService().getAccountsStates(accountsStatesRequestList.getAccountNumbersList().getAccountNumberWS()));
+			response = binder.bindGetAccStateResponse(accountManagementService.getAccountsStates(accountsStatesRequestList.getAccountNumbersList().getAccountNumberWS()));
 
 		} catch (Exception e) {
 			logger.error("AccountManagementAdapter.getAccountState failed: ", e);

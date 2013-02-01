@@ -1,8 +1,8 @@
 package com.zwort.matahata.core.sp.binder;
 
-import java.util.Comparator;
-
 import zwort.com.matahata.services._1.BudgetUsageByCategoriesWS;
+
+import java.util.Comparator;
 
 public class BudgetUsageByCategoriesWSComparable implements
 		Comparator<BudgetUsageByCategoriesWS> {

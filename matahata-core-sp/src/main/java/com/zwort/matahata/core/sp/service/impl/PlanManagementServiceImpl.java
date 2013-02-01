@@ -1,19 +1,20 @@
 package com.zwort.matahata.core.sp.service.impl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.sp.binder.PlanManagementBinder;
 import com.zwort.matahata.core.sp.dto.PlanDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.PlanManagementService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PlanManagementServiceImpl extends AbstractManagementService implements PlanManagementService {
 	
 	private static final Log logger = LogFactory.getLog(PlanManagementServiceImpl.class);
 	
-	private PlanManagementBinder binder;
+	@Autowired
+    private PlanManagementBinder binder;
 
 	@Override
 	public Long addNewPlan(PlanDTO dto) throws ServiceProviderException {
@@ -34,11 +35,5 @@ public class PlanManagementServiceImpl extends AbstractManagementService impleme
 //		// TODO Auto-generated method stub
 //		return false;
 //	}
-
-	//Spring setters
-	
-	public void setBinder(PlanManagementBinder binder) {
-		this.binder = binder;
-	}
 
 }

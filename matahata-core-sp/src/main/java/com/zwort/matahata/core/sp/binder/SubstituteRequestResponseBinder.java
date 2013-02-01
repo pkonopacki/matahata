@@ -1,43 +1,14 @@
 package com.zwort.matahata.core.sp.binder;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.zwort.matahata.core.sp.assembler.SubstituteDtoAssembler;
+import com.zwort.matahata.core.sp.dto.*;
+import com.zwort.matahata.core.sp.util.ConversionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import zwort.com.matahata.services._1.*;
 
-import zwort.com.matahata.services._1.BudgetUsageByCategoriesWS;
-import zwort.com.matahata.services._1.BudgetUsageByCategoriesWSList;
-import zwort.com.matahata.services._1.BudgetUsageTotalsWS;
-import zwort.com.matahata.services._1.ExpenseWS;
-import zwort.com.matahata.services._1.ExpensesByBenWS;
-import zwort.com.matahata.services._1.ExpensesByCategoriesWS;
-import zwort.com.matahata.services._1.ExpensesByCategoriesWSList;
-import zwort.com.matahata.services._1.ExpensesByCurrenciesWS;
-import zwort.com.matahata.services._1.ExpensesTotalsByCategoriesWSMap;
-import zwort.com.matahata.services._1.ExpensesTotalsByCurrenciesWS;
-import zwort.com.matahata.services._1.ExpensesWSList;
-import zwort.com.matahata.services._1.FindExpensesByBeneficiaries;
-import zwort.com.matahata.services._1.FindExpensesByBeneficiariesList;
-import zwort.com.matahata.services._1.FindExpensesByBeneficiariesResp;
-import zwort.com.matahata.services._1.FindExpensesByCategoriesResponse;
-import zwort.com.matahata.services._1.FindExpensesByPlanForCategory;
-import zwort.com.matahata.services._1.FindExpensesByPlanForCategoryResponse;
-
-import com.zwort.matahata.core.sp.assembler.SubstituteDtoAssembler;
-import com.zwort.matahata.core.sp.dto.BudgetUsageDTO;
-import com.zwort.matahata.core.sp.dto.CategoryDTO;
-import com.zwort.matahata.core.sp.dto.CategoryType;
-import com.zwort.matahata.core.sp.dto.CriteriaDTO;
-import com.zwort.matahata.core.sp.dto.CurrencyDTO;
-import com.zwort.matahata.core.sp.dto.ExpenseDTO;
-import com.zwort.matahata.core.sp.dto.SubstituteDTO;
-import com.zwort.matahata.core.sp.util.ConversionUtils;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class SubstituteRequestResponseBinder extends BaseRequestResponseBinder {
 	

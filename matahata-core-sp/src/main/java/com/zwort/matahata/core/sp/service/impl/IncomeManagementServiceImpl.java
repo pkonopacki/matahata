@@ -1,21 +1,22 @@
 package com.zwort.matahata.core.sp.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.zwort.matahata.core.sp.binder.IncomeManagementBinder;
 import com.zwort.matahata.core.sp.dto.IncomeDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.IncomeManagementService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class IncomeManagementServiceImpl extends AbstractManagementService implements IncomeManagementService {
 
 	private static final Log logger = LogFactory.getLog(IncomeManagementServiceImpl.class);
 	
-	private IncomeManagementBinder binder;
+	@Autowired
+    private IncomeManagementBinder binder;
 	
 	@Override
 	public List<Long> addNewIncome(List<IncomeDTO> dtoList) throws ServiceProviderException {
@@ -35,12 +36,6 @@ public class IncomeManagementServiceImpl extends AbstractManagementService imple
 		
 		return idsList;
 		
-	}
-
-	//Spring setters
-	
-	public void setBinder(IncomeManagementBinder binder) {
-		this.binder = binder;
 	}
 
 }

@@ -4,17 +4,22 @@ import com.zwort.matahata.core.dao.AccountDAO;
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Account;
 import com.zwort.matahata.core.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
 
+@Service
 public class AccountServiceImpl extends DictionaryServiceImpl<Account>
 		implements AccountService {
 
-	public AccountDAO getDao() {
+    public AccountDAO getDao() {
 		return (AccountDAO) dao;
 	}
 
-	public void setDao(AccountDAO dao) {
+	//TODO: What can we do???
+    @Autowired
+    public void setDao(AccountDAO dao) {
 		super.setDao(dao);
 	}
 

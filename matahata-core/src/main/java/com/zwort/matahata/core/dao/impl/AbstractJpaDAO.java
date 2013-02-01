@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import com.zwort.matahata.core.dao.BaseDAO;
 import com.zwort.matahata.core.exception.DAOException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractJpaDAO<E> implements BaseDAO<E> {
 
@@ -18,7 +19,7 @@ public abstract class AbstractJpaDAO<E> implements BaseDAO<E> {
 	
 
 	public AbstractJpaDAO() {
-		super();
+        super();
 	}
 
 	public AbstractJpaDAO(Class<E> type) {

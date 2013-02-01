@@ -1,119 +1,58 @@
 package com.zwort.matahata.core.facade.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.facade.Facade;
-import com.zwort.matahata.core.model.Account;
-import com.zwort.matahata.core.model.Beneficiary;
-import com.zwort.matahata.core.model.Category;
-import com.zwort.matahata.core.model.Credit;
+import com.zwort.matahata.core.model.*;
 import com.zwort.matahata.core.model.Currency;
-import com.zwort.matahata.core.model.Debit;
-import com.zwort.matahata.core.model.Expense;
-import com.zwort.matahata.core.model.Income;
-import com.zwort.matahata.core.model.Item;
-import com.zwort.matahata.core.model.Month;
-import com.zwort.matahata.core.model.Plan;
-import com.zwort.matahata.core.model.PlanItem;
-import com.zwort.matahata.core.model.Substitute;
-import com.zwort.matahata.core.model.Transfer;
-import com.zwort.matahata.core.service.AccountService;
-import com.zwort.matahata.core.service.BeneficiaryService;
-import com.zwort.matahata.core.service.CategoryService;
-import com.zwort.matahata.core.service.CurrencyService;
-import com.zwort.matahata.core.service.EntityService;
-import com.zwort.matahata.core.service.ExpenseService;
-import com.zwort.matahata.core.service.PlanService;
-import com.zwort.matahata.core.service.TransferService;
+import com.zwort.matahata.core.service.*;
 import com.zwort.matahata.core.substitute.SubstituteService;
 import com.zwort.matahata.core.utils.DateUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
 
 /**
  * @author  pedro
  */
+@Service
 public class FacadeImpl implements Facade {
 	
 	private static final Log logger = LogFactory.getLog(FacadeImpl.class);
 	
-	private ExpenseService expenseService;
+	@Autowired
+    private ExpenseService expenseService;
 	
-	private EntityService<Item> itemService;
-	
-	private TransferService transferService;
+	@Autowired
+    private TransferService transferService;
 
-	private EntityService<Income> incomeService;
+	@Autowired
+    private IncomeService incomeService;
 
-	private EntityService<Debit> debitService;
+    @Autowired
+	private OperationService operationService;
 	
-	private EntityService<Credit> creditService;
+	@Autowired
+    private AccountService accountService;
+	
+	@Autowired
+    private CategoryService categoryService;
+	
+	@Autowired
+    private CurrencyService currencyService;
 
-	private AccountService accountService;
-	
-	private CategoryService categoryService;
-	
-	private CurrencyService currencyService;
-
+    @Autowired
 	private PlanService planService;
 
+    @Autowired
 	private BeneficiaryService beneficiaryService;
 
+    @Autowired
 	private SubstituteService substituteService;
 
-	public void setCategoryService(CategoryService categoryService) {
-		this.categoryService = categoryService;
-	}
-
-	public void setExpenseService(ExpenseService expenseService) {
-		this.expenseService = expenseService;
-	}
-
-	public void setTransferService(TransferService transferService) {
-		this.transferService = transferService;
-	}
-
-	public void setIncomeService(EntityService<Income> incomeService) {
-		this.incomeService = incomeService;
-	}
-
-	public void setDebitService(EntityService<Debit> debitService) {
-		this.debitService = debitService;
-	}
-
-	public void setCreditService(EntityService<Credit> creditService) {
-		this.creditService = creditService;
-	}
-
-	public void setAccountService(AccountService accountService) {
-		this.accountService = accountService;
-	}
-	
-	public void setCurrencyService(CurrencyService currencyService) {
-		this.currencyService = currencyService;
-	}
-	
-	public void setPlanService(PlanService planService) {
-		this.planService = planService;
-	}
-	
-	public void setBeneficiaryService(BeneficiaryService beneficiaryService) {
-		this.beneficiaryService = beneficiaryService;
-	}
-	
-	public void setSubstituteService(SubstituteService substituteService) {
-		this.substituteService = substituteService;
-	}
-	
-	
 //	public void saveCategory(Category category) {
 //		categoryService.add(category);
 //	}
@@ -192,8 +131,8 @@ public class FacadeImpl implements Facade {
         } else {
 			throw new ServiceException("One of the currencies must be a reference currency");
 		}
-        creditService.add(operationCr);
-        debitService.add(operationDeb);
+        operationService.add(operationCr);
+        operationService.add(operationDeb);
         accountService.update(accSrc);
 		accountService.update(accDest);
 
@@ -215,7 +154,7 @@ public class FacadeImpl implements Facade {
 		operation.setDate(DateUtils.getCurrentSqlDate());
         operation.setBalance(balance + amount);
 		acc.setBalance(operation.getBalance());
-		creditService.add(operation);
+        operationService.add(operation);
         accountService.update(acc);
 
         return retValue;
@@ -242,7 +181,7 @@ public class FacadeImpl implements Facade {
 		operation.setDate(DateUtils.getCurrentSqlDate());
         operation.setBalance(balance - amount);
 		acc.setBalance(operation.getBalance());
-		debitService.add(operation);
+        operationService.add(operation);
         accountService.update(acc);
         logger.debug("FacadeImpl#saveExpense end");
 

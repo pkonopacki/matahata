@@ -5,7 +5,9 @@ import javax.persistence.Query;
 import com.zwort.matahata.core.dao.BeneficiaryDAO;
 import com.zwort.matahata.core.exception.DAOException;
 import com.zwort.matahata.core.model.Beneficiary;
+import org.springframework.stereotype.Repository;
 
+@Repository(value = "beneficiaryDAO")
 public class BeneficiaryDAOJpaImpl extends DictionaryDAOJpaImpl<Beneficiary>
 		implements BeneficiaryDAO {
 

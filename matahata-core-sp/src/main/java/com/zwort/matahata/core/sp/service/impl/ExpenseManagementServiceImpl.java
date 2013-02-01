@@ -1,24 +1,25 @@
 package com.zwort.matahata.core.sp.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Expense;
 import com.zwort.matahata.core.sp.binder.ExpenseManagementBinder;
 import com.zwort.matahata.core.sp.dto.ExpenseDTO;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.ExpenseManagementService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExpenseManagementServiceImpl extends AbstractManagementService implements ExpenseManagementService {
 	
 	private static final Log logger = LogFactory.getLog(ExpenseManagementServiceImpl.class);
 	
-	private ExpenseManagementBinder binder;
+	@Autowired
+    private ExpenseManagementBinder binder;
 	
 
 	@Override

@@ -4,17 +4,22 @@ import com.zwort.matahata.core.dao.CategoryDAO;
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Category;
 import com.zwort.matahata.core.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
 
+@Service
 public class CategoryServiceImpl extends DictionaryServiceImpl<Category>
 		implements CategoryService {
 
-	public CategoryDAO getDao() {
+	@Override
+    public CategoryDAO getDao() {
 		return (CategoryDAO) dao;
 	}
 
-	public void setDao(CategoryDAO dao) {
+	@Autowired
+    public void setDao(CategoryDAO dao) {
 		super.setDao(dao);
 	}
 

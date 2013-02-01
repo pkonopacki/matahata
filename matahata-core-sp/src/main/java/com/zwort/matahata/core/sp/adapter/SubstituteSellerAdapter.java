@@ -1,20 +1,19 @@
 package com.zwort.matahata.core.sp.adapter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import zwort.com.matahata.services._1.FindExpensesByBeneficiaries;
-import zwort.com.matahata.services._1.FindExpensesByBeneficiariesResp;
-import zwort.com.matahata.services._1.FindExpensesByCategories;
-import zwort.com.matahata.services._1.FindExpensesByCategoriesResponse;
-import zwort.com.matahata.services._1.FindExpensesByPlanForCategory;
-import zwort.com.matahata.services._1.FindExpensesByPlanForCategoryResponse;
-
-import com.zwort.matahata.core.sp.ServiceLocator;
 import com.zwort.matahata.core.sp.binder.SubstituteRequestResponseBinder;
 import com.zwort.matahata.core.sp.exception.util.ErrorPropertiesUtils;
+import com.zwort.matahata.core.sp.service.SubstituteSellerService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import zwort.com.matahata.services._1.*;
 
+@Component
 public class SubstituteSellerAdapter {
+
+    @Autowired
+    private SubstituteSellerService substituteSellerService;
 
 	private static Log logger = LogFactory.getLog(SubstituteSellerAdapter.class);
 	
@@ -24,7 +23,7 @@ public class SubstituteSellerAdapter {
 		FindExpensesByCategoriesResponse response = new FindExpensesByCategoriesResponse();
 		
 		try {
-			response = binder.bindResponseFromDto(ServiceLocator.getInstance().getSubstituteSellerService().sellSubstitute(binder.bindMonthFromWSMonth(request.getMonth()), request.getYear()));
+			response = binder.bindResponseFromDto(substituteSellerService.sellSubstitute(binder.bindMonthFromWSMonth(request.getMonth()), request.getYear()));
 		
 		} catch (Exception e) {
 			logger.error("SubstituteSellerAdapter.sellSubstitute failed: ", e);
@@ -42,7 +41,7 @@ public class SubstituteSellerAdapter {
 		FindExpensesByPlanForCategoryResponse response = new FindExpensesByPlanForCategoryResponse();
 		
 		try {
-			response = binder.bindFindExpByPlanForCatResponseFromDtoList(ServiceLocator.getInstance().getSubstituteSellerService().findExpensesByPlanForCategory(binder.bindCriteriaDtoFromFindExpByPlanForCatRequest(request)));
+			response = binder.bindFindExpByPlanForCatResponseFromDtoList(substituteSellerService.findExpensesByPlanForCategory(binder.bindCriteriaDtoFromFindExpByPlanForCatRequest(request)));
 		
 		} catch (Exception e) {
 			logger.error("SubstituteSellerAdapter.findExpensesByPlanForCategoryResponse failed: ", e);
@@ -60,7 +59,7 @@ public class SubstituteSellerAdapter {
 		SubstituteRequestResponseBinder binder = new SubstituteRequestResponseBinder();
 		
 		try {
-			response = binder.bindFindExpensesByBeneficiariesResp(ServiceLocator.getInstance().getSubstituteSellerService().findExpSumByBeneficiary(binder.bindMonthFromWSMonth(request.getMonth()), request.getYear()));
+			response = binder.bindFindExpensesByBeneficiariesResp(substituteSellerService.findExpSumByBeneficiary(binder.bindMonthFromWSMonth(request.getMonth()), request.getYear()));
 			
 		} catch (Exception e) {
 			logger.error("SubstituteSellerAdapter.findExpensesByBeneficiaries failed: ", e);

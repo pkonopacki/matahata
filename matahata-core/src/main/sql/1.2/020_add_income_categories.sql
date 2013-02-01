@@ -10,3 +10,7 @@ INSERT INTO category (abbreviation, description, monthly_limit, creation_date, l
 INSERT INTO category (abbreviation, description, monthly_limit, creation_date, last_update, active, category_type) values ('NAR', 'Narzędziai urządzenia kosmiczne', 0, NOW(), NOW(), true, 0);
 INSERT INTO category (abbreviation, description, monthly_limit, creation_date, last_update, active, category_type) values ('ZYD', 'Rzeczy popchnięte do Żyda', 0, NOW(), NOW(), true, 1);
 INSERT INTO category (abbreviation, description, monthly_limit, creation_date, last_update, active, category_type) values ('WRZ', 'Wrzut do wiadra', 0, NOW(), NOW(), true, 1);
+INSERT INTO category (abbreviation, description, monthly_limit, creation_date, last_update, active, category_type) values ('EXK', 'Kupno waluty - expense', 0, NOW(), NOW(), true, 0);
+INSERT INTO category (abbreviation, description, monthly_limit, creation_date, last_update, active, category_type) values ('EXI', 'Kupiona waluta - income', 0, NOW(), NOW(), true, 1);
+INSERT INTO category (abbreviation, description, monthly_limit, creation_date, last_update, active, category_type) values ('ODI', 'Odsetki - income', 0, NOW(), NOW(), true, 1);
+

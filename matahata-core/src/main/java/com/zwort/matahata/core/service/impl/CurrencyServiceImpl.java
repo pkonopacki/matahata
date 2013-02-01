@@ -4,18 +4,23 @@ import com.zwort.matahata.core.dao.CurrencyDAO;
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Currency;
 import com.zwort.matahata.core.service.CurrencyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
 
+@Service
 public class CurrencyServiceImpl extends DictionaryServiceImpl<Currency>
 		implements CurrencyService {
 
 	
-	public CurrencyDAO getDao() {
+	@Override
+    public CurrencyDAO getDao() {
 		return (CurrencyDAO) dao;
 	}
 
-	public void setDao(CurrencyDAO dao) {
+	@Autowired
+    public void setDao(CurrencyDAO dao) {
 		this.dao = dao;
 	}
 
