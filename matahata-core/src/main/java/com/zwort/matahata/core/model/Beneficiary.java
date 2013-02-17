@@ -1,10 +1,9 @@
 package com.zwort.matahata.core.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 //@NamedQueries({
 //	@NamedQuery(name = "findAllBeneficiaries", query = "select b from Beneficiary b"),

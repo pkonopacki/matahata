@@ -6,14 +6,14 @@ import com.zwort.matahata.core.model.*;
 import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.Calendar;
 import java.util.Date;
 
 public abstract class CommonBinder {
 	
-	@Autowired
+	@Inject
     protected Facade facade;
 	
 	private static final Log logger = LogFactory.getLog(CommonBinder.class);
@@ -108,6 +108,9 @@ public abstract class CommonBinder {
 	}
 
 	protected Date getLastDayOfMonth(Month month) {
+
+        //TODO: This is a bit crapped - for correction
+
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		cal.set(Calendar.MONTH, month.ordinal());

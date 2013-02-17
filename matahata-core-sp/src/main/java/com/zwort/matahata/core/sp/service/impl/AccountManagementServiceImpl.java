@@ -11,10 +11,10 @@ import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.AccountManagementService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zwort.com.matahata.services._1.AccountNumberWS;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,10 +26,10 @@ public class AccountManagementServiceImpl implements AccountManagementService {
 	
 	private static final Log logger = LogFactory.getLog(AccountManagementServiceImpl.class);
 	
-	@Autowired
+	@Inject
     private CurrencyService currencyService;
 
-    @Autowired
+    @Inject
 	private AccountService accountService;
 
 	@Override

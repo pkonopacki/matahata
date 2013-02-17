@@ -1,10 +1,10 @@
 package com.zwort.matahata.core.dao;
 
-import java.util.Date;
-
 import com.zwort.matahata.core.exception.DAOException;
 import com.zwort.matahata.core.model.Plan;
 import com.zwort.matahata.core.model.PlanItem;
+
+import java.util.Date;
 
 public interface PlanDAO extends EntityDAO<Plan> {
 	

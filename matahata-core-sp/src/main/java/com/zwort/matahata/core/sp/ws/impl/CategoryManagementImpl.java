@@ -5,14 +5,14 @@ import com.zwort.matahata.core.sp.request.AddCategoryRequest;
 import com.zwort.matahata.core.sp.response.FindCategoryResponse;
 import com.zwort.matahata.core.sp.response.ResponseBase;
 import com.zwort.matahata.core.sp.ws.CategoryManagement;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import javax.jws.WebService;
 
 @WebService
 public class CategoryManagementImpl implements CategoryManagement {
 
-	@Autowired
+	@Inject
     private CategoryManagementAdapter adapter;
 	
 	@Override

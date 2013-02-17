@@ -1,19 +1,10 @@
 package com.zwort.matahata.core.facade;
 
+import com.zwort.matahata.core.exception.ServiceException;
+import com.zwort.matahata.core.model.*;
+
 import java.util.Date;
 import java.util.List;
-
-import com.zwort.matahata.core.exception.ServiceException;
-import com.zwort.matahata.core.model.Account;
-import com.zwort.matahata.core.model.Beneficiary;
-import com.zwort.matahata.core.model.Category;
-import com.zwort.matahata.core.model.Currency;
-import com.zwort.matahata.core.model.Expense;
-import com.zwort.matahata.core.model.Income;
-import com.zwort.matahata.core.model.Month;
-import com.zwort.matahata.core.model.Plan;
-import com.zwort.matahata.core.model.Substitute;
-import com.zwort.matahata.core.model.Transfer;
 
 public interface Facade  {
 	

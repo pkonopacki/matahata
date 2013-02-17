@@ -1,19 +1,10 @@
 package com.zwort.matahata.ws.client.service.impl;
 
-import javax.annotation.PostConstruct;
-
-import zwort.com.matahata.services._1.AddExpenseRequestsList;
-import zwort.com.matahata.services._1.AddExpenseResponseList;
-import zwort.com.matahata.services._1.AddIncomeRequestList;
-import zwort.com.matahata.services._1.AddIncomeResponseList;
-import zwort.com.matahata.services._1.AddPlanRequest;
-import zwort.com.matahata.services._1.AddPlanResponse;
-import zwort.com.matahata.services._1.AddTransferRequestList;
-import zwort.com.matahata.services._1.AddTransferResponseList;
-import zwort.com.matahata.services._1.MatahataServicePortType;
-
 import com.zwort.matahata.ws.client.MatahataPortFactoryBean;
 import com.zwort.matahata.ws.client.service.MatahataService;
+import zwort.com.matahata.services._1.*;
+
+import javax.annotation.PostConstruct;
 
 public class MatahataServiceImpl implements MatahataService {
 

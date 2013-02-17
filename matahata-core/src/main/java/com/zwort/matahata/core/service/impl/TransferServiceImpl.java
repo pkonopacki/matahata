@@ -6,8 +6,9 @@ import com.zwort.matahata.core.model.Expense;
 import com.zwort.matahata.core.model.Income;
 import com.zwort.matahata.core.model.Transfer;
 import com.zwort.matahata.core.service.TransferService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
 
 @Service
 public class TransferServiceImpl extends EntityServiceImpl<Transfer> implements TransferService {
@@ -17,7 +18,7 @@ public class TransferServiceImpl extends EntityServiceImpl<Transfer> implements 
 		return (TransferDAO) dao;
 	}
 	
-	@Autowired
+	@Inject
     public void setDao(TransferDAO dao) {
 		super.setDao(dao);
 	}

@@ -7,13 +7,14 @@ import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.PlanManagementService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.inject.Inject;
 
 public class PlanManagementServiceImpl extends AbstractManagementService implements PlanManagementService {
 	
 	private static final Log logger = LogFactory.getLog(PlanManagementServiceImpl.class);
 	
-	@Autowired
+	@Inject
     private PlanManagementBinder binder;
 
 	@Override

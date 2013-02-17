@@ -1,16 +1,15 @@
 package com.zwort.matahata.core.dao.impl;
 
-import javax.persistence.Query;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.zwort.matahata.core.dao.TransferDAO;
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Expense;
 import com.zwort.matahata.core.model.Income;
 import com.zwort.matahata.core.model.Transfer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.Query;
 
 @Repository(value = "transferDAO")
 public class TransferDAOJpaImpl extends EntityDAOJpaImpl<Transfer> implements TransferDAO {

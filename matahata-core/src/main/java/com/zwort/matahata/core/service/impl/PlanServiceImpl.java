@@ -1,20 +1,18 @@
 package com.zwort.matahata.core.service.impl;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.zwort.matahata.core.dao.PlanDAO;
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Plan;
 import com.zwort.matahata.core.model.PlanItem;
 import com.zwort.matahata.core.service.PlanService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class PlanServiceImpl extends EntityServiceImpl<Plan> implements
@@ -25,7 +23,7 @@ public class PlanServiceImpl extends EntityServiceImpl<Plan> implements
 		return (PlanDAO) dao;
 	}
 	
-	@Autowired
+	@Inject
     public void setDao(PlanDAO dao) {
 		super.setDao(dao);
 	}

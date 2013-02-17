@@ -9,10 +9,10 @@ import com.zwort.matahata.core.substitute.SubstituteService;
 import com.zwort.matahata.core.utils.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.*;
 
 /**
@@ -23,34 +23,34 @@ public class FacadeImpl implements Facade {
 	
 	private static final Log logger = LogFactory.getLog(FacadeImpl.class);
 	
-	@Autowired
+	@Inject
     private ExpenseService expenseService;
 	
-	@Autowired
+	@Inject
     private TransferService transferService;
 
-	@Autowired
+	@Inject
     private IncomeService incomeService;
 
-    @Autowired
+    @Inject
 	private OperationService operationService;
 	
-	@Autowired
+	@Inject
     private AccountService accountService;
 	
-	@Autowired
+	@Inject
     private CategoryService categoryService;
 	
-	@Autowired
+	@Inject
     private CurrencyService currencyService;
 
-    @Autowired
+    @Inject
 	private PlanService planService;
 
-    @Autowired
+    @Inject
 	private BeneficiaryService beneficiaryService;
 
-    @Autowired
+    @Inject
 	private SubstituteService substituteService;
 
 //	public void saveCategory(Category category) {

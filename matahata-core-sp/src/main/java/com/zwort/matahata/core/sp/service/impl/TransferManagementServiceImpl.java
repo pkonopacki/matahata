@@ -6,8 +6,8 @@ import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.TransferManagementService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class TransferManagementServiceImpl extends AbstractManagementService imp
 
 	private static final Log logger = LogFactory.getLog(TransferManagementServiceImpl.class);
 	
-	@Autowired
+	@Inject
     private TransferManagementBinder binder;
 	
 	@Override

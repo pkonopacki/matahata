@@ -1,14 +1,12 @@
 package com.zwort.matahata.core.dao.impl;
 
-import java.util.List;
+import com.zwort.matahata.core.dao.BaseDAO;
+import com.zwort.matahata.core.exception.DAOException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import com.zwort.matahata.core.dao.BaseDAO;
-import com.zwort.matahata.core.exception.DAOException;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
 public abstract class AbstractJpaDAO<E> implements BaseDAO<E> {
 

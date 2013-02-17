@@ -1,17 +1,10 @@
 package com.zwort.matahata.ws.client.service.impl;
 
-import javax.annotation.PostConstruct;
-
-import zwort.com.matahata.services._1.DupaServicePortType;
-import zwort.com.matahata.services._1.FindExpensesByCategories;
-import zwort.com.matahata.services._1.FindExpensesByCategoriesResponse;
-import zwort.com.matahata.services._1.FindExpensesByPlanForCategory;
-import zwort.com.matahata.services._1.FindExpensesByPlanForCategoryResponse;
-import zwort.com.matahata.services._1.GetAccountStateRequestList;
-import zwort.com.matahata.services._1.GetAccountStateResponse;
-
 import com.zwort.matahata.ws.client.DupaPortFactoryBean;
 import com.zwort.matahata.ws.client.service.DupaService;
+import zwort.com.matahata.services._1.*;
+
+import javax.annotation.PostConstruct;
 
 public class DupaServiceImpl implements DupaService {
 	

@@ -4,9 +4,9 @@ import com.zwort.matahata.core.dao.CategoryDAO;
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Category;
 import com.zwort.matahata.core.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
 @Service
@@ -18,7 +18,7 @@ public class CategoryServiceImpl extends DictionaryServiceImpl<Category>
 		return (CategoryDAO) dao;
 	}
 
-	@Autowired
+	@Inject
     public void setDao(CategoryDAO dao) {
 		super.setDao(dao);
 	}

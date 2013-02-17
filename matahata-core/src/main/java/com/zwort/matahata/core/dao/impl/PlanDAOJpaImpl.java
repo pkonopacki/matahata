@@ -1,14 +1,13 @@
 package com.zwort.matahata.core.dao.impl;
 
-import java.util.Date;
-
-import javax.persistence.Query;
-
 import com.zwort.matahata.core.dao.PlanDAO;
 import com.zwort.matahata.core.exception.DAOException;
 import com.zwort.matahata.core.model.Plan;
 import com.zwort.matahata.core.model.PlanItem;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.Query;
+import java.util.Date;
 
 @Repository(value = "planDAO")
 public class PlanDAOJpaImpl extends EntityDAOJpaImpl<Plan> implements PlanDAO {

@@ -3,8 +3,9 @@ package com.zwort.matahata.core.service.impl;
 import com.zwort.matahata.core.dao.OperationDAO;
 import com.zwort.matahata.core.model.Operation;
 import com.zwort.matahata.core.service.OperationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,7 +22,7 @@ public class OperationServiceImpl extends EntityServiceImpl<Operation> implement
         return (OperationDAO) dao;
     }
 
-    @Autowired
+    @Inject
     public void setDao(OperationDAO dao) {
         super.setDao(dao);
     }

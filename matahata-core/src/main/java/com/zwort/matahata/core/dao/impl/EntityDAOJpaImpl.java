@@ -1,14 +1,12 @@
 package com.zwort.matahata.core.dao.impl;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.Query;
-
+import com.zwort.matahata.core.dao.EntityDAO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.zwort.matahata.core.dao.EntityDAO;
+import javax.persistence.Query;
+import java.util.Date;
+import java.util.List;
 
 public class EntityDAOJpaImpl<E> extends AbstractJpaDAO<E> implements EntityDAO<E> {
 	

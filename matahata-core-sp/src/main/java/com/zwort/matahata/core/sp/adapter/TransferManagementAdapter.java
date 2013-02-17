@@ -5,15 +5,16 @@ import com.zwort.matahata.core.sp.exception.util.ErrorPropertiesUtils;
 import com.zwort.matahata.core.sp.service.TransferManagementService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zwort.com.matahata.services._1.AddTransferRequestList;
 import zwort.com.matahata.services._1.AddTransferResponseList;
 
+import javax.inject.Inject;
+
 @Component
 public class TransferManagementAdapter {
 
-	@Autowired
+	@Inject
     private TransferManagementService transferManagementService;
 
     private static Log logger = LogFactory.getLog(TransferManagementAdapter.class);

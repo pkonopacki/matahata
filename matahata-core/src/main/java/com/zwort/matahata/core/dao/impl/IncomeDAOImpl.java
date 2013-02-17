@@ -2,10 +2,7 @@ package com.zwort.matahata.core.dao.impl;
 
 import com.zwort.matahata.core.dao.IncomeDAO;
 import com.zwort.matahata.core.model.Income;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import javax.annotation.Resource;
 
 /**
  * Created with IntelliJ IDEA.

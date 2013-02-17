@@ -1,8 +1,8 @@
 package com.zwort.matahata.core.service;
 
-import java.util.List;
-
 import com.zwort.matahata.core.exception.ServiceException;
+
+import java.util.List;
 
 public interface BaseService<E> {
 	

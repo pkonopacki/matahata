@@ -1,11 +1,12 @@
 package com.zwort.matahata.core.sp.service.impl;
 
 import com.zwort.matahata.core.facade.Facade;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.inject.Inject;
 
 public abstract class AbstractManagementService {
 	
-	@Autowired
+	@Inject
     protected Facade facade;
 
 }

@@ -1,11 +1,11 @@
 package com.zwort.matahata.core.service;
 
-import java.util.List;
-
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Category;
 import com.zwort.matahata.core.model.Expense;
 import com.zwort.matahata.core.model.Plan;
+
+import java.util.List;
 
 public interface ExpenseService extends EntityService<Expense> {
 	

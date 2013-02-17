@@ -4,9 +4,9 @@ import com.zwort.matahata.core.dao.BeneficiaryDAO;
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Beneficiary;
 import com.zwort.matahata.core.service.BeneficiaryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
 @Service
@@ -18,7 +18,7 @@ public class BeneficiaryServiceImpl extends DictionaryServiceImpl<Beneficiary>
 		return (BeneficiaryDAO) dao;
 	}
 
-	@Autowired
+	@Inject
     public void setDao(BeneficiaryDAO dao) {
 		this.dao = dao;
 	}

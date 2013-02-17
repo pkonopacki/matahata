@@ -44,7 +44,13 @@ public class Currency extends AbstractDictionaryEntity {
 	public boolean equals(Object obj) {
 		
 		if (obj instanceof Currency) {
-			return this.isoCode.equals(((Currency) obj).getIsoCode());
+
+            if (((Currency) obj).getIsoCode() != null) {
+			    return this.isoCode.equals(((Currency) obj).getIsoCode());
+
+            } else {
+                return this.getIsoCode() == null ? true : false;
+            }
 		
 		} else {
 			return false;

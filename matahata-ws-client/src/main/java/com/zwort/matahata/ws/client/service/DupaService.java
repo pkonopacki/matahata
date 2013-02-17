@@ -1,11 +1,6 @@
 package com.zwort.matahata.ws.client.service;
 
-import zwort.com.matahata.services._1.FindExpensesByCategories;
-import zwort.com.matahata.services._1.FindExpensesByCategoriesResponse;
-import zwort.com.matahata.services._1.FindExpensesByPlanForCategory;
-import zwort.com.matahata.services._1.FindExpensesByPlanForCategoryResponse;
-import zwort.com.matahata.services._1.GetAccountStateRequestList;
-import zwort.com.matahata.services._1.GetAccountStateResponse;
+import zwort.com.matahata.services._1.*;
 
 public interface DupaService {
 	

@@ -1,11 +1,10 @@
 package com.zwort.matahata.ws.client;
 
-import java.io.IOException;
+import org.apache.ws.security.WSPasswordCallback;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.UnsupportedCallbackException;
-
-import org.apache.ws.security.WSPasswordCallback;
+import java.io.IOException;
 
 public class MatahataPasswordHandler {
 	

@@ -1,10 +1,10 @@
 package com.zwort.matahata.core.service.impl;
 
-import java.util.List;
-
 import com.zwort.matahata.core.dao.DictionaryDAO;
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.service.DictionaryService;
+
+import java.util.List;
 
 public class DictionaryServiceImpl<E> extends AbstractBaseService<E> implements DictionaryService<E> {
 

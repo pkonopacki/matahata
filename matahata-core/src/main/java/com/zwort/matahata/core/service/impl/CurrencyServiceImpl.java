@@ -4,9 +4,9 @@ import com.zwort.matahata.core.dao.CurrencyDAO;
 import com.zwort.matahata.core.exception.ServiceException;
 import com.zwort.matahata.core.model.Currency;
 import com.zwort.matahata.core.service.CurrencyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
 @Service
@@ -19,7 +19,7 @@ public class CurrencyServiceImpl extends DictionaryServiceImpl<Currency>
 		return (CurrencyDAO) dao;
 	}
 
-	@Autowired
+	@Inject
     public void setDao(CurrencyDAO dao) {
 		this.dao = dao;
 	}

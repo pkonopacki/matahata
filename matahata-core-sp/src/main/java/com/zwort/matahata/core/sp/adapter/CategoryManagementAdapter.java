@@ -7,15 +7,16 @@ import com.zwort.matahata.core.sp.response.FindCategoryResponse;
 import com.zwort.matahata.core.sp.service.CategoryManagementService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
 
 @Component
 public class CategoryManagementAdapter extends BaseAdapter {
 	
 	private static Log logger = LogFactory.getLog(CategoryManagementAdapter.class);
 	
-	@Autowired
+	@Inject
     private CategoryManagementService categoryManagementService;
 
     public AddCategoryResponse addNewCategory(AddCategoryRequest request) {

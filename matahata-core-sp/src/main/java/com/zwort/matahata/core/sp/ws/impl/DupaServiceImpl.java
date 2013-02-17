@@ -2,17 +2,17 @@ package com.zwort.matahata.core.sp.ws.impl;
 
 import com.zwort.matahata.core.sp.adapter.AccountManagementAdapter;
 import com.zwort.matahata.core.sp.adapter.SubstituteSellerAdapter;
-import org.springframework.beans.factory.annotation.Autowired;
 import zwort.com.matahata.services._1.*;
 
+import javax.inject.Inject;
 import javax.jws.WebParam;
 
 public class DupaServiceImpl implements DupaServicePortType {
 
-    @Autowired
+    @Inject
     private SubstituteSellerAdapter substituteSellerAdapter;
 
-    @Autowired
+    @Inject
     private AccountManagementAdapter accountManagementAdapter;
 
 

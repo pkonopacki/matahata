@@ -4,21 +4,22 @@ import com.zwort.matahata.core.sp.adapter.ExpenseManagementAdapter;
 import com.zwort.matahata.core.sp.adapter.IncomeManagementAdapter;
 import com.zwort.matahata.core.sp.adapter.PlanManagementAdapter;
 import com.zwort.matahata.core.sp.adapter.TransferManagementAdapter;
-import org.springframework.beans.factory.annotation.Autowired;
 import zwort.com.matahata.services._1.*;
+
+import javax.inject.Inject;
 
 public class MatahataServiceImpl implements MatahataServicePortType {
 
-    @Autowired
+    @Inject
 	private TransferManagementAdapter transferManagementAdapter;
 
-    @Autowired
+    @Inject
 	private ExpenseManagementAdapter expenseManagementAdapter;
 
-    @Autowired
+    @Inject
 	private IncomeManagementAdapter incomeManagementAdapter;
 	
-	@Autowired
+	@Inject
     private PlanManagementAdapter planManagementAdapter;
 
 	@Override

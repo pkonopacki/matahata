@@ -5,14 +5,15 @@ import com.zwort.matahata.core.sp.exception.util.ErrorPropertiesUtils;
 import com.zwort.matahata.core.sp.service.SubstituteSellerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zwort.com.matahata.services._1.*;
+
+import javax.inject.Inject;
 
 @Component
 public class SubstituteSellerAdapter {
 
-    @Autowired
+    @Inject
     private SubstituteSellerService substituteSellerService;
 
 	private static Log logger = LogFactory.getLog(SubstituteSellerAdapter.class);

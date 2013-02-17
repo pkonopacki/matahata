@@ -8,9 +8,9 @@ import com.zwort.matahata.core.sp.exception.ServiceProviderException;
 import com.zwort.matahata.core.sp.service.ExpenseManagementService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class ExpenseManagementServiceImpl extends AbstractManagementService impl
 	
 	private static final Log logger = LogFactory.getLog(ExpenseManagementServiceImpl.class);
 	
-	@Autowired
+	@Inject
     private ExpenseManagementBinder binder;
 	
 

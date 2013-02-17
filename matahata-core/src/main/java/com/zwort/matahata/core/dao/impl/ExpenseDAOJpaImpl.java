@@ -1,14 +1,13 @@
 package com.zwort.matahata.core.dao.impl;
 
-import java.util.List;
-
-import javax.persistence.Query;
-
-import org.springframework.stereotype.Repository;
 import com.zwort.matahata.core.dao.ExpenseDAO;
 import com.zwort.matahata.core.model.Category;
 import com.zwort.matahata.core.model.Expense;
 import com.zwort.matahata.core.model.Plan;
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository(value = "expenseDAO")
 public class ExpenseDAOJpaImpl extends EntityDAOJpaImpl<Expense> implements

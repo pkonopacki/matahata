@@ -3,16 +3,17 @@ package com.zwort.matahata.core.sp.adapter;
 import com.zwort.matahata.core.sp.binder.ExpenseRequestResopnseBinder;
 import com.zwort.matahata.core.sp.exception.util.ErrorPropertiesUtils;
 import com.zwort.matahata.core.sp.service.ExpenseManagementService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zwort.com.matahata.services._1.AddExpenseRequestsList;
 import zwort.com.matahata.services._1.AddExpenseResponseList;
 import zwort.com.matahata.services._1.FindExpenseResponse;
 
+import javax.inject.Inject;
+
 @Component
 public class ExpenseManagementAdapter extends BaseAdapter {
 
-	@Autowired
+	@Inject
     private ExpenseManagementService expenseManagementService;
 
     public AddExpenseResponseList addNewExpense(AddExpenseRequestsList request) {

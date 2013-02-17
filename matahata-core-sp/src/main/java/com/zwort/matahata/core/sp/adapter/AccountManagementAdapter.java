@@ -5,15 +5,16 @@ import com.zwort.matahata.core.sp.exception.util.ErrorPropertiesUtils;
 import com.zwort.matahata.core.sp.request.AddAccountRequest;
 import com.zwort.matahata.core.sp.response.AddAccountResponse;
 import com.zwort.matahata.core.sp.service.AccountManagementService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zwort.com.matahata.services._1.GetAccountStateRequestList;
 import zwort.com.matahata.services._1.GetAccountStateResponse;
 
+import javax.inject.Inject;
+
 @Component
 public class AccountManagementAdapter extends BaseAdapter {
 	
-	@Autowired
+	@Inject
     private AccountManagementService accountManagementService;
 
     public AddAccountResponse addAccount(AddAccountRequest request) {

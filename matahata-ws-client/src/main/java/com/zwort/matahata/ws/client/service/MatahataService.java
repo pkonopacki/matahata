@@ -1,13 +1,6 @@
 package com.zwort.matahata.ws.client.service;
 
-import zwort.com.matahata.services._1.AddExpenseRequestsList;
-import zwort.com.matahata.services._1.AddExpenseResponseList;
-import zwort.com.matahata.services._1.AddIncomeRequestList;
-import zwort.com.matahata.services._1.AddIncomeResponseList;
-import zwort.com.matahata.services._1.AddPlanRequest;
-import zwort.com.matahata.services._1.AddPlanResponse;
-import zwort.com.matahata.services._1.AddTransferRequestList;
-import zwort.com.matahata.services._1.AddTransferResponseList;
+import zwort.com.matahata.services._1.*;
 
 public interface MatahataService {
 	

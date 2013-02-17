@@ -1,11 +1,10 @@
 package com.zwort.matahata.core.dao.impl;
 
 
-import java.util.List;
+import com.zwort.matahata.core.dao.DictionaryDAO;
 
 import javax.persistence.Query;
-
-import com.zwort.matahata.core.dao.DictionaryDAO;
+import java.util.List;
 
 public class DictionaryDAOJpaImpl<E> extends AbstractJpaDAO<E> implements DictionaryDAO<E> {
 
