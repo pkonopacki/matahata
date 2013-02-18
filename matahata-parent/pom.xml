@@ -43,15 +43,6 @@
                 <version>2.1_3</version>
             </dependency>
 
-            <!-- JPA -->
-            <!--
-            <dependency>
-                <groupId>org.hibernate.java-persistence</groupId>
-                <artifactId>jpa-api</artifactId>
-                <version>2.0-cr-1</version>
-            </dependency>
-            -->
-
             <!-- Commons libs -->
             <dependency>
                 <groupId>commons-io</groupId>
@@ -73,13 +64,6 @@
                 <artifactId>commons-beanutils</artifactId>
                 <version>1.8.3</version>
             </dependency>
-
-            <!-- Spring libs -->
-            <!-- 			<dependency> -->
-            <!-- 				<groupId>org.springframework</groupId> -->
-            <!-- 				<artifactId>spring</artifactId> -->
-            <!-- 				<version>${spring.version}</version> -->
-            <!-- 			</dependency> -->
 
             <!--
                    Core utilities used by other modules.
@@ -245,29 +229,6 @@
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
-
-            <!--
-            <dependency>
-			    <groupId>org.hibernate</groupId>
-			    <artifactId>hibernate-core</artifactId>
-			    <version>3.3.2.GA</version>
-			</dependency>
-			<dependency>
-			    <groupId>org.hibernate</groupId>
-			    <artifactId>hibernate-annotations</artifactId>
-			    <version>3.4.0.GA</version>
-			</dependency>
-			<dependency>
-			    <groupId>org.hibernate</groupId>
-			    <artifactId>hibernate-commons-annotations</artifactId>
-			    <version>3.3.0.ga</version>
-			</dependency> 
-			<dependency>
-			    <groupId>org.hibernate</groupId>
-			    <artifactId>hibernate-entitymanager</artifactId>
-			    <version>3.3.2.GA</version>
-			</dependency>
-			 -->
 
             <!-- CXF -->
             <dependency>
