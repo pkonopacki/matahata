@@ -1,0 +1,98 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns2:addNewExpense xmlns:ns2="http://com.zwort/matahata/Services/1"
+                           xmlns:ns3="http://com.zwort/matahata/Common/ErrorInfo/1">
+            <System>Drucik</System>
+            <AddExpenseRequestsList>
+                <Date>2012-06-01T06:00:00.000+02:00</Date>
+                <Description>Opłata za ubezpieczenie</Description>
+                <Amount>1.7</Amount>
+                <Location>mBank</Location>
+                <CategoryAbbr>UBE</CategoryAbbr>
+                <SrcAccountNo>27114020040000320245406966</SrcAccountNo>
+                <PayerInitials>PK</PayerInitials>
+                <BeneficiaryInitials>PK</BeneficiaryInitials>
+            </AddExpenseRequestsList>
+            <AddExpenseRequestsList>
+                <Date>2012-06-01T06:00:00.000+02:00</Date>
+                <Description>Bilet ZTM Warszawa</Description>
+                <Amount>3.8</Amount>
+                <Location>Relay, Okęcie</Location>
+                <CategoryAbbr>TRA</CategoryAbbr>
+                <SrcAccountNo>15001900</SrcAccountNo>
+                <PayerInitials>PK</PayerInitials>
+                <BeneficiaryInitials>PK</BeneficiaryInitials>
+            </AddExpenseRequestsList>
+            <AddExpenseRequestsList>
+                <Date>2012-06-01T06:00:00.000+02:00</Date>
+                <Description>Słonecznik</Description>
+                <Amount>5.49</Amount>
+                <Location>Piotr i Paweł, Blue City</Location>
+                <CategoryAbbr>SLO</CategoryAbbr>
+                <SrcAccountNo>15001900</SrcAccountNo>
+                <PayerInitials>PK</PayerInitials>
+                <BeneficiaryInitials>AI</BeneficiaryInitials>
+            </AddExpenseRequestsList>
+            <AddExpenseRequestsList>
+                <Date>2012-06-01T06:00:00.000+02:00</Date>
+                <Description>Spożywcze</Description>
+                <Amount>3.99</Amount>
+                <Location>Piotr i Paweł, Blue City</Location>
+                <CategoryAbbr>SPO</CategoryAbbr>
+                <SrcAccountNo>15001900</SrcAccountNo>
+                <PayerInitials>PK</PayerInitials>
+                <BeneficiaryInitials>PK</BeneficiaryInitials>
+            </AddExpenseRequestsList>
+            <AddExpenseRequestsList>
+                <Date>2012-06-01T06:00:00.000+02:00</Date>
+                <Description>Pivo</Description>
+                <Amount>38.78</Amount>
+                <Location>Piotr i Paweł, Blue City</Location>
+                <CategoryAbbr>ALK</CategoryAbbr>
+                <SrcAccountNo>15001900</SrcAccountNo>
+                <PayerInitials>PK</PayerInitials>
+                <BeneficiaryInitials>WI</BeneficiaryInitials>
+            </AddExpenseRequestsList>
+            <AddExpenseRequestsList>
+                <Date>2012-06-01T06:00:00.000+02:00</Date>
+                <Description>Słodycze</Description>
+                <Amount>4.39</Amount>
+                <Location>Piotr i Paweł, Blue City</Location>
+                <CategoryAbbr>SLO</CategoryAbbr>
+                <SrcAccountNo>15001900</SrcAccountNo>
+                <PayerInitials>PK</PayerInitials>
+                <BeneficiaryInitials>US</BeneficiaryInitials>
+            </AddExpenseRequestsList>
+            <AddExpenseRequestsList>
+                <Date>2012-06-01T06:00:00.000+02:00</Date>
+                <Description>Słodycze</Description>
+                <Amount>3.89</Amount>
+                <Location>Piotr i Paweł, Blue City</Location>
+                <CategoryAbbr>SLO</CategoryAbbr>
+                <SrcAccountNo>15001900</SrcAccountNo>
+                <PayerInitials>PK</PayerInitials>
+                <BeneficiaryInitials>PK</BeneficiaryInitials>
+            </AddExpenseRequestsList>
+            <AddExpenseRequestsList>
+                <Date>2012-06-01T06:00:00.000+02:00</Date>
+                <Description>Spożywcze</Description>
+                <Amount>2.49</Amount>
+                <Location>Piotr i Paweł, Blue City</Location>
+                <CategoryAbbr>SPO</CategoryAbbr>
+                <SrcAccountNo>15001900</SrcAccountNo>
+                <PayerInitials>PK</PayerInitials>
+                <BeneficiaryInitials>US</BeneficiaryInitials>
+            </AddExpenseRequestsList>
+            <AddExpenseRequestsList>
+                <Date>2012-06-01T06:00:00.000+02:00</Date>
+                <Description>Datek na zwierzuf</Description>
+                <Amount>10.0</Amount>
+                <Location>Pani od zwierzuf</Location>
+                <CategoryAbbr>PRZ</CategoryAbbr>
+                <SrcAccountNo>15001900</SrcAccountNo>
+                <PayerInitials>PK</PayerInitials>
+                <BeneficiaryInitials>PK</BeneficiaryInitials>
+            </AddExpenseRequestsList>
+        </ns2:addNewExpense>
+    </soap:Body>
+</soap:Envelope>

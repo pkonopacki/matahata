@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <context:component-scan base-package="com.zwort.matahata.cli" />
+
+    <context:property-placeholder location="classpath*:client.properties"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+    </bean>
+
+    <!--<bean id="requestDataFactory" class="com.zwort.matahata.cli.transformer.RequestDataFactory">-->
+        <!--<property name="addExpenseRequestTransformer" ref="addExpenseRequestTransformer"/>-->
+        <!--<property name="addIncomeRequestTransformer" ref="addIncomeRequestTransformer"/>-->
+        <!--<property name="addTransferRequestTransformer" ref="addTransferRequestTransformer"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="addExpenseRequestTransformer" class="com.zwort.matahata.cli.transformer.AddExpenseRequestTransformer"/>-->
+
+    <!--<bean id="addIncomeRequestTransformer" class="com.zwort.matahata.cli.transformer.AddIncomeRequestTransformer"/>-->
+
+    <!--<bean id="addTransferRequestTransformer" class="com.zwort.matahata.cli.transformer.AddTransferRequestTransformer"/>-->
+
+    <!-- WS client -->
+
+    <bean id="matahataService" class="com.zwort.matahata.ws.client.service.impl.MatahataServiceImpl" init-method="init">
+        <property name="factory" ref="matahataServicePortFactory"/>
+    </bean>
+
+    <!-- Service invoker -->
+
+    <!--<bean id="serviceInvoker" class="com.zwort.matahata.cli.ServiceInvoker">-->
+        <!--<property name="factory" ref="requestDataFactory"/>-->
+        <!--<property name="service" ref="matahataService"/>-->
+    <!--</bean>-->
+
+    <!-- WS Client config -->
+
+    <bean id="matahataServicePortFactory" class="com.zwort.matahata.ws.client.MatahataPortFactoryBean">
+        <property name="outInterceptors">
+            <list>
+                <bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
+            </list>
+        </property>
+        <property name="address">
+            <bean factory-bean="matahataClientConfig" factory-method="getUrl"/>
+        </property>
+        <property name="serviceClass"
+                  value="zwort.com.matahata.services._1.MatahataServicePortType"/>
+        <property name="ignoreCn">
+            <bean factory-bean="matahataClientConfig" factory-method="getIgnoreCnBig"/>
+        </property>
+        <property name="inInterceptors">
+            <list>
+                <bean class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="matahataClientConfig" class="com.zwort.matahata.ws.client.MatahataClientConfig">
+        <!-- 		<property name="user" value="${matahata.connection.user}" /> -->
+        <!-- 		<property name="password" value="${matahata.connection.password}" /> -->
+        <!-- 		<property name="url" value="${matahata.connection.url}" /> -->
+        <!-- 		<property name="ignoreCn" value="${matahata.connection.ignoreCn}" /> -->
+        <property name="user" value="user"/>
+        <property name="password" value="password"/>
+        <!-- 		<property name="url" value="http://192.168.0.160:8080/matahata-service/MatahataServicePortType" /> -->
+        <!-- 		<property name="url" value="http://localhost:8090/matahata-service/MatahataServicePortType" /> -->
+        <!-- 		<property name="url" value="http://212-76-47-46.home.aster.pl:8080/matahata-service/MatahataServicePortType" /> -->
+        <property name="url">
+            <value>${matahata.connection.url}</value>
+        </property>
+
+        <!-- 		<property name="url" value="http://localhost:8080/matahata-service/MatahataServicePortType" /> -->
+        <property name="ignoreCn" value="true"/>
+    </bean>
+
+
+</beans>
