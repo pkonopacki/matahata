@@ -6,3 +6,6 @@ management:
   endpoint:
     shutdown:
       enabled: false
+  security:
+    basic:
+      enabled: true
