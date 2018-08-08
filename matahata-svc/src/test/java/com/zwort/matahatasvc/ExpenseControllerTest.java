@@ -17,7 +17,7 @@ import java.net.URL;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ShitControllerIT {
+public class ExpenseControllerTest {
 
     @LocalServerPort
     private int port;
@@ -29,7 +29,7 @@ public class ShitControllerIT {
 
     @Before
     public void setUp() throws Exception {
-        this.base = new URL("http://localhost:" + port + "/");
+        this.base = new URL("http://localhost:" + port + "/api/");
     }
 
     @Test
